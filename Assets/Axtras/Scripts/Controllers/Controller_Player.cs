@@ -27,13 +27,15 @@ public class Controller_Player : MonoBehaviour
     
     private void Update() {
         if (Manager_UI.Instance.GetLanternStatus()) {
-            Vector3 mousePos = Input.mousePosition;
-            Manager_UI.Instance.UpdateCursorPosition(mousePos);
-
-            var clicked = Input.GetMouseButtonDown(0);
-            lightObject?.SetActive(clicked);
+            if (Input.GetMouseButtonDown(0)) {
+                isLanternActive = !isLanternActive;
+                lightObject?.SetActive(isLanternActive);
+            }
             
-            if (clicked) {
+            if (isLanternActive) {
+                Vector3 mousePos = Input.mousePosition;
+                Manager_UI.Instance.UpdateCursorPosition(mousePos);
+
                 Ray ray = mainCamera.ScreenPointToRay(mousePos);
                 Vector3 targetPosition = ray.origin + ray.direction * maxDistance;
                 
