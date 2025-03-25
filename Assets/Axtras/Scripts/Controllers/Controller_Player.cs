@@ -3,69 +3,44 @@ using UnityEngine;
 public class Controller_Player : MonoBehaviour
 {
     #region Vars
-    [Header("General Settings")]
-    [SerializeField] private Transform lightTransform;
-    [SerializeField] private GameObject lightObject;
+    private Vector3 velocity = Vector3.zero;
+    private Camera mainCamera;
+    private RaycastHit hit;
+    private Vector3 lastPosition;
     
     [Header("Movement Settings")]
     [SerializeField] private float smoothTime = 0.1f;
     [SerializeField] private float maxDistance = 10f;
     
-    private Vector3 velocity = Vector3.zero;
-    private Camera mainCamera;
-    private Vector3 lastPosition;
-    private bool isLightActive = false;
+    [Header("Lantern Settings")]
+    [SerializeField] private Transform lightTransform;
+    [SerializeField] private GameObject lightObject;
+    private bool isLanternActive = false;
     #endregion 
     
-    void Start()
-    {
+    private void Start() {
         mainCamera = Camera.main;
-        lastPosition = lightTransform != null ? lightTransform.position : Vector3.zero;
+        lastPosition = (lightTransform != null) ? lightTransform.position : Vector3.zero;
         
-        if (lightObject != null)
-        {
-            lightObject.SetActive(false);
-        }
-        
-        // Use the UI Manager to ensure cursor state is correct
-        Cursor.visible = Manager_UI.Instance == null || !Manager_UI.Instance.IsLanternActive();
+        lightObject?.SetActive(false);
     }
     
-    void Update()
-    {
-        if (Manager_Game.Instance != null && Manager_Game.Instance.IsGameOver)
-            return;
-            
-        Vector3 mousePos = Input.mousePosition;
-        
-        // Update cursor position through the UI Manager
-        if (Manager_UI.Instance != null)
-        {
+    private void Update() {
+        if (Manager_UI.Instance.GetLanternStatus()) {
+            Vector3 mousePos = Input.mousePosition;
             Manager_UI.Instance.UpdateCursorPosition(mousePos);
-        }
-        
-        bool mousePressed = Input.GetMouseButton(0);
-        
-        if (lightObject != null)
-        {
-            lightObject.SetActive(mousePressed);
-        }
-        
-        isLightActive = mousePressed;
-        
-        if (mousePressed)
-        {
-            Ray ray = mainCamera.ScreenPointToRay(mousePos);
-            Vector3 targetPosition = ray.origin + ray.direction * maxDistance;
+
+            var clicked = Input.GetMouseButtonDown(0);
+            lightObject?.SetActive(clicked);
             
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, maxDistance))
-            {
-                targetPosition = hit.point;
-            }
-            
-            if (lightTransform != null)
-            {
+            if (clicked) {
+                Ray ray = mainCamera.ScreenPointToRay(mousePos);
+                Vector3 targetPosition = ray.origin + ray.direction * maxDistance;
+                
+                if (Physics.Raycast(ray, out hit, maxDistance)) {
+                    targetPosition = hit.point;
+                }
+                
                 lightTransform.position = Vector3.SmoothDamp(
                     lightTransform.position, 
                     targetPosition, 
@@ -75,27 +50,8 @@ public class Controller_Player : MonoBehaviour
                 
                 float movement = Vector3.Distance(lightTransform.position, lastPosition);
                 lastPosition = lightTransform.position;
-                
-                if (Manager_Timer.Instance != null)
-                {
-                    Manager_Timer.Instance.UpdateTimer(movement);
-                }
+                Manager_Timer.Instance.UpdateTimer(movement);
             }
         }
-    }
-    
-    void OnEnable()
-    {
-        // Let the UI Manager handle cursor visibility
-        if (Manager_UI.Instance != null)
-        {
-            Cursor.visible = !Manager_UI.Instance.IsLanternActive();
-        }
-    }
-    
-    void OnDisable()
-    {
-        // Restore system cursor when script is disabled
-        Cursor.visible = true;
     }
 }
