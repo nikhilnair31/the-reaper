@@ -21,6 +21,7 @@ public class Manager_UI : MonoBehaviour
 
     [Header("Game UI")]
     [SerializeField] private GameObject diaryPanelGO;
+    [SerializeField] private RectTransform cursorRT;
     [SerializeField] private Image cursorImage;
     [SerializeField] private Button lanternButton;
     [SerializeField] private Button diaryButton;
@@ -43,8 +44,8 @@ public class Manager_UI : MonoBehaviour
     private void Start() {
         if (diaryPanelGO != null)
             diaryPanelGO.SetActive(false);
-        if (cursorImage != null)
-            cursorImage.gameObject.SetActive(false);
+        if (cursorRT != null)
+            cursorRT.gameObject.SetActive(false);
         
         lanternButton?.onClick.AddListener(ToggleLantern);
         diaryButton?.onClick.AddListener(ToggleDiary);
@@ -58,7 +59,7 @@ public class Manager_UI : MonoBehaviour
     
     public void UpdateCursorPosition(Vector3 position) {
         if (currentTool == Tool.Lantern) {
-            cursorImage.rectTransform.position = position;
+            cursorRT.position = position;
         }
     }
     
@@ -67,13 +68,13 @@ public class Manager_UI : MonoBehaviour
 
         if (currentTool == Tool.Lantern) {
             currentTool = Tool.None;
-            cursorImage.gameObject.SetActive(false);
+            cursorRT.gameObject.SetActive(false);
             SetButtonSize(lanternButton, 1f);
         }
         else {
             currentTool = Tool.Lantern;
             cursorImage.sprite = lanternCursor;
-            cursorImage.gameObject.SetActive(true);
+            cursorRT.gameObject.SetActive(true);
             SetButtonSize(lanternButton, 1.2f);
         }
     }
@@ -82,13 +83,13 @@ public class Manager_UI : MonoBehaviour
 
         if (currentTool == Tool.Diary) {
             currentTool = Tool.None;
-            cursorImage.gameObject.SetActive(false);
+            cursorRT.gameObject.SetActive(false);
             SetButtonSize(diaryButton, 1f);
         }
         else {
             currentTool = Tool.Diary;
             cursorImage.sprite = diaryCursor;
-            cursorImage.gameObject.SetActive(true);
+            cursorRT.gameObject.SetActive(true);
             SetButtonSize(diaryButton, 1.2f);
         }
 
@@ -100,13 +101,13 @@ public class Manager_UI : MonoBehaviour
 
         if (currentTool == Tool.Slice) {
             currentTool = Tool.None;
-            cursorImage.gameObject.SetActive(false);
+            cursorRT.gameObject.SetActive(false);
             SetButtonSize(slicingButton, 1f);
         }
         else {
             currentTool = Tool.Slice;
             cursorImage.sprite = sliceCursor;
-            cursorImage.gameObject.SetActive(true);
+            cursorRT.gameObject.SetActive(true);
             SetButtonSize(slicingButton, 1.2f);
         }
     }
