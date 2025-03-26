@@ -60,9 +60,6 @@ public class Manager_UI : MonoBehaviour
     
     public void ToggleLantern() {
         Debug.Log("Lantern button pressed!");
-        
-        ResetPanels();
-        ResetButtonSize();
 
         if (currentTool == Tool.Lantern) {
             currentTool = Tool.None;            
@@ -70,6 +67,9 @@ public class Manager_UI : MonoBehaviour
             SetButtonSize(lanternButton, 1f);
         }
         else {
+            ResetPanels();
+            ResetButtonSize();
+
             currentTool = Tool.Lantern;
             Cursor.SetCursor(lanternCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(lanternButton, 1.5f);
@@ -81,15 +81,15 @@ public class Manager_UI : MonoBehaviour
     public void ToggleDiary() {
         Debug.Log("Diary button pressed!");
         
-        ResetPanels();
-        ResetButtonSize();
-
         if (currentTool == Tool.Diary) {
             currentTool = Tool.None;            
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(diaryButton, 1f);
         }
         else {
+            ResetPanels();
+            ResetButtonSize();
+
             currentTool = Tool.Diary;
             Cursor.SetCursor(diaryCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(diaryButton, 1.5f);
@@ -101,15 +101,15 @@ public class Manager_UI : MonoBehaviour
     public void ToggleSlice() {
         Debug.Log("Slicing button pressed!");
         
-        ResetPanels();
-        ResetButtonSize();
-
         if (currentTool == Tool.Slice) {
             currentTool = Tool.None;            
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(slicingButton, 1f);
         }
         else {
+            ResetPanels();
+            ResetButtonSize();
+
             currentTool = Tool.Slice;
             Cursor.SetCursor(sliceCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(slicingButton, 1.5f);
