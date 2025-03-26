@@ -944,6 +944,8 @@ MonoBehaviour:
   lightObject: {fileID: 1893395718}
   boostMul: 5
   sliceDistance: 10
+  sliceMinDistance: 5
+  sliceInterpolatedSteps: 15
 --- !u!1 &591393340
 GameObject:
   m_ObjectHideFlags: 0

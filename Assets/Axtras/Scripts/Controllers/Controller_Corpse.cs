@@ -6,14 +6,18 @@ public class Controller_Corpse : MonoBehaviour
     [Header("Rope Settings")]
     [SerializeField] private Transform pointA;
     [SerializeField] private Transform pointB;
-    [SerializeField] private LineRenderer lineRenderer;
+    
+    [Header("Corpse Settings")]
+    [SerializeField] private MeshRenderer corpseMeshRend;
     #endregion 
     
     private void Start() {
+        RandMaterial();
     }
-    
-    private void Update() {
-        lineRenderer.SetPosition(0, pointA.position);
-        lineRenderer.SetPosition(1, pointB.position);
-    }      
+    private void RandMaterial() {
+        Material[] mats = corpseMeshRend.materials;
+        var mat = mats[0];
+        mat.mainTexture = Resources.Load<Texture2D>("Textures/Corpse/Corpse_" + Random.Range(1, 4));
+        corpseMeshRend.materials = mats;
+    }
 }
