@@ -10,13 +10,13 @@
             "m_Id": "04694f0a716e4f2089415fcafa2a9bfe"
         },
         {
-            "m_Id": "c58d4b5c0b134f08baf25027fbd8352b"
-        },
-        {
             "m_Id": "56f608f0c7a54f5fb548513842ba8025"
         },
         {
             "m_Id": "a16d344aefce4f9d8772e8bbb498eaf6"
+        },
+        {
+            "m_Id": "591e16363ea344d8aece9c99facf01a4"
         }
     ],
     "m_Keywords": [],
@@ -70,9 +70,6 @@
             "m_Id": "743cd56f8bb14b96b1a60c327e19e221"
         },
         {
-            "m_Id": "e8c8fc0955264fe2a29e34c8abc94322"
-        },
-        {
             "m_Id": "bc61068498dd4cb6964d8882266e9576"
         },
         {
@@ -92,6 +89,12 @@
         },
         {
             "m_Id": "2b6e3f0609534484b5c1831a8b7591a3"
+        },
+        {
+            "m_Id": "372b26ab8a2f4aaf816f31837add462c"
+        },
+        {
+            "m_Id": "b3805eb5282241ddab2665fd77b9b536"
         }
     ],
     "m_GroupDatas": [],
@@ -137,6 +140,20 @@
                     "m_Id": "a07161984e914ba48b64ffa5890a0469"
                 },
                 "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "372b26ab8a2f4aaf816f31837add462c"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "699d680e3c1f4d93bfbfa8dfc18f61d7"
+                },
+                "m_SlotId": 2
             }
         },
         {
@@ -200,13 +217,27 @@
                 "m_Node": {
                     "m_Id": "a6d2c06e35b34f02814af46b3c4ad6ff"
                 },
-                "m_SlotId": 0
+                "m_SlotId": 7
             },
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "a07161984e914ba48b64ffa5890a0469"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "b3805eb5282241ddab2665fd77b9b536"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "e74d0e4500624fcf9ae0d01ee4a6b8cf"
+                },
+                "m_SlotId": 1
             }
         },
         {
@@ -235,20 +266,6 @@
                     "m_Id": "a6d2c06e35b34f02814af46b3c4ad6ff"
                 },
                 "m_SlotId": 2
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "e8c8fc0955264fe2a29e34c8abc94322"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "e74d0e4500624fcf9ae0d01ee4a6b8cf"
-                },
-                "m_SlotId": 1
             }
         }
     ],
@@ -323,10 +340,10 @@
     "m_Guid": {
         "m_GuidSerialized": "bdaa8bbb-724c-4a84-91ed-13858d369876"
     },
-    "m_Name": "Scar",
+    "m_Name": "Tattoo",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Scar",
-    "m_DefaultReferenceName": "_Scar",
+    "m_RefNameGeneratedByDisplayName": "Tattoo",
+    "m_DefaultReferenceName": "_Tattoo",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -337,7 +354,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"dffef66376be4fa480fb02b19edbe903\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"44ae395b87ef15245a0ab16e177b5b12\",\"type\":3}}",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -421,7 +438,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "1a3bd9173b8c45fba5d09801b5f3724d",
     "m_Id": 0,
-    "m_DisplayName": "Scar",
+    "m_DisplayName": "Tattoo",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -434,7 +451,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "1fc6de2c62474dc6a14095e0b7e7335f",
     "m_Id": 0,
-    "m_DisplayName": "Scar Intensity",
+    "m_DisplayName": "Tattoo Intensity",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -456,10 +473,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1178.4000244140625,
-            "y": 180.0,
-            "width": 145.5999755859375,
-            "height": 127.20001220703125
+            "x": -1120.8001708984375,
+            "y": 141.60000610351563,
+            "width": 145.60009765625,
+            "height": 127.20004272460938
         }
     },
     "m_Slots": [
@@ -479,7 +496,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_OutputChannel": 0
+    "m_OutputChannel": 1
 }
 
 {
@@ -563,10 +580,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -502.4000244140625,
-            "y": 608.0,
-            "width": 147.199951171875,
-            "height": 33.60003662109375
+            "x": -512.0000610351563,
+            "y": 607.2000732421875,
+            "width": 156.79995727539063,
+            "height": 33.5999755859375
         }
     },
     "m_Slots": [
@@ -671,23 +688,40 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
-    "m_ObjectId": "3430f5fd05e44ad3951d1615e010c956",
-    "m_Id": 0,
-    "m_DisplayName": "Scar Tiling",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0
+    "m_Type": "UnityEditor.ShaderGraph.UVNode",
+    "m_ObjectId": "372b26ab8a2f4aaf816f31837add462c",
+    "m_Group": {
+        "m_Id": ""
     },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
+    "m_Name": "UV",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -878.4000854492188,
+            "y": -220.00001525878907,
+            "width": 145.60009765625,
+            "height": 127.20000457763672
+        }
     },
-    "m_Labels": []
+    "m_Slots": [
+        {
+            "m_Id": "5595cee5bc13411981b81a86dba28776"
+        }
+    ],
+    "synonyms": [
+        "texcoords",
+        "coords",
+        "coordinates"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_OutputChannel": 0
 }
 
 {
@@ -797,13 +831,13 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "4a4e2d9e2c44489a951d40f7b66c5abd",
-    "m_Name": "Scar",
+    "m_Name": "Tattoo",
     "m_ChildObjectList": [
         {
             "m_Id": "04694f0a716e4f2089415fcafa2a9bfe"
         },
         {
-            "m_Id": "c58d4b5c0b134f08baf25027fbd8352b"
+            "m_Id": "591e16363ea344d8aece9c99facf01a4"
         },
         {
             "m_Id": "a16d344aefce4f9d8772e8bbb498eaf6"
@@ -862,16 +896,41 @@
 }
 
 {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "5595cee5bc13411981b81a86dba28776",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Vector2ShaderProperty",
     "m_ObjectId": "56f608f0c7a54f5fb548513842ba8025",
     "m_Guid": {
         "m_GuidSerialized": "06acae8d-6bee-4cec-b143-a7ee8ba850ca"
     },
-    "m_Name": "Scar Offset",
+    "m_Name": "Tattoo Offset",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Scar Offset",
-    "m_DefaultReferenceName": "_Scar_Offset",
+    "m_RefNameGeneratedByDisplayName": "Tattoo Offset",
+    "m_DefaultReferenceName": "_Tattoo_Offset",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -886,6 +945,34 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "591e16363ea344d8aece9c99facf01a4",
+    "m_Guid": {
+        "m_GuidSerialized": "e01b077e-9e27-4fa1-a1b7-f2da88d506d6"
+    },
+    "m_Name": "Tattoo Scale",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Tattoo Scale",
+    "m_DefaultReferenceName": "_Tattoo_Scale",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 5.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
     }
 }
 
@@ -1091,7 +1178,7 @@
         "m_SerializableColors": []
     },
     "m_TextureType": 0,
-    "m_NormalMapSpace": 0,
+    "m_NormalMapSpace": 1,
     "m_EnableGlobalMipBias": true,
     "m_MipSamplingMode": 0
 }
@@ -1300,7 +1387,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "84f579ad377749b49502154f21db997d",
     "m_Id": 0,
-    "m_DisplayName": "Scar Offset",
+    "m_DisplayName": "Tattoo Offset",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1576,10 +1663,10 @@
     "m_Guid": {
         "m_GuidSerialized": "6548afe3-7731-4f59-9ab9-5ff4cd11f962"
     },
-    "m_Name": "Scar Intensity",
+    "m_Name": "Tattoo Intensity",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Scar Intensity",
-    "m_DefaultReferenceName": "_Scar_Intensity",
+    "m_RefNameGeneratedByDisplayName": "Tattoo Intensity",
+    "m_DefaultReferenceName": "_Tattoo_Intensity",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -1589,7 +1676,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.10000000149011612,
+    "m_Value": -5.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -1728,6 +1815,42 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "b3805eb5282241ddab2665fd77b9b536",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1111.2000732421875,
+            "y": 316.00006103515627,
+            "width": 130.39996337890626,
+            "height": 33.600006103515628
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "df92f6806f5b44deac684e5c6d1056c0"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "591e16363ea344d8aece9c99facf01a4"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "b9a28c26bba4443c9828587ab9faee26",
     "m_Id": 0,
@@ -1763,10 +1886,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1168.800048828125,
-            "y": 376.8000183105469,
-            "width": 136.0,
-            "height": 33.5999755859375
+            "x": -1111.199951171875,
+            "y": 379.20001220703127,
+            "width": 135.9998779296875,
+            "height": 33.600067138671878
         }
     },
     "m_Slots": [
@@ -1821,41 +1944,13 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"85ac55597b97403c82fc6601a93cf241\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"20f18c02ab217be4b839dd786febd91c\",\"type\":3}}",
         "m_Guid": ""
     },
     "isMainTexture": true,
     "useTilingAndOffset": false,
     "m_Modifiable": true,
     "m_DefaultType": 0
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector2ShaderProperty",
-    "m_ObjectId": "c58d4b5c0b134f08baf25027fbd8352b",
-    "m_Guid": {
-        "m_GuidSerialized": "378a2e68-d015-47c7-85c0-0a8a29fac5a0"
-    },
-    "m_Name": "Scar Tiling",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Scar Tiling",
-    "m_DefaultReferenceName": "_Scar_Tiling",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 0.0,
-        "w": 0.0
-    }
 }
 
 {
@@ -1938,6 +2033,21 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "df92f6806f5b44deac684e5c6d1056c0",
+    "m_Id": 0,
+    "m_DisplayName": "Tattoo Scale",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -2046,42 +2156,6 @@
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
-    "m_ObjectId": "e8c8fc0955264fe2a29e34c8abc94322",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Property",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -1168.800048828125,
-            "y": 327.9999694824219,
-            "width": 132.0,
-            "height": 33.60003662109375
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "3430f5fd05e44ad3951d1615e010c956"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Property": {
-        "m_Id": "c58d4b5c0b134f08baf25027fbd8352b"
     }
 }
 
