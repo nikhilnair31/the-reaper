@@ -6,7 +6,7 @@ public class Controller_Cleaner : MonoBehaviour
         Debug.Log($"Cleaner collided with {other.name}");
 
         if (other.CompareTag("Corpse")) {
-            Destroy(gameObject.transform.parent.gameObject);
+            Destroy(other.transform.parent.gameObject);
         }
     }    
 }

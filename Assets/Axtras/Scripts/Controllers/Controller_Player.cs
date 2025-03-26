@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Controller_Player : MonoBehaviour
@@ -21,6 +22,11 @@ public class Controller_Player : MonoBehaviour
     
     [Header("Slice Settings")]
     [SerializeField] private float sliceDistance = 10f;
+    [SerializeField] private float sliceMinDistance = 5f;
+    [SerializeField] private int sliceInterpolatedSteps = 15;
+    private HashSet<int> processedObjects = new ();
+    private Vector3 lastMousePosition;
+    private bool sliceActive = false;
     #endregion 
     
     private void Start() {
@@ -74,28 +80,75 @@ public class Controller_Player : MonoBehaviour
     }
     private void HandleSlice() {
         if (Manager_UI.Instance.GetSliceStatus()) {
-            if (Input.GetMouseButton(0)) {
-                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                Debug.DrawRay(ray.origin, ray.direction * sliceDistance, Color.red, 0.1f);
+            if (Input.GetMouseButtonDown(0)) {
+                sliceActive = true;
+                lastMousePosition = Input.mousePosition;
+            }
+            
+            if (Input.GetMouseButtonUp(0)) {
+                sliceActive = false;
+            }
+            
+            if (sliceActive) {
+                Vector3 currentMousePosition = Input.mousePosition;
+                Ray currentRay = mainCamera.ScreenPointToRay(currentMousePosition);
+                Debug.DrawRay(currentRay.origin, currentRay.direction * sliceDistance, Color.red, 0.1f);
                 
-                if (Physics.Raycast(ray, out hit, sliceDistance)) {
-                    Debug.Log($"Slicing object: {hit.collider.name}");
-
-                    if (hit.transform.CompareTag("Rope")) {
-                        Debug.Log($"Slicing rope!");
-
-                        // Disable rope
-                        hit.transform.gameObject.SetActive(false);
-                        // Get corpse and disable spring
-                        var corpse = hit.transform.parent.Find("Person");
-                        var spring = corpse.GetComponent<SpringJoint>();
-                        Destroy(spring);
+                if (Physics.Raycast(currentRay, out hit, sliceDistance)) {
+                    ProcessHit(hit);
+                }
+                
+                if (lastMousePosition != Vector3.zero && Vector2.Distance(lastMousePosition, currentMousePosition) > sliceMinDistance) {
+                    int steps = Mathf.CeilToInt(Vector2.Distance(lastMousePosition, currentMousePosition) / sliceMinDistance);
+                    steps = Mathf.Min(steps, sliceInterpolatedSteps); // Cap maximum steps to avoid performance issues
+                    
+                    for (int i = 1; i < steps; i++) {
+                        Vector3 lerpPosition = Vector3.Lerp(lastMousePosition, currentMousePosition, (float)i / steps);
+                        Ray lerpRay = mainCamera.ScreenPointToRay(lerpPosition);
+                        
+                        Debug.DrawRay(lerpRay.origin, lerpRay.direction * sliceDistance, Color.yellow, 0.1f);
+                        
+                        if (Physics.Raycast(lerpRay, out hit, sliceDistance)) {
+                            ProcessHit(hit);
+                        }
                     }
-                    else if (hit.transform.CompareTag("Corpse")) {
-                        Debug.Log($"Slicing corpse!");
+                }
+                
+                lastMousePosition = currentMousePosition;
+            }
+        }
+    }
+
+    private void ProcessHit(RaycastHit hit) {        
+        // Use instance ID to prevent processing the same object multiple times per frame
+        int instanceID = hit.transform.GetInstanceID();
+        if (processedObjects.Contains(instanceID)) {
+            return;
+        }
+    
+        processedObjects.Add(instanceID);
+        Debug.Log($"Slicing object: {hit.collider.name}");
+        
+        if (hit.transform.CompareTag("Rope")) {
+            Debug.Log($"Slicing rope!");
+            
+            // Avoid duplicate slicing of the same object
+            if (hit.transform.gameObject.activeSelf) {
+                // Disable rope
+                hit.transform.gameObject.SetActive(false);
+                // Get corpse and disable spring
+                var corpse = hit.transform.parent.Find("Person");
+                if (corpse != null) {
+                    var spring = corpse.GetComponent<SpringJoint>();
+                    if (spring != null) {
+                        Destroy(spring);
                     }
                 }
             }
+        }
+        else if (hit.transform.CompareTag("Corpse")) {
+            Debug.Log($"Slicing corpse!");
+            // Add desired functionality here
         }
     }
 }
