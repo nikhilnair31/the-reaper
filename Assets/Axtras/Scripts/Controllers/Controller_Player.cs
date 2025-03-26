@@ -46,12 +46,8 @@ public class Controller_Player : MonoBehaviour
             }
             
             if (isLanternActive) {
-                Vector3 mousePos = Input.mousePosition;
-                Manager_UI.Instance.UpdateCursorPosition(mousePos);
-
-                Ray ray = mainCamera.ScreenPointToRay(mousePos);
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 Vector3 targetPosition = ray.origin + ray.direction * maxDistance;
-                
                 if (Physics.Raycast(ray, out hit, maxDistance)) {
                     targetPosition = hit.point;
                 }

@@ -15,17 +15,19 @@ public class Manager_UI : MonoBehaviour
 
     [Header("Tools Settings")]
     [SerializeField] private Tool currentTool;
+    [SerializeField] private Texture2D defaultCursor;
     [SerializeField] private Sprite lanternCursor;
     [SerializeField] private Sprite diaryCursor;
     [SerializeField] private Sprite sliceCursor;
 
     [Header("Game UI")]
-    [SerializeField] private GameObject diaryPanelGO;
     [SerializeField] private RectTransform cursorRT;
     [SerializeField] private Image cursorImage;
     [SerializeField] private Button lanternButton;
     [SerializeField] private Button diaryButton;
     [SerializeField] private Button slicingButton;
+    [SerializeField] private GameObject torchFuelPanelGO;
+    [SerializeField] private GameObject diaryPanelGO;
     
     [Header("Over UI")]
     [SerializeField] private GameObject overPanelGO;
@@ -42,10 +44,12 @@ public class Manager_UI : MonoBehaviour
     }
     
     private void Start() {
-        if (diaryPanelGO != null)
-            diaryPanelGO.SetActive(false);
         if (cursorRT != null)
             cursorRT.gameObject.SetActive(false);
+        if (diaryPanelGO != null)
+            diaryPanelGO.SetActive(false);
+        if (torchFuelPanelGO != null)
+            torchFuelPanelGO.SetActive(false);
         
         lanternButton?.onClick.AddListener(ToggleLantern);
         diaryButton?.onClick.AddListener(ToggleDiary);
@@ -54,13 +58,7 @@ public class Manager_UI : MonoBehaviour
         currentTool = Tool.None;
         
         Cursor.visible = true;
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-    }
-    
-    public void UpdateCursorPosition(Vector3 position) {
-        if (currentTool == Tool.Lantern) {
-            cursorRT.position = position;
-        }
+        Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
     }
     
     public void ToggleLantern() {
@@ -68,29 +66,32 @@ public class Manager_UI : MonoBehaviour
 
         if (currentTool == Tool.Lantern) {
             currentTool = Tool.None;
-            cursorRT.gameObject.SetActive(false);
+            // cursorRT.gameObject.SetActive(false);
             SetButtonSize(lanternButton, 1f);
         }
         else {
             currentTool = Tool.Lantern;
             cursorImage.sprite = lanternCursor;
-            cursorRT.gameObject.SetActive(true);
-            SetButtonSize(lanternButton, 1.2f);
+            // cursorRT.gameObject.SetActive(true);
+            SetButtonSize(lanternButton, 1.5f);
         }
+
+        bool isActive = torchFuelPanelGO.activeSelf;
+        torchFuelPanelGO.SetActive(!isActive);
     }
     public void ToggleDiary() {
         Debug.Log("Diary button pressed!");
 
         if (currentTool == Tool.Diary) {
             currentTool = Tool.None;
-            cursorRT.gameObject.SetActive(false);
+            // cursorRT.gameObject.SetActive(false);
             SetButtonSize(diaryButton, 1f);
         }
         else {
             currentTool = Tool.Diary;
             cursorImage.sprite = diaryCursor;
-            cursorRT.gameObject.SetActive(true);
-            SetButtonSize(diaryButton, 1.2f);
+            // cursorRT.gameObject.SetActive(true);
+            SetButtonSize(diaryButton, 1.5f);
         }
 
         bool isActive = diaryPanelGO.activeSelf;
@@ -101,14 +102,14 @@ public class Manager_UI : MonoBehaviour
 
         if (currentTool == Tool.Slice) {
             currentTool = Tool.None;
-            cursorRT.gameObject.SetActive(false);
+            // cursorRT.gameObject.SetActive(false);
             SetButtonSize(slicingButton, 1f);
         }
         else {
             currentTool = Tool.Slice;
             cursorImage.sprite = sliceCursor;
-            cursorRT.gameObject.SetActive(true);
-            SetButtonSize(slicingButton, 1.2f);
+            // cursorRT.gameObject.SetActive(true);
+            SetButtonSize(slicingButton, 1.5f);
         }
     }
 
