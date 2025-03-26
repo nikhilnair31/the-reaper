@@ -15,6 +15,8 @@ public class Controller_Player : MonoBehaviour
     [Header("Lantern Settings")]
     [SerializeField] private Transform lightTransform;
     [SerializeField] private GameObject lightObject;
+    [SerializeField] private float boostMul = 2f;
+    private bool isBoosting = false;
     private bool isLanternActive = false;
     #endregion 
     
@@ -26,7 +28,18 @@ public class Controller_Player : MonoBehaviour
     }
     
     private void Update() {
+        HandleLantern();
+        HandleDiary();
+        HandleSlice();
+    }
+    private void HandleLantern() {
         if (Manager_UI.Instance.GetLanternStatus()) {
+            if (Input.GetKeyDown(KeyCode.F)) {
+                isBoosting = !isBoosting;
+                var light = lightObject.GetComponent<Light>();
+                light.intensity = isBoosting ? light.intensity * boostMul : light.intensity / boostMul;
+            }
+
             if (Input.GetMouseButtonDown(0)) {
                 isLanternActive = !isLanternActive;
                 lightObject?.SetActive(isLanternActive);
@@ -54,6 +67,14 @@ public class Controller_Player : MonoBehaviour
                 lastPosition = lightTransform.position;
                 Manager_Timer.Instance.UpdateTimer(movement);
             }
+        }
+    }
+    private void HandleDiary() {
+        if (Manager_UI.Instance.GetDiaryStatus()) {
+        }
+    }
+    private void HandleSlice() {
+        if (Manager_UI.Instance.GetSliceStatus()) {
         }
     }
 }

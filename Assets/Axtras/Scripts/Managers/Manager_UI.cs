@@ -119,6 +119,12 @@ public class Manager_UI : MonoBehaviour
     public bool GetLanternStatus() {
         return currentTool == Tool.Lantern;
     }
+    public bool GetDiaryStatus() {
+        return currentTool == Tool.Diary;
+    }
+    public bool GetSliceStatus() {
+        return currentTool == Tool.Slice;
+    }
 
     public void ControlOverUI(bool active) {
         Debug.Log($"ControlOverUI:L {active}");
