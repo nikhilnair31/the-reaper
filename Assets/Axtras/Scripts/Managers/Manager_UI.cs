@@ -60,6 +60,9 @@ public class Manager_UI : MonoBehaviour
     
     public void ToggleLantern() {
         Debug.Log("Lantern button pressed!");
+        
+        ResetPanels();
+        ResetButtonSize();
 
         if (currentTool == Tool.Lantern) {
             currentTool = Tool.None;            
@@ -77,6 +80,9 @@ public class Manager_UI : MonoBehaviour
     }
     public void ToggleDiary() {
         Debug.Log("Diary button pressed!");
+        
+        ResetPanels();
+        ResetButtonSize();
 
         if (currentTool == Tool.Diary) {
             currentTool = Tool.None;            
@@ -94,6 +100,9 @@ public class Manager_UI : MonoBehaviour
     }
     public void ToggleSlice() {
         Debug.Log("Slicing button pressed!");
+        
+        ResetPanels();
+        ResetButtonSize();
 
         if (currentTool == Tool.Slice) {
             currentTool = Tool.None;            
@@ -116,8 +125,12 @@ public class Manager_UI : MonoBehaviour
         diaryRT.localScale = Vector3.one;
         slicingRT.localScale = Vector3.one;
     }
+    private void ResetPanels() {
+        torchFuelPanelGO.SetActive(false);
+        diaryPanelGO.SetActive(false);
+    }
+
     private void SetButtonSize(Button btn, float sizeVal) {
-        ResetButtonSize();
         var rt = btn.GetComponent<RectTransform>();
         rt.localScale = new (sizeVal, sizeVal, sizeVal);
     }
