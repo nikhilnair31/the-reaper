@@ -17,6 +17,7 @@ namespace GogoGaga.OptimizedRopesAndCables
         MeshFilter meshFilter;
         MeshRenderer meshRenderer;
         Mesh ropeMesh;
+        MeshCollider meshCollider;
         LineRenderer lineRenderer;
 
         private void OnValidate()
@@ -29,6 +30,8 @@ namespace GogoGaga.OptimizedRopesAndCables
                 meshRenderer = GetComponent<MeshRenderer>();
             if(!lineRenderer)
                 lineRenderer = GetComponent<LineRenderer>();
+            if (!meshCollider)
+                meshCollider = GetComponent<MeshCollider>();
 
             meshRenderer.material = material;
         }
@@ -44,6 +47,8 @@ namespace GogoGaga.OptimizedRopesAndCables
                 meshRenderer = GetComponent<MeshRenderer>();
             if (!lineRenderer)
                 lineRenderer = GetComponent<LineRenderer>();
+            if (!meshCollider)
+                meshCollider = GetComponent<MeshCollider>();
         }
 
         private void Start()
@@ -152,8 +157,30 @@ namespace GogoGaga.OptimizedRopesAndCables
 
             // Assign the mesh to the MeshFilter
             meshFilter.mesh = mesh;
+            
+            // Update the mesh collider with the new mesh
+            UpdateMeshCollider(mesh);
         }
 
+        void UpdateMeshCollider(Mesh mesh)
+        {
+            // Ensure we have a mesh collider
+            if (meshCollider == null)
+            {
+                meshCollider = gameObject.AddComponent<MeshCollider>();
+            }
+            
+            // Update the collider with the current mesh
+            meshCollider.sharedMesh = null; // Clear existing mesh
+            meshCollider.sharedMesh = mesh; // Assign new mesh
+            
+            // Set collider properties
+            meshCollider.convex = true; // For physics interactions
+            meshCollider.isTrigger = true; // Make it a trigger to avoid physics interactions
+            meshCollider.providesContacts = true; // Provide collision contact points
+            meshCollider.cookingOptions = MeshColliderCookingOptions.EnableMeshCleaning | 
+                                        MeshColliderCookingOptions.WeldColocatedVertices;
+        }
         void GenerateMesh()
         {
             Vector3[] points = new Vector3[OverallDivision+ 1];
@@ -174,6 +201,7 @@ namespace GogoGaga.OptimizedRopesAndCables
         {
             Destroy(meshRenderer);
             Destroy(meshFilter);
+            Destroy(meshCollider);
         }
 
        

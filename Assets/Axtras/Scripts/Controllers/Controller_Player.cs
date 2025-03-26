@@ -18,6 +18,9 @@ public class Controller_Player : MonoBehaviour
     [SerializeField] private float boostMul = 2f;
     private bool isBoosting = false;
     private bool isLanternActive = false;
+    
+    [Header("Slice Settings")]
+    [SerializeField] private float sliceDistance = 10f;
     #endregion 
     
     private void Start() {
@@ -71,6 +74,28 @@ public class Controller_Player : MonoBehaviour
     }
     private void HandleSlice() {
         if (Manager_UI.Instance.GetSliceStatus()) {
+            if (Input.GetMouseButton(0)) {
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                Debug.DrawRay(ray.origin, ray.direction * sliceDistance, Color.red, 0.1f);
+                
+                if (Physics.Raycast(ray, out hit, sliceDistance)) {
+                    Debug.Log($"Slicing object: {hit.collider.name}");
+
+                    if (hit.transform.CompareTag("Rope")) {
+                        Debug.Log($"Slicing rope!");
+
+                        // Disable rope
+                        hit.transform.gameObject.SetActive(false);
+                        // Get corpse and disable spring
+                        var corpse = hit.transform.parent.Find("Person");
+                        var spring = corpse.GetComponent<SpringJoint>();
+                        Destroy(spring);
+                    }
+                    else if (hit.transform.CompareTag("Corpse")) {
+                        Debug.Log($"Slicing corpse!");
+                    }
+                }
+            }
         }
     }
 }

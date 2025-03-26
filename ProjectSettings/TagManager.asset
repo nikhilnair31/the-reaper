@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Person
+  - Rope
+  - Corpse
   layers:
   - Default
   - TransparentFX
