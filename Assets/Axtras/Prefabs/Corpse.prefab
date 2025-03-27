@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7431739662979964748}
   - component: {fileID: 3057532439093908467}
   - component: {fileID: 9051239400952670630}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Corpse
   m_TagString: Corpse
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 1952074104183947610}
   - component: {fileID: 5127302992510769817}
   - component: {fileID: 6240795299679407258}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rope
   m_TagString: Rope
   m_Icon: {fileID: 0}
@@ -592,12 +592,6 @@ MonoBehaviour:
   auraPrefabs:
   - {fileID: 8172857068077763117, guid: 124088a89347c0444b757c520a273a22, type: 3}
   auraSpawnChance: 0.5
-  auraScaleRange: {x: 0.8, y: 1.5}
-  auraColorStart: {r: 0, g: 1, b: 1, a: 1}
-  auraColorEnd: {r: 0, g: 0, b: 1, a: 1}
-  auraLifetime: 3
-  auraIntensity: 1
-  auraEmissionRate: 20
 --- !u!135 &947081899121419513
 SphereCollider:
   m_ObjectHideFlags: 0

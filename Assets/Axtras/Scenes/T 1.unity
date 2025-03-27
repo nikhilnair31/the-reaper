@@ -946,6 +946,9 @@ MonoBehaviour:
   sliceDistance: 10
   sliceMinDistance: 5
   sliceInterpolatedSteps: 15
+  sliceLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &591393340
 GameObject:
   m_ObjectHideFlags: 0

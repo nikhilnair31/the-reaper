@@ -24,6 +24,7 @@ public class Controller_Player : MonoBehaviour
     [SerializeField] private float sliceDistance = 10f;
     [SerializeField] private float sliceMinDistance = 5f;
     [SerializeField] private int sliceInterpolatedSteps = 15;
+    [SerializeField] private LayerMask sliceLayerMask;
     private HashSet<int> processedObjects = new ();
     private Vector3 lastMousePosition;
     private bool sliceActive = false;
@@ -94,7 +95,7 @@ public class Controller_Player : MonoBehaviour
                 Ray currentRay = mainCamera.ScreenPointToRay(currentMousePosition);
                 Debug.DrawRay(currentRay.origin, currentRay.direction * sliceDistance, Color.red, 0.1f);
                 
-                if (Physics.Raycast(currentRay, out hit, sliceDistance)) {
+                if (Physics.Raycast(currentRay, out hit, sliceDistance, sliceLayerMask)) {
                     ProcessHit(hit);
                 }
                 
@@ -108,7 +109,7 @@ public class Controller_Player : MonoBehaviour
                         
                         Debug.DrawRay(lerpRay.origin, lerpRay.direction * sliceDistance, Color.yellow, 0.1f);
                         
-                        if (Physics.Raycast(lerpRay, out hit, sliceDistance)) {
+                        if (Physics.Raycast(lerpRay, out hit, sliceDistance, sliceLayerMask)) {
                             ProcessHit(hit);
                         }
                     }
