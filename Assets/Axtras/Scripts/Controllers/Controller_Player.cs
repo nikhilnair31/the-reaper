@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Controller_Player : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class Controller_Player : MonoBehaviour
 
     [Header("Diary Settings")]
     [SerializeField][TextArea(3, 10)] private string diaryRulesStr;
-    private string[] diaryRulesList;
+    private List<string> diaryRulesList;
     
     [Header("Slice Settings")]
     [SerializeField] private float sliceDistance = 10f;
@@ -57,8 +58,8 @@ public class Controller_Player : MonoBehaviour
         lightObject?.SetActive(false);
     }
     private void InitDiary() {
-        diaryRulesList = diaryRulesStr.Split('\n');
-        Manager_UI.Instance.SetDiaryText(diaryRulesStr);
+        diaryRulesList = diaryRulesStr.Split('\n').ToList();    
+        Controller_Diary.Instance.InitDiaryPages(diaryRulesList);
     }
     
     private void Update() {
