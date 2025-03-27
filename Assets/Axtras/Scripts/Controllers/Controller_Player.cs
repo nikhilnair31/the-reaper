@@ -20,6 +20,10 @@ public class Controller_Player : MonoBehaviour
     [SerializeField] private float boostMul = 2f;
     private bool isBoosting = false;
     private bool isLanternActive = false;
+
+    [Header("Diary Settings")]
+    [SerializeField][TextArea(3, 10)] private string diaryRulesStr;
+    private string[] diaryRulesList;
     
     [Header("Slice Settings")]
     [SerializeField] private float sliceDistance = 10f;
@@ -42,9 +46,19 @@ public class Controller_Player : MonoBehaviour
     }
 
     private void Start() {
+        Init();
+        InitLantern();
+        InitDiary();
+    }
+    private void Init() {
         mainCamera = Camera.main;
-        
+    }
+    private void InitLantern() {
         lightObject?.SetActive(false);
+    }
+    private void InitDiary() {
+        diaryRulesList = diaryRulesStr.Split('\n');
+        Manager_UI.Instance.SetDiaryText(diaryRulesStr);
     }
     
     private void Update() {

@@ -24,6 +24,7 @@ public class Manager_UI : MonoBehaviour
     [SerializeField] private Button lanternButton;
     [SerializeField] private Button diaryButton;
     [SerializeField] private Button slicingButton;
+    [SerializeField] private Text diaryText;
     [SerializeField] private GameObject torchFuelPanelGO;
     [SerializeField] private GameObject diaryPanelGO;
     
@@ -142,6 +143,10 @@ public class Manager_UI : MonoBehaviour
     }
     public bool GetSliceStatus() {
         return currentTool == Tool.Slice;
+    }
+
+    public void SetDiaryText(string text) {
+        diaryText.text = text;
     }
 
     public void ControlOverUI(bool active) {
