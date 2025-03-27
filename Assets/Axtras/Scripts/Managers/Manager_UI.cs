@@ -14,6 +14,18 @@ public class Manager_UI : MonoBehaviour
         Slice
     }
 
+    [Header("Menu UI")]
+    [SerializeField] private GameObject menuPanelGO;
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button endButton;
+    
+    [Header("Over UI")]
+    [SerializeField] private GameObject overPanelGO;
+    [SerializeField] private TMP_Text storyText;
+    
+    [Header("Loading UI")]
+    [SerializeField] private GameObject loadingPanelGO;
+
     [Header("Tools Settings")]
     [SerializeField] private Tool currentTool;
     [SerializeField] private Texture2D defaultCursor;
@@ -22,14 +34,12 @@ public class Manager_UI : MonoBehaviour
     [SerializeField] private Texture2D sliceCursor;
 
     [Header("Game UI")]
+    [SerializeField] private GameObject gamePanelGO;
     [SerializeField] private Button lanternButton;
     [SerializeField] private Button diaryButton;
     [SerializeField] private Button slicingButton;
     [SerializeField] private GameObject torchFuelPanelGO;
     [SerializeField] private GameObject diaryPanelGO;
-    
-    [Header("Over UI")]
-    [SerializeField] private GameObject overPanelGO;
     #endregion
     
     private void Awake() {
@@ -48,6 +58,8 @@ public class Manager_UI : MonoBehaviour
         if (torchFuelPanelGO != null)
             torchFuelPanelGO.SetActive(false);
         
+        startButton?.onClick.AddListener(StartGame);
+        endButton?.onClick.AddListener(EndGame);
         lanternButton?.onClick.AddListener(ToggleLantern);
         diaryButton?.onClick.AddListener(ToggleDiary);
         slicingButton?.onClick.AddListener(ToggleSlice);
@@ -56,6 +68,33 @@ public class Manager_UI : MonoBehaviour
         
         Cursor.visible = true;
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+    }
+    
+    public void StartGame() {
+        Debug.Log("Start button pressed!");
+        
+        startButton.gameObject.SetActive(false);
+
+        loadingPanelGO.SetActive(false);
+        overPanelGO.SetActive(false);
+
+        Manager_Game.Instance.StartGame();
+    }
+    public void EndGame() {
+        Debug.Log("End button pressed!");
+        
+        endButton.gameObject.SetActive(false);
+
+        loadingPanelGO.SetActive(true);
+        overPanelGO.SetActive(false);
+
+        Manager_Game.Instance.EndGame();
+    }
+    
+    public void SetStoryText(string text) {
+        Debug.Log($"SetStoryText: {text}");
+        
+        storyText.text = text;
     }
     
     public void ToggleLantern() {
@@ -145,8 +184,23 @@ public class Manager_UI : MonoBehaviour
         return currentTool == Tool.Slice;
     }
 
+    public void ControlLoadingUI(bool active) {
+        Debug.Log($"ControlLoadingUI {active}");
+
+        loadingPanelGO.SetActive(active);
+    }
+    public void ControlGameUI(bool active) {
+        Debug.Log($"ControlGameUI {active}");
+
+        loadingPanelGO.SetActive(active);
+    }
+    public void ControlMenuUI(bool active) {
+        Debug.Log($"ControlMenuUI {active}");
+
+        loadingPanelGO.SetActive(active);
+    }
     public void ControlOverUI(bool active) {
-        Debug.Log($"ControlOverUI:L {active}");
+        Debug.Log($"ControlOverUI {active}");
 
         overPanelGO.SetActive(active);
     }

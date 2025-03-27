@@ -162,11 +162,16 @@ public class Controller_Player : MonoBehaviour
                         Destroy(spring);
                     }
                 }
+
+                // Add score on rope slice
+                Manager_Game.Instance.IncScore();
             }
         }
         else if (hit.transform.CompareTag("Corpse")) {
             Debug.Log($"Slicing corpse!");
-            // Add desired functionality here
+
+            // Decrease score on corpse slice
+            Manager_Game.Instance.DecScore();
         }
     }
 
