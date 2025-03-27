@@ -44,7 +44,7 @@ public class Controller_Player : MonoBehaviour
     }
     private void HandleLantern() {
         if (Manager_UI.Instance.GetLanternStatus()) {
-            if (Input.GetKeyDown(KeyCode.F)) {
+            if (Input.GetMouseButtonDown(1)) {
                 isBoosting = !isBoosting;
                 var light = lightObject.GetComponent<Light>();
                 light.intensity = isBoosting ? light.intensity * boostMul : light.intensity / boostMul;
