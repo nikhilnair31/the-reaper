@@ -5,43 +5,38 @@ public class Controller_Corpse : MonoBehaviour
 {
     #region Variables
     private SphereCollider sphereCollider;
+    private GameObject corpseGO;
 
     [Header("General Settings")]
     [SerializeField] private MeshRenderer corpseMeshRend;
     [SerializeField] private MeshFilter meshFilter;
-    [SerializeField] private GameObject corpseGO;
-
-    [Header("Raycast Settings")]
-    [SerializeField] private int rayCount = 100;
-    [SerializeField] private float rayHitChance = 0.75f;
-    [SerializeField] private LayerMask raycastLayerMask;
     [SerializeField] private bool visualizeRays = true;
+    [SerializeField] private LayerMask raycastLayerMask;
     
     [Header("Tattoo Settings")]
     [SerializeField] private GameObject[] tattooPrefabs;
     [SerializeField] private float tattooSize = 0.1f;
     [SerializeField] private int maxTattoos = 10;
+    [SerializeField] private int tattooRayCount = 100;
+    [SerializeField] private float tattooRayHitChance = 0.05f;
     
     [Header("Scar Settings")]
     [SerializeField] private GameObject[] scarPrefabs;
     [SerializeField] private float scarSize = 0.15f;
     [SerializeField] private int maxScars = 5;
+    [SerializeField] private int scarRayCount = 100;
+    [SerializeField] private float scarRayHitChance = 0.05f;
 
     [Header("Aura Settings")]
     [SerializeField] private GameObject[] auraPrefabs;
     [SerializeField] private float auraSpawnChance = 0.5f;
-    [SerializeField] private Vector2 auraScaleRange = new (0.8f, 1.5f);
-    [SerializeField] private Color auraColorStart = Color.cyan;
-    [SerializeField] private Color auraColorEnd = Color.blue;
-    [SerializeField] private float auraLifetime = 3f;
-    [SerializeField] private float auraIntensity = 1f;
-    [SerializeField] private float auraEmissionRate = 20f;
     #endregion
     
     private void Start() {
-        corpseGO = transform.Find("Corpse").gameObject;
-
-        sphereCollider = GetComponent<SphereCollider>();
+        if (corpseGO == null)
+            corpseGO = transform.Find("Corpse").gameObject;
+        if (sphereCollider == null)
+            sphereCollider = GetComponent<SphereCollider>();
 
         RandomizeBaseTexture();
         RandomizeTattoos();
@@ -76,7 +71,7 @@ public class Controller_Corpse : MonoBehaviour
         if (scarPrefabs == null || scarPrefabs.Length == 0)
             return;
             
-        var hits = CastRaysInward();
+        var hits = CastRaysInward(tattooRayCount, tattooRayHitChance);
         int scarCount = 0;
         
         foreach (var hit in hits) {
@@ -94,43 +89,11 @@ public class Controller_Corpse : MonoBehaviour
             
         GameObject auraPrefab = auraPrefabs[Random.Range(0, auraPrefabs.Length)];
         
-        GameObject aura = Instantiate(auraPrefab, transform.position, Quaternion.identity);
-        aura.transform.SetParent(corpseGO.transform);
-        
-        float scale = Random.Range(auraScaleRange.x, auraScaleRange.y);
-        aura.transform.localScale = new Vector3(scale, scale, scale);
-        
-        if (aura.TryGetComponent<ParticleSystem>(out var particleSystem)) {
-            var main = particleSystem.main;
-            main.startColor = auraColorStart;
-            main.startLifetime = auraLifetime;
-            
-            var emission = particleSystem.emission;
-            emission.rateOverTime = auraEmissionRate;
-            
-            var colorOverLifetime = particleSystem.colorOverLifetime;
-            if (colorOverLifetime.enabled) {
-                Gradient gradient = new Gradient();
-                gradient.SetKeys(
-                    new GradientColorKey[] { 
-                        new (auraColorStart, 0f), 
-                        new (auraColorEnd, 1f) 
-                    },
-                    new GradientAlphaKey[] { 
-                        new (1f, 0f), 
-                        new (0f, 1f) 
-                    }
-                );
-                colorOverLifetime.color = gradient;
-            }
-            
-            if (particleSystem.TryGetComponent<Renderer>(out var renderer)) {
-                renderer.material.SetColor("_EmissionColor", auraColorStart * auraIntensity);
-            }
-        }
+        GameObject aura = Instantiate(auraPrefab, corpseGO.transform);
+        aura.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
-    private List<RaycastHit> CastRaysInward()  {
+    private List<RaycastHit> CastRaysInward(int rayCount = 100, float rayHitChance = 0.05f) {
         List<RaycastHit> allHits = new();
         
         Vector3 center = transform.position;

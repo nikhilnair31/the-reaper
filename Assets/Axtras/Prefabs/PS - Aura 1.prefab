@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5284037749957297907}
   - component: {fileID: 7993140223272105445}
   m_Layer: 0
-  m_Name: Status PS
+  m_Name: PS - Aura 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

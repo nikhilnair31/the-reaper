@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3057532439093908467}
   - component: {fileID: 9051239400952670630}
   m_Layer: 6
-  m_Name: Person
+  m_Name: Corpse
   m_TagString: Corpse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -573,14 +573,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corpseMeshRend: {fileID: 5437075662199383339}
   meshFilter: {fileID: 4493441346940068057}
-  rayCount: 100
-  rayHitChance: 0.05
+  visualizeRays: 0
   raycastLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  visualizeRays: 0
-  decalPrefab: {fileID: 4419387971811043002, guid: 45621b6043603c84c8074c512d9258f2, type: 3}
-  decalSize: 0.1
+  tattooPrefabs:
+  - {fileID: 4419387971811043002, guid: b7edd16500d200444a47a38a48040596, type: 3}
+  tattooSize: 0.1
+  maxTattoos: 3
+  tattooRayCount: 100
+  tattooRayHitChance: 0.05
+  scarPrefabs:
+  - {fileID: 4419387971811043002, guid: 45621b6043603c84c8074c512d9258f2, type: 3}
+  scarSize: 0.15
+  maxScars: 2
+  scarRayCount: 100
+  scarRayHitChance: 0.05
+  auraPrefabs:
+  - {fileID: 8172857068077763117, guid: 124088a89347c0444b757c520a273a22, type: 3}
+  auraSpawnChance: 0.5
+  auraScaleRange: {x: 0.8, y: 1.5}
+  auraColorStart: {r: 0, g: 1, b: 1, a: 1}
+  auraColorEnd: {r: 0, g: 0, b: 1, a: 1}
+  auraLifetime: 3
+  auraIntensity: 1
+  auraEmissionRate: 20
 --- !u!135 &947081899121419513
 SphereCollider:
   m_ObjectHideFlags: 0

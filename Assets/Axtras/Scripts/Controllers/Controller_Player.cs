@@ -132,15 +132,11 @@ public class Controller_Player : MonoBehaviour
         if (hit.transform.CompareTag("Rope")) {
             Debug.Log($"Slicing rope!");
             
-            // Avoid duplicate slicing of the same object
             if (hit.transform.gameObject.activeSelf) {
-                // Disable rope
                 hit.transform.gameObject.SetActive(false);
-                // Get corpse and disable spring
-                var corpse = hit.transform.parent.Find("Person");
+                var corpse = hit.transform.parent.Find("Corpse");
                 if (corpse != null) {
-                    var spring = corpse.GetComponent<SpringJoint>();
-                    if (spring != null) {
+                    if (corpse.TryGetComponent<SpringJoint>(out var spring)) {
                         Destroy(spring);
                     }
                 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8476819886882571790}
   - component: {fileID: 9068789972793434841}
   m_Layer: 0
-  m_Name: Tattoo Decal
+  m_Name: Decal - Tattoo 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
