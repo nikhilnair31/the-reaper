@@ -6599,6 +6599,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.0152901
       objectReference: {fileID: 0}
+    - target: {fileID: 5739751252891621213, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
+      propertyPath: decalPrefab
+      value: 
+      objectReference: {fileID: 4419387971811043002, guid: 45621b6043603c84c8074c512d9258f2, type: 3}
     - target: {fileID: 8922519638501160208, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
       propertyPath: m_Name
       value: Corpse (2)
@@ -7134,10 +7138,6 @@ PrefabInstance:
     - target: {fileID: 4037547686000303448, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235917941351743091, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.31529033
       objectReference: {fileID: 0}
     - target: {fileID: 8922519638501160208, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
       propertyPath: m_Name
