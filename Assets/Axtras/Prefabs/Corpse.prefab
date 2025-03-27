@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7431739662979964748}
   - component: {fileID: 3057532439093908467}
   - component: {fileID: 9051239400952670630}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Corpse
   m_TagString: Corpse
   m_Icon: {fileID: 0}
@@ -573,7 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corpseMeshRend: {fileID: 5437075662199383339}
   meshFilter: {fileID: 4493441346940068057}
-  visualizeRays: 0
+  visualizeRays: 1
   raycastLayerMask:
     serializedVersion: 2
     m_Bits: 64
