@@ -1,13 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Controller_Player : MonoBehaviour
 {
     #region Vars
+    public static Controller_Player Instance { get; private set; }
+    
     private Vector3 velocity = Vector3.zero;
     private Camera mainCamera;
     private RaycastHit hit;
-    private Vector3 lastPosition;
     
     [Header("Movement Settings")]
     [SerializeField] private float smoothTime = 0.1f;
@@ -30,9 +31,18 @@ public class Controller_Player : MonoBehaviour
     private bool sliceActive = false;
     #endregion 
     
+    private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start() {
         mainCamera = Camera.main;
-        lastPosition = (lightTransform != null) ? lightTransform.position : Vector3.zero;
         
         lightObject?.SetActive(false);
     }
@@ -68,10 +78,6 @@ public class Controller_Player : MonoBehaviour
                     ref velocity, 
                     smoothTime
                 );
-                
-                float movement = Vector3.Distance(lightTransform.position, lastPosition);
-                lastPosition = lightTransform.position;
-                Manager_Timer.Instance.UpdateTimer(movement);
             }
         }
     }
@@ -147,5 +153,9 @@ public class Controller_Player : MonoBehaviour
             Debug.Log($"Slicing corpse!");
             // Add desired functionality here
         }
+    }
+
+    public bool GetIsLanternBoosting() {
+        return isBoosting;
     }
 }

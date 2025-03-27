@@ -21,7 +21,6 @@ public class Manager_UI : MonoBehaviour
     [SerializeField] private Texture2D sliceCursor;
 
     [Header("Game UI")]
-    [SerializeField] private Image cursorImage;
     [SerializeField] private Button lanternButton;
     [SerializeField] private Button diaryButton;
     [SerializeField] private Button slicingButton;

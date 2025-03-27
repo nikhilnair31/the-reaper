@@ -6,10 +6,10 @@ public class Manager_Timer : MonoBehaviour
     #region Vars
     public static Manager_Timer Instance { get; private set; }
     
-    [Header("Timer Settings")]
+    [Header("Fuel Settings")]
     [SerializeField] private Image fuelAmountImage;
-    [SerializeField] private float fillDrainRate = 0.05f;
-    [SerializeField] private float movementDrainMultiplier = 1.5f;
+    [SerializeField] private float fuelNormalDrainMul = 1f;
+    [SerializeField] private float fuelBoostDrainMul = 2f;
     #endregion
 
     private void Awake() {
@@ -23,25 +23,37 @@ public class Manager_Timer : MonoBehaviour
     }
     
     private void Start() {
+        Init();
+    }
+    private void Init() {
         fuelAmountImage.fillAmount = 1f;
     }
-    
-    public void UpdateTimer(float movementAmount) {
-        float drain = fillDrainRate * (1.0f + movementAmount * movementDrainMultiplier) * Time.deltaTime;
-        var amtVal = Mathf.Max(0, fuelAmountImage.fillAmount - drain);
-        SetTimerFill(amtVal);
-        
-        if (fuelAmountImage.fillAmount <= 0) {
-            TimerEmpty();
+
+    private void Update() {
+        HandleLantern();
+    }
+    private void HandleLantern() {
+        if (Manager_UI.Instance.GetLanternStatus()) {
+            UpdateFuelAmount();
         }
     }
-    
-    public void SetTimerFill(float amount) {
+
+    public void UpdateFuelAmount() {
+        var drainMul = Controller_Player.Instance.GetIsLanternBoosting() ? fuelBoostDrainMul : fuelNormalDrainMul;
+        var drainAmt = drainMul * Time.deltaTime;
+        var amtVal = Mathf.Max(0, fuelAmountImage.fillAmount - drainAmt);
+
+        SetFuelFill(amtVal);
+        
+        if (fuelAmountImage.fillAmount <= 0) {
+            FuelEmpty();
+        }
+    }
+    private void SetFuelFill(float amount) {
         fuelAmountImage.fillAmount = Mathf.Clamp01(amount);
     }
-    
-    private void TimerEmpty() {
-        Debug.Log("Timer Empty!");
+    private void FuelEmpty() {
+        Debug.Log("Fuel Empty!");
 
         Manager_UI.Instance.ControlOverUI(true);
     }

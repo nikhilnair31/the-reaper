@@ -867,8 +867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuelAmountImage: {fileID: 1979208738}
-  fillDrainRate: 0.05
-  movementDrainMultiplier: 1.5
+  fuelNormalDrainMul: 0.01
+  fuelBoostDrainMul: 0.05
 --- !u!114 &354226962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,7 +886,6 @@ MonoBehaviour:
   lanternCursor: {fileID: 2800000, guid: d039ac6cd225fe0438e65aaa84c3535d, type: 3}
   diaryCursor: {fileID: 2800000, guid: 0746f38345ba1a7429fadd505b7f9781, type: 3}
   sliceCursor: {fileID: 2800000, guid: af1143ed3ce6fcd43af6010729275954, type: 3}
-  cursorImage: {fileID: 0}
   lanternButton: {fileID: 1073070248}
   diaryButton: {fileID: 1934816431}
   slicingButton: {fileID: 997522758}
