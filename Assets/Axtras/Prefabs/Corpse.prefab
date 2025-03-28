@@ -1352,7 +1352,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   corpseMeshRend: {fileID: 178690799689442949}
-  meshFilter: {fileID: 0}
   visualizeRays: 1
   raycastLayerMask:
     serializedVersion: 2
@@ -1375,6 +1374,20 @@ MonoBehaviour:
   auraPrefabs:
   - {fileID: 8172857068077763117, guid: 124088a89347c0444b757c520a273a22, type: 3}
   auraSpawnChance: 0.5
+  limbsMissingArray:
+  - {fileID: 147368506740282097}
+  - {fileID: 2809712280727963226}
+  - {fileID: 4051848279035341505}
+  - {fileID: 8662770752579318751}
+  - {fileID: 4148773352579274564}
+  - {fileID: 2412333158211437925}
+  - {fileID: 4314081032361899763}
+  - {fileID: 2991604379840426616}
+  - {fileID: 8589860372921699091}
+  - {fileID: 8087525794994907983}
+  - {fileID: 6875576572585659463}
+  - {fileID: 6286697930270387617}
+  limbMissingChance: 0.05
   whisperPrefab: {fileID: 2614981329418612469, guid: 47ad2df9de44b08459793517d6bf682a, type: 3}
   whipserMoveUpAmount: 8
   whipserTweenTime: 2

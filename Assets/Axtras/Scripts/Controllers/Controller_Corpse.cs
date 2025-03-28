@@ -14,7 +14,6 @@ public class Controller_Corpse : MonoBehaviour
 
     [Header("General Settings")]
     [SerializeField] private SkinnedMeshRenderer corpseMeshRend;
-    [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private bool visualizeRays = true;
     [SerializeField] private LayerMask raycastLayerMask;
     
@@ -40,6 +39,10 @@ public class Controller_Corpse : MonoBehaviour
     [Header("Aura Settings")]
     [SerializeField] private GameObject[] auraPrefabs;
     [SerializeField] private float auraSpawnChance = 0.5f;
+    
+    [Header("Limb Settings")]
+    [SerializeField] private Transform[] limbsMissingArray;
+    [SerializeField] private float limbMissingChance = 0.05f;
 
     [Header("Whispers Settings")]
     [SerializeField] private GameObject whisperPrefab;
@@ -60,6 +63,7 @@ public class Controller_Corpse : MonoBehaviour
         RandomizeTattoos();
         RandomizeScars();
         RandomizeAuras();
+        RandomizeLimbsMissing();
         RandomizePhysics();
     }
     private void RandomizeBaseTexture() {
@@ -111,6 +115,16 @@ public class Controller_Corpse : MonoBehaviour
         GameObject aura = Instantiate(auraPrefab, corpseGO.transform);
         aura.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
+    private void RandomizeLimbsMissing() {
+        if (limbsMissingArray == null || limbsMissingArray.Length == 0)
+            return;
+            
+        foreach (var limb in limbsMissingArray) {
+            if (Random.value < limbMissingChance) {
+                limb.localScale = Vector3.zero;
+            }
+        }
+    }
     private void RandomizePhysics() {
         if (corpseGO.TryGetComponent(out corpseRb)) {
             corpseRb.isKinematic = false;
@@ -142,7 +156,7 @@ public class Controller_Corpse : MonoBehaviour
 
             bool didHit = Physics.Raycast(ray, out RaycastHit hit, distance, raycastLayerMask);
             
-            if (!didHit && meshFilter != null){
+            if (!didHit && corpseMeshRend != null){
                 didHit = RaycastAgainstMesh(ray, out hit, distance);
             }
             
@@ -161,10 +175,10 @@ public class Controller_Corpse : MonoBehaviour
     private bool RaycastAgainstMesh(Ray ray, out RaycastHit hit, float maxDistance) {
         hit = new RaycastHit();
         
-        if (meshFilter == null || meshFilter.sharedMesh == null)
+        if (corpseMeshRend == null || corpseMeshRend.sharedMesh == null)
             return false;
             
-        Mesh mesh = meshFilter.sharedMesh;
+        Mesh mesh = corpseMeshRend.sharedMesh;
         Vector3[] vertices = mesh.vertices;
         int[] triangles = mesh.triangles;
         
