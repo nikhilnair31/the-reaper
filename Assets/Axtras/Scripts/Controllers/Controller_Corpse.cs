@@ -9,12 +9,19 @@ public class Controller_Corpse : MonoBehaviour
     #region Variables
     private SphereCollider sphereCollider;
     private GameObject corpseGO;
+    private Rigidbody corpseRb;
+    private Rope rope;
 
     [Header("General Settings")]
     [SerializeField] private MeshRenderer corpseMeshRend;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private bool visualizeRays = true;
     [SerializeField] private LayerMask raycastLayerMask;
+    
+    [Header("Physics Settings")]
+    [SerializeField] private float corpseMass = 70f;
+    [SerializeField] private float ropeSpringStrength = 700f;
+    [SerializeField] private float randSpringStrenthPerc = 0.1f;
     
     [Header("Tattoo Settings")]
     [SerializeField] private GameObject[] tattooPrefabs;
@@ -51,6 +58,7 @@ public class Controller_Corpse : MonoBehaviour
         RandomizeTattoos();
         RandomizeScars();
         RandomizeAuras();
+        RandomizePhysics();
     }
     private void RandomizeBaseTexture() {
         if (corpseMeshRend) {
@@ -100,6 +108,17 @@ public class Controller_Corpse : MonoBehaviour
         
         GameObject aura = Instantiate(auraPrefab, corpseGO.transform);
         aura.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+    }
+    private void RandomizePhysics() {
+        if (corpseGO.TryGetComponent(out corpseRb)) {
+            corpseRb.isKinematic = false;
+            corpseRb.useGravity = true;
+            corpseRb.mass = corpseMass;
+        }
+        
+        if (corpseGO.TryGetComponent<SpringJoint>(out var spring)) {
+            spring.spring = ropeSpringStrength * Random.Range(1 - randSpringStrenthPerc, 1 + randSpringStrenthPerc);
+        }
     }
 
     private List<RaycastHit> CastRaysInward(int rayCount = 100, float rayHitChance = 0.05f) {
