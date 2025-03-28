@@ -40,6 +40,12 @@ public class Manager_Content : MonoBehaviour
             whispersList = whispersStr.Split('\n').ToList();
     }
     
+    public void InitDiaryRules() {
+        var listOfRulesData = rulesList.Where(rule => rule.unlocked).ToList();
+        var listOfRulesStr = listOfRulesData.Select(rule => rule.ruleStr).ToList();
+        Controller_Diary.Instance.InitDiaryPages(listOfRulesStr);
+    }
+
     public string PickStory() {
         if (storyList.Count == 0) {
             Debug.LogWarning("No story available");

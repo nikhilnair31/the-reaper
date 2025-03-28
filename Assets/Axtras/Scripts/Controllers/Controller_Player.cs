@@ -34,7 +34,7 @@ public class Controller_Player : MonoBehaviour
     private bool isLanternActive = false;
 
     [Header("Diary Settings")]
-    [SerializeField][TextArea(3, 10)] private string diaryRulesStr;
+    [SerializeField] private Transform diaryTransform;
     private List<string> diaryRulesList;
     
     [Header("Slice Settings")]
@@ -78,8 +78,7 @@ public class Controller_Player : MonoBehaviour
         lightObject?.SetActive(false);
     }
     private void InitDiary() {
-        diaryRulesList = diaryRulesStr.Split('\n').ToList();    
-        Controller_Diary.Instance.InitDiaryPages(diaryRulesList);
+        Manager_Content.Instance.InitDiaryRules();
     }
     private void InitSlice() {
     }
