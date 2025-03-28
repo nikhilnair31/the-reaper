@@ -46,6 +46,18 @@ public class Manager_Content : MonoBehaviour
         Controller_Diary.Instance.InitDiaryPages(listOfRulesStr);
     }
 
+    public string PickWhisper() {
+        if (whispersList.Count == 0) {
+            Debug.LogWarning("No whisper available");
+            return "...";
+        }
+        
+        int randomIndex = Random.Range(0, whispersList.Count);
+        string whisper = whispersList[randomIndex];
+        Debug.Log($"Picked Whisper: {whisper}");
+
+        return whisper;
+    }
     public string PickStory() {
         if (storyList.Count == 0) {
             Debug.LogWarning("No story available");

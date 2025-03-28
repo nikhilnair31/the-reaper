@@ -291,8 +291,9 @@ public class Controller_Corpse : MonoBehaviour
             rope.endPoint.rotation
         );
         
+        var whisperStr = Manager_Content.Instance.PickStory();
         var whisperText = whisper.GetComponentInChildren<TMP_Text>();
-        whisperText.text = "Whispering...";
+        whisperText.text = whisperStr;
 
         DOTween.Sequence()
             .Append(
