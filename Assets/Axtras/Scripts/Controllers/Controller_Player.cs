@@ -141,7 +141,9 @@ public class Controller_Player : MonoBehaviour
         }
     }
 
-    private void ProcessHit(RaycastHit hit) {        
+    private void ProcessHit(RaycastHit hit) {   
+        Debug.Log($"Slicing object: {hit.collider.name}");
+
         // Use instance ID to prevent processing the same object multiple times per frame
         int instanceID = hit.transform.GetInstanceID();
         if (processedObjects.Contains(instanceID)) {
@@ -149,13 +151,15 @@ public class Controller_Player : MonoBehaviour
         }
     
         processedObjects.Add(instanceID);
-        Debug.Log($"Slicing object: {hit.collider.name}");
         
         if (hit.transform.CompareTag("Rope")) {
             Debug.Log($"Slicing rope!");
             
             if (hit.transform.gameObject.activeSelf) {
+                // Disable the rope object
                 hit.transform.gameObject.SetActive(false);
+
+                // Destroy the spring joint component
                 var corpse = hit.transform.parent.Find("Corpse");
                 if (corpse != null) {
                     if (corpse.TryGetComponent<SpringJoint>(out var spring)) {
@@ -165,6 +169,10 @@ public class Controller_Player : MonoBehaviour
 
                 // Add score on rope slice
                 Manager_Game.Instance.IncScore();
+
+                // Spawn whispers
+                var corpseController = corpse.transform.GetComponentInChildren<Controller_Corpse>();
+                corpseController?.SpawnWhisper();
             }
         }
         else if (hit.transform.CompareTag("Corpse")) {
@@ -172,7 +180,14 @@ public class Controller_Player : MonoBehaviour
 
             // Decrease score on corpse slice
             Manager_Game.Instance.DecScore();
+
+            // Spawn whispers
+            var corpseController = hit.transform.parent.GetComponent<Controller_Corpse>();
+            corpseController?.SpawnWhisper();
         }
+
+        // Clear processed objects after processing
+        processedObjects.Clear();
     }
 
     public bool GetIsLanternBoosting() {

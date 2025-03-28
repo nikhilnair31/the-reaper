@@ -592,6 +592,10 @@ MonoBehaviour:
   auraPrefabs:
   - {fileID: 8172857068077763117, guid: 124088a89347c0444b757c520a273a22, type: 3}
   auraSpawnChance: 0.5
+  whisperPrefab: {fileID: 2614981329418612469, guid: 47ad2df9de44b08459793517d6bf682a, type: 3}
+  whipserSpawnYOffset: -2
+  whipserMoveUpAmount: 8
+  whipserTweenTime: 2
 --- !u!135 &947081899121419513
 SphereCollider:
   m_ObjectHideFlags: 0

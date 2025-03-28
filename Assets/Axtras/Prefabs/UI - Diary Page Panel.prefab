@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8617538391033352860}
   - component: {fileID: 5885566754329257192}
   m_Layer: 5
-  m_Name: Diary Page Panel
+  m_Name: UI - Diary Page Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

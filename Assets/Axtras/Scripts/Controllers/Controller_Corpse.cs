@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 
 public class Controller_Corpse : MonoBehaviour 
 {
@@ -30,6 +32,13 @@ public class Controller_Corpse : MonoBehaviour
     [Header("Aura Settings")]
     [SerializeField] private GameObject[] auraPrefabs;
     [SerializeField] private float auraSpawnChance = 0.5f;
+
+    [Header("Whispers Settings")]
+    [SerializeField] private GameObject whisperPrefab;
+    [SerializeField] private float whipserSpawnYOffset = 1f;
+    [SerializeField] private float whipserMoveUpAmount = 3f;
+    [SerializeField] private float whipserTweenTime = 3f;
+    private bool spawnedWhisper = false;
     #endregion
     
     private void Start() {
@@ -247,5 +256,38 @@ public class Controller_Corpse : MonoBehaviour
 
         if (hit.collider != null)
             decal.transform.SetParent(hit.collider.transform);
+    }
+    public void SpawnWhisper() {
+        if (whisperPrefab == null || spawnedWhisper)
+            return;
+        
+        spawnedWhisper = true;
+
+        GameObject whisper = Instantiate(whisperPrefab);
+        whisper.transform.SetLocalPositionAndRotation(
+            transform.position + Vector3.up * whipserSpawnYOffset, 
+            Quaternion.identity
+        );
+        
+        var whisperText = whisper.GetComponentInChildren<TMP_Text>();
+        whisperText.text = "Whispering...";
+
+        DOTween.Sequence()
+            .Append(
+                whisper.transform
+                    .DOMoveY(
+                        whipserMoveUpAmount, 
+                        whipserTweenTime
+                    )
+                    .SetEase(Ease.Linear)
+            )
+            .Join(
+                whisperText
+                    .DOFade(0, whipserTweenTime)
+            )
+            .OnComplete(() => {
+                spawnedWhisper = false;
+                Destroy(whisper);
+            });
     }
 }
