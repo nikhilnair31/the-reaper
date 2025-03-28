@@ -5835,14 +5835,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3057532439093908467, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
-      propertyPath: m_Spring
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057532439093908467, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
-      propertyPath: m_MaxDistance
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 4037547686000303448, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.4717882
@@ -5883,14 +5875,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4235917941351743091, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.0152901
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739751252891621213, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
-      propertyPath: decalPrefab
-      value: 
-      objectReference: {fileID: 4419387971811043002, guid: 45621b6043603c84c8074c512d9258f2, type: 3}
     - target: {fileID: 8922519638501160208, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
       propertyPath: m_Name
       value: Corpse (2)
@@ -6365,11 +6349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!137 &1850065461 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 178690799689442949, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
-  m_PrefabInstance: {fileID: 9094622888060612133}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1893395718
 GameObject:
   m_ObjectHideFlags: 0
@@ -6821,10 +6800,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5739751252891621213, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
-      propertyPath: corpseMeshRend
-      value: 
-      objectReference: {fileID: 1850065461}
     - target: {fileID: 8922519638501160208, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
       propertyPath: m_Name
       value: Corpse (0)
