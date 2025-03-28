@@ -11,7 +11,8 @@ public class Controller_Player : MonoBehaviour
         None,
         Lantern,
         Diary,
-        Slice
+        Slice,
+        Grab
     }
     
     private Vector3 velocity = Vector3.zero;
@@ -44,6 +45,13 @@ public class Controller_Player : MonoBehaviour
     private HashSet<int> processedObjects = new ();
     private Vector3 lastMousePosition;
     private bool sliceActive = false;
+    
+    [Header("Grab Settings")]
+    [SerializeField] private float grabDistance = 10f;
+    [SerializeField] private float grabForce = 1f;
+    [SerializeField] private LayerMask grabLayerMask;
+    private Transform grabbedObject = null;
+    private Vector3 grabOffset = Vector3.zero;
     #endregion 
     
     private void Awake() {
@@ -73,11 +81,16 @@ public class Controller_Player : MonoBehaviour
         diaryRulesList = diaryRulesStr.Split('\n').ToList();    
         Controller_Diary.Instance.InitDiaryPages(diaryRulesList);
     }
+    private void InitSlice() {
+    }
+    private void InitGrab() {
+    }
     
     private void Update() {
         HandleLantern();
         HandleDiary();
         HandleSlice();
+        HandleGrab();
     }
     private void HandleLantern() {
         if (GetToolLantern()) {
@@ -152,6 +165,43 @@ public class Controller_Player : MonoBehaviour
             }
         }
     }
+    private void HandleGrab() {
+        if (GetToolGrab()) {
+            if (Input.GetMouseButtonDown(0)) {
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+                Debug.DrawRay(ray.origin, ray.direction * grabDistance, Color.blue, 0.1f);
+                if (Physics.Raycast(ray, out hit, grabDistance, grabLayerMask)) {
+                    Debug.Log($"Hit object: {hit.collider.name}");
+                    if (hit.transform.GetComponent<Rigidbody>() != null) {
+                        grabbedObject = hit.transform;
+                        grabOffset = grabbedObject.position - hit.point;
+                    }
+                    else {
+                        Debug.Log($"No Rigidbody found on the hit object: {hit.collider.name}");
+                    }
+                }
+            }
+            
+            if (Input.GetMouseButtonUp(0)) {
+                grabbedObject = null;
+            }
+            
+            if (grabbedObject != null) {
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                Vector3 targetPosition = ray.origin + ray.direction * grabDistance;
+                
+                if (Physics.Raycast(ray, out hit, grabDistance, grabLayerMask)) {
+                    targetPosition = hit.point + grabOffset;
+                }
+                
+                if (grabbedObject.TryGetComponent(out Rigidbody rb)) {
+                    Vector3 direction = targetPosition - grabbedObject.position;
+                    rb.linearVelocity = direction * grabForce;
+                }
+            }
+        }
+    }
 
     private void ProcessHit(RaycastHit hit) {   
         Debug.Log($"Slicing object: {hit.collider.name}");
@@ -217,6 +267,9 @@ public class Controller_Player : MonoBehaviour
     }
     public bool GetToolSlice() {
         return currentTool == Tool.Slice;
+    }
+    public bool GetToolGrab() {
+        return currentTool == Tool.Grab;
     }
     public bool GetIsLanternBoosting() {
         return isBoosting;

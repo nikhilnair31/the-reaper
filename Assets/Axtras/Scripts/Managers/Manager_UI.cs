@@ -24,12 +24,14 @@ public class Manager_UI : MonoBehaviour
     [SerializeField] private Texture2D lanternCursor;
     [SerializeField] private Texture2D diaryCursor;
     [SerializeField] private Texture2D sliceCursor;
+    [SerializeField] private Texture2D grabCursor;
 
     [Header("Game UI")]
     [SerializeField] private GameObject gamePanelGO;
     [SerializeField] private Button lanternButton;
     [SerializeField] private Button diaryButton;
     [SerializeField] private Button slicingButton;
+    [SerializeField] private Button grabButton;
     [SerializeField] private GameObject torchFuelPanelGO;
     [SerializeField] private GameObject diaryPanelGO;
     #endregion
@@ -55,6 +57,7 @@ public class Manager_UI : MonoBehaviour
         lanternButton?.onClick.AddListener(ToggleLantern);
         diaryButton?.onClick.AddListener(ToggleDiary);
         slicingButton?.onClick.AddListener(ToggleSlice);
+        grabButton?.onClick.AddListener(ToggleGrab);
         
         Cursor.visible = true;
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
@@ -90,7 +93,7 @@ public class Manager_UI : MonoBehaviour
     public void ToggleLantern() {
         Debug.Log("Lantern button pressed!");
 
-        if (Controller_Player.Instance.GetTool() == Controller_Player.Tool.Lantern) {
+        if (Controller_Player.Instance.GetToolLantern()) {
             Controller_Player.Instance.SetTool(Controller_Player.Tool.None);         
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(lanternButton, 1f);
@@ -110,7 +113,7 @@ public class Manager_UI : MonoBehaviour
     public void ToggleDiary() {
         Debug.Log("Diary button pressed!");
         
-        if (Controller_Player.Instance.GetTool() == Controller_Player.Tool.Diary) {
+        if (Controller_Player.Instance.GetToolDiary()) {
             Controller_Player.Instance.SetTool(Controller_Player.Tool.None);          
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(diaryButton, 1f);
@@ -130,7 +133,7 @@ public class Manager_UI : MonoBehaviour
     public void ToggleSlice() {
         Debug.Log("Slicing button pressed!");
         
-        if (Controller_Player.Instance.GetTool() == Controller_Player.Tool.Slice) {
+        if (Controller_Player.Instance.GetToolSlice()) {
             Controller_Player.Instance.SetTool(Controller_Player.Tool.None);            
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(slicingButton, 1f);
@@ -144,15 +147,34 @@ public class Manager_UI : MonoBehaviour
             SetButtonSize(slicingButton, 1.5f);
         }
     }
+    public void ToggleGrab() {
+        Debug.Log("Grabing button pressed!");
+        
+        if (Controller_Player.Instance.GetToolGrab()) {
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);            
+            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(grabButton, 1f);
+        }
+        else {
+            ResetPanels();
+            ResetButtonSize();
+
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.Grab); 
+            Cursor.SetCursor(grabCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(grabButton, 1.5f);
+        }
+    }
 
     private void ResetButtonSize() {
         var lanternRT = lanternButton.GetComponent<RectTransform>();
         var diaryRT = diaryButton.GetComponent<RectTransform>();
         var slicingRT = slicingButton.GetComponent<RectTransform>();
+        var grabingRT = grabButton.GetComponent<RectTransform>();
 
         lanternRT.localScale = Vector3.one;
         diaryRT.localScale = Vector3.one;
         slicingRT.localScale = Vector3.one;
+        grabingRT.localScale = Vector3.one;
     }
     private void ResetPanels() {
         torchFuelPanelGO.SetActive(false);
