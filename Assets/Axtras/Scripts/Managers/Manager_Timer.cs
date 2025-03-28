@@ -33,7 +33,7 @@ public class Manager_Timer : MonoBehaviour
         HandleLantern();
     }
     private void HandleLantern() {
-        if (Manager_UI.Instance.GetLanternStatus()) {
+        if (Controller_Player.Instance.GetToolLantern()) {
             UpdateFuelAmount();
         }
     }

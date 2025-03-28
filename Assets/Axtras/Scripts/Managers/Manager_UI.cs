@@ -7,13 +7,6 @@ public class Manager_UI : MonoBehaviour
     #region Vars
     public static Manager_UI Instance { get; private set; }
 
-    public enum Tool {
-        None,
-        Lantern,
-        Diary,
-        Slice
-    }
-
     [Header("Menu UI")]
     [SerializeField] private GameObject menuPanelGO;
     [SerializeField] private Button startButton;
@@ -27,7 +20,6 @@ public class Manager_UI : MonoBehaviour
     [SerializeField] private GameObject loadingPanelGO;
 
     [Header("Tools Settings")]
-    [SerializeField] private Tool currentTool;
     [SerializeField] private Texture2D defaultCursor;
     [SerializeField] private Texture2D lanternCursor;
     [SerializeField] private Texture2D diaryCursor;
@@ -63,8 +55,6 @@ public class Manager_UI : MonoBehaviour
         lanternButton?.onClick.AddListener(ToggleLantern);
         diaryButton?.onClick.AddListener(ToggleDiary);
         slicingButton?.onClick.AddListener(ToggleSlice);
-
-        currentTool = Tool.None;
         
         Cursor.visible = true;
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
@@ -100,8 +90,8 @@ public class Manager_UI : MonoBehaviour
     public void ToggleLantern() {
         Debug.Log("Lantern button pressed!");
 
-        if (currentTool == Tool.Lantern) {
-            currentTool = Tool.None;            
+        if (Controller_Player.Instance.GetTool() == Controller_Player.Tool.Lantern) {
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);         
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(lanternButton, 1f);
         }
@@ -109,7 +99,7 @@ public class Manager_UI : MonoBehaviour
             ResetPanels();
             ResetButtonSize();
 
-            currentTool = Tool.Lantern;
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.Lantern);  
             Cursor.SetCursor(lanternCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(lanternButton, 1.5f);
         }
@@ -120,8 +110,8 @@ public class Manager_UI : MonoBehaviour
     public void ToggleDiary() {
         Debug.Log("Diary button pressed!");
         
-        if (currentTool == Tool.Diary) {
-            currentTool = Tool.None;            
+        if (Controller_Player.Instance.GetTool() == Controller_Player.Tool.Diary) {
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);          
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(diaryButton, 1f);
         }
@@ -129,7 +119,7 @@ public class Manager_UI : MonoBehaviour
             ResetPanels();
             ResetButtonSize();
 
-            currentTool = Tool.Diary;
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.Diary); 
             Cursor.SetCursor(diaryCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(diaryButton, 1.5f);
         }
@@ -140,8 +130,8 @@ public class Manager_UI : MonoBehaviour
     public void ToggleSlice() {
         Debug.Log("Slicing button pressed!");
         
-        if (currentTool == Tool.Slice) {
-            currentTool = Tool.None;            
+        if (Controller_Player.Instance.GetTool() == Controller_Player.Tool.Slice) {
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);            
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(slicingButton, 1f);
         }
@@ -149,7 +139,7 @@ public class Manager_UI : MonoBehaviour
             ResetPanels();
             ResetButtonSize();
 
-            currentTool = Tool.Slice;
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.Slice); 
             Cursor.SetCursor(sliceCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(slicingButton, 1.5f);
         }
@@ -172,16 +162,6 @@ public class Manager_UI : MonoBehaviour
     private void SetButtonSize(Button btn, float sizeVal) {
         var rt = btn.GetComponent<RectTransform>();
         rt.localScale = new (sizeVal, sizeVal, sizeVal);
-    }
-
-    public bool GetLanternStatus() {
-        return currentTool == Tool.Lantern;
-    }
-    public bool GetDiaryStatus() {
-        return currentTool == Tool.Diary;
-    }
-    public bool GetSliceStatus() {
-        return currentTool == Tool.Slice;
     }
 
     public void ControlLoadingUI(bool active) {

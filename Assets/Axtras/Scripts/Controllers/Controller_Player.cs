@@ -6,10 +6,20 @@ public class Controller_Player : MonoBehaviour
 {
     #region Vars
     public static Controller_Player Instance { get; private set; }
+
+    public enum Tool {
+        None,
+        Lantern,
+        Diary,
+        Slice
+    }
     
     private Vector3 velocity = Vector3.zero;
     private Camera mainCamera;
     private RaycastHit hit;
+
+    [Header("Tool Settings")]
+    [SerializeField] private Tool currentTool;
     
     [Header("Movement Settings")]
     [SerializeField] private float smoothTime = 0.1f;
@@ -53,6 +63,8 @@ public class Controller_Player : MonoBehaviour
     }
     private void Init() {
         mainCamera = Camera.main;
+
+        currentTool = Tool.None;
     }
     private void InitLantern() {
         lightObject?.SetActive(false);
@@ -68,7 +80,7 @@ public class Controller_Player : MonoBehaviour
         HandleSlice();
     }
     private void HandleLantern() {
-        if (Manager_UI.Instance.GetLanternStatus()) {
+        if (GetToolLantern()) {
             if (Input.GetMouseButtonDown(1)) {
                 isBoosting = !isBoosting;
                 var light = lightObject.GetComponent<Light>();
@@ -97,11 +109,11 @@ public class Controller_Player : MonoBehaviour
         }
     }
     private void HandleDiary() {
-        if (Manager_UI.Instance.GetDiaryStatus()) {
+        if (GetToolDiary()) {
         }
     }
     private void HandleSlice() {
-        if (Manager_UI.Instance.GetSliceStatus()) {
+        if (GetToolSlice()) {
             if (Input.GetMouseButtonDown(0)) {
                 sliceActive = true;
                 lastMousePosition = Input.mousePosition;
@@ -190,6 +202,22 @@ public class Controller_Player : MonoBehaviour
         processedObjects.Clear();
     }
 
+    public void SetTool(Tool tool) {
+        currentTool = tool;
+    }
+    
+    public Tool GetTool() {
+        return currentTool;
+    }
+    public bool GetToolLantern() {
+        return currentTool == Tool.Lantern;
+    }
+    public bool GetToolDiary() {
+        return currentTool == Tool.Diary;
+    }
+    public bool GetToolSlice() {
+        return currentTool == Tool.Slice;
+    }
     public bool GetIsLanternBoosting() {
         return isBoosting;
     }
