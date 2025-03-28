@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 
 public class Controller_Diary : MonoBehaviour 
 {
@@ -45,6 +46,7 @@ public class Controller_Diary : MonoBehaviour
         totalPages = diaryRulesList.Count;
         for (int i = 0; i < totalPages; i++) {
             GameObject page = Instantiate(pagePrefab, pageParentGO.transform);
+            page.transform.localPosition = new Vector3(0, 145f, 0);
             page.GetComponentInChildren<TextMeshProUGUI>().text = diaryRulesList[i];
             pageObjectsList.Add(page);
 
@@ -63,13 +65,14 @@ public class Controller_Diary : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0)) {
                 float dragDistance = Input.mousePosition.y - startDragPosition.y;
+                // Debug.Log($"Drag Distance: {dragDistance} | currentPage: {currentPage} | totalPages: {totalPages}");
                 
                 if (Mathf.Abs(dragDistance) > dragThreshold) {
-                    if (dragDistance > 0 && currentPage > 0) {
-                        FlipPage(-1);
+                    if (dragDistance > 0 && currentPage >= 0) {
+                        FlipPage(1);
                     }
                     else if (dragDistance < 0 && currentPage < totalPages - 1) {
-                        FlipPage(1);
+                        FlipPage(-1);
                     }
                 }
             }
@@ -89,27 +92,28 @@ public class Controller_Diary : MonoBehaviour
 
         nextPageObj.SetActive(true);
 
-        StartCoroutine(AnimatePageFlip(currentPageObj, nextPageObj, direction));
+        StartCoroutine(
+            AnimatePageFlip(currentPageObj, nextPageObj, direction)
+        );
     }
     
     private IEnumerator AnimatePageFlip(GameObject currentPageObj, GameObject nextPageObj, int direction) {
-        float time = 0f;
-        float startY = 0f;
-        float endY = (direction > 0) ? -180f : 180f;
-
-        Quaternion startRotation = Quaternion.Euler(startY, 0, 0);
-        Quaternion endRotation = Quaternion.Euler(endY, 0, 0);
-
-        while (time < flipDuration) {
-            time += Time.deltaTime;
-            currentPageObj.transform.rotation = Quaternion.Lerp(startRotation, endRotation, time / flipDuration);
-            yield return null;
-        }
-
-        currentPageObj.transform.rotation = endRotation;
-        currentPageObj.SetActive(false);
-
-        currentPage = pageObjectsList.IndexOf(nextPageObj);
-        isFlipping = false;
+        float endX = (direction > 0) ? -180f : 180f;
+        
+        Vector3 currentRotation = currentPageObj.transform.rotation.eulerAngles;
+        
+        isFlipping = true;
+        
+        currentPageObj.transform
+            .DOLocalRotate(
+                new (endX, currentRotation.y, currentRotation.z), 
+                flipDuration
+            ).OnComplete(() => {
+                currentPageObj.SetActive(false);
+                currentPage = pageObjectsList.IndexOf(nextPageObj);
+                isFlipping = false;
+            });
+        
+        return null;
     }
 }

@@ -8,11 +8,12 @@ public class Manager_Content : MonoBehaviour
     public static Manager_Content Instance { get; private set; }
     
     [Header("Story Settings")]
+    [SerializeField][TextArea(3, 10)] private string storyStr;
     [SerializeField] private List<string> storyList = new ();
 
     [Header("Whipsers Settings")]
     [SerializeField][TextArea(3, 10)] private string whispersStr;
-    private List<string> whispersList = new ();
+    [SerializeField]private List<string> whispersList = new ();
     
     [Header("Rules Settings")]
     [SerializeField] private List<Data_Rules> rulesList = new ();
@@ -32,7 +33,11 @@ public class Manager_Content : MonoBehaviour
         Init();
     }
     private void Init() {
-        whispersList = whispersStr.Split('\n').ToList();
+        if (storyList.Count == 0)
+            storyList = storyStr.Split('\n').ToList();
+        
+        if (whispersList.Count == 0)
+            whispersList = whispersStr.Split('\n').ToList();
     }
     
     public string PickStory() {

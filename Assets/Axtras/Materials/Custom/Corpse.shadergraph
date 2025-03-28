@@ -687,7 +687,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"af1143ed3ce6fcd43af6010729275954\",\"type\":3}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -870,7 +870,7 @@
     "m_Title": "Aura",
     "m_Position": {
         "x": -1215.199951171875,
-        "y": 1360.7996826171875
+        "y": 1360.7998046875
     }
 }
 
@@ -3044,8 +3044,8 @@
     "m_ObjectId": "8a4d4031cfd94c30a7ac16d8988dd636",
     "m_Title": "Scars",
     "m_Position": {
-        "x": -1285.599853515625,
-        "y": 691.9999389648438
+        "x": -1285.5999755859375,
+        "y": 692.0
     }
 }
 
@@ -3531,7 +3531,7 @@
     "m_ObjectId": "acb5434381dc4598a9b7a11ae6b1ae89",
     "m_Title": "Base",
     "m_Position": {
-        "x": -603.2000122070313,
+        "x": -603.2000732421875,
         "y": -511.199951171875
     }
 }
@@ -4206,7 +4206,7 @@
     "m_Title": "Tattoo",
     "m_Position": {
         "x": -1146.4000244140625,
-        "y": 76.79999542236328
+        "y": 76.79998779296875
     }
 }
 

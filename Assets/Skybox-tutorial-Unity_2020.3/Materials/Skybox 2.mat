@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SunViewGrad:
-        m_Texture: {fileID: 5445961698780662350, guid: c9adb1f542a93ae489bacfeae21e8394, type: 2}
+        m_Texture: {fileID: 2800000, guid: 119d8e0939b011349a584efe53c7cfbb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SunZenithGrad:
@@ -55,7 +55,7 @@ Material:
     - _MoonPositionX: -0.674
     - _MoonPositionY: -0.282
     - _MoonPositionZ: -0.511
-    - _MoonRadius: 0.21
+    - _MoonRadius: 0.316
     - _StarExposure: 1.69
     - _StarLatitude: 52
     - _StarPower: 1.5
