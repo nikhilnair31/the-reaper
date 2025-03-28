@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3025493004119519773}
   - component: {fileID: 4493441346940068057}
   - component: {fileID: 5437075662199383339}
+  - component: {fileID: 9051239400952670630}
   - component: {fileID: 7431739662979964748}
   - component: {fileID: 3057532439093908467}
-  - component: {fileID: 9051239400952670630}
   m_Layer: 6
   m_Name: Corpse
   m_TagString: Corpse
@@ -90,6 +90,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &9051239400952670630
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722286542075788829}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -250359655930596419, guid: 5c4e30db9f8d38b469fd4da54caff070, type: 3}
 --- !u!54 &7431739662979964748
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,28 +164,6 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!64 &9051239400952670630
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722286542075788829}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -250359655930596419, guid: 5c4e30db9f8d38b469fd4da54caff070, type: 3}
 --- !u!1 &5612972717191725740
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +577,9 @@ MonoBehaviour:
   raycastLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  corpseMass: 70
+  ropeSpringStrength: 700
+  randSpringStrenthPerc: 0.1
   tattooPrefabs:
   - {fileID: 4419387971811043002, guid: b7edd16500d200444a47a38a48040596, type: 3}
   tattooSize: 0.1

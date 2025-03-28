@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 354226963}
   - component: {fileID: 354226962}
   - component: {fileID: 354226960}
+  - component: {fileID: 354226964}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -509,6 +510,47 @@ MonoBehaviour:
   - potatoes fart
   - i'm car
   - rinku is tinku pinku
+--- !u!114 &354226964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354226958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792616089ce32004589ef426195c33c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whispersStr: 'oh no
+
+    thank you
+
+    finally
+
+    why
+
+    curses
+
+    end this
+
+    what
+    is this
+
+    oh god'
+  rulesList:
+  - ruleStr: Cut down any body with a snake tattoo
+    universal: 1
+    unlocked: 1
+  - ruleStr: Keep up bodies with scars on their faces
+    universal: 1
+    unlocked: 1
+  - ruleStr: If body has snake tattoo and face scar then cut it down
+    universal: 1
+    unlocked: 0
+  - ruleStr: Those who see the void needn't see the earth
+    universal: 0
+    unlocked: 0
 --- !u!1 &448877123
 GameObject:
   m_ObjectHideFlags: 0

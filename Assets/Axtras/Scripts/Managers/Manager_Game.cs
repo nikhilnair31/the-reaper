@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class Manager_Game : MonoBehaviour 
 {
@@ -13,9 +12,6 @@ public class Manager_Game : MonoBehaviour
     [SerializeField] private int score = 0;
     [SerializeField] private int scoreInc = 10;
     [SerializeField] private int scoreDec = 15;
-
-    [Header("Story Settings")]
-    [SerializeField] private List<string> storyList = new ();
     #endregion
 
     private void Awake() {
@@ -49,20 +45,8 @@ public class Manager_Game : MonoBehaviour
         Manager_UI.Instance.ControlMenuUI(false);
         Manager_UI.Instance.ControlOverUI(true);
 
-        Manager_UI.Instance.SetStoryText(PickStory());  
-    }
-
-    private string PickStory() {
-        if (storyList.Count == 0) {
-            Debug.LogWarning("No story available");
-            return "...";
-        }
-        
-        int randomIndex = Random.Range(0, storyList.Count);
-        string story = storyList[randomIndex];
-        Debug.Log($"Picked Story: {story}");
-
-        return story;
+        var story = Manager_Content.Instance.PickStory();
+        Manager_UI.Instance.SetStoryText(story);  
     }
     
     public void IncScore() {

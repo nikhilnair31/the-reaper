@@ -53,6 +53,8 @@ public class Controller_Corpse : MonoBehaviour
             corpseGO = transform.Find("Corpse").gameObject;
         if (sphereCollider == null)
             sphereCollider = GetComponent<SphereCollider>();
+        if (rope == null)
+            rope = transform.GetComponentInChildren<Rope>();
 
         RandomizeBaseTexture();
         RandomizeTattoos();
@@ -284,7 +286,6 @@ public class Controller_Corpse : MonoBehaviour
 
         GameObject whisper = Instantiate(whisperPrefab);
 
-        var rope = transform.GetComponentInChildren<Rope>();
         whisper.transform.SetLocalPositionAndRotation(
             rope.endPoint.position, 
             rope.endPoint.rotation
