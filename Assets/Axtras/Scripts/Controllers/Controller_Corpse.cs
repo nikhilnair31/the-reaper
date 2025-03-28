@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using GogoGaga.OptimizedRopesAndCables;
 using DG.Tweening;
 using TMPro;
 
@@ -35,7 +36,6 @@ public class Controller_Corpse : MonoBehaviour
 
     [Header("Whispers Settings")]
     [SerializeField] private GameObject whisperPrefab;
-    [SerializeField] private float whipserSpawnYOffset = 1f;
     [SerializeField] private float whipserMoveUpAmount = 3f;
     [SerializeField] private float whipserTweenTime = 3f;
     private bool spawnedWhisper = false;
@@ -264,9 +264,11 @@ public class Controller_Corpse : MonoBehaviour
         spawnedWhisper = true;
 
         GameObject whisper = Instantiate(whisperPrefab);
+
+        var rope = transform.GetComponentInChildren<Rope>();
         whisper.transform.SetLocalPositionAndRotation(
-            transform.position + Vector3.up * whipserSpawnYOffset, 
-            Quaternion.identity
+            rope.endPoint.position, 
+            rope.endPoint.rotation
         );
         
         var whisperText = whisper.GetComponentInChildren<TMP_Text>();
