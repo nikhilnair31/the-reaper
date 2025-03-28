@@ -270,6 +270,9 @@ public class Controller_Player : MonoBehaviour
     public bool GetToolGrab() {
         return currentTool == Tool.Grab;
     }
+    public bool GetIsLanternOn() {
+        return isLanternActive;
+    }
     public bool GetIsLanternBoosting() {
         return isBoosting;
     }
