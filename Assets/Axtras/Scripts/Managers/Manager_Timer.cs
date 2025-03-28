@@ -33,14 +33,14 @@ public class Manager_Timer : MonoBehaviour
         HandleLantern();
     }
     private void HandleLantern() {
-        if (Controller_Player.Instance.GetToolLantern()) {
+        if (Controller_Player.Instance.GetToolLantern() && Controller_Player.Instance.GetIsLanternOn()) {
             UpdateFuelAmount();
         }
     }
 
     public void UpdateFuelAmount() {
         var drainMul = 
-            Controller_Player.Instance.GetIsLanternBoosting() && Controller_Player.Instance.GetIsLanternOn()
+            Controller_Player.Instance.GetIsLanternBoosting()
             ? fuelBoostDrainMul : fuelNormalDrainMul;
         var drainAmt = drainMul * Time.deltaTime;
         var amtVal = Mathf.Max(0, fuelAmountImage.fillAmount - drainAmt);
