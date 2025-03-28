@@ -6365,6 +6365,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!137 &1850065461 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 178690799689442949, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
+  m_PrefabInstance: {fileID: 9094622888060612133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1893395718
 GameObject:
   m_ObjectHideFlags: 0
@@ -6503,6 +6508,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvii
       objectReference: {fileID: 0}
+    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 959422724203525256, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
       propertyPath: m_Camera
       value: 
@@ -6569,6 +6590,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2399471696462309175, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6752,6 +6821,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5739751252891621213, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
+      propertyPath: corpseMeshRend
+      value: 
+      objectReference: {fileID: 1850065461}
     - target: {fileID: 8922519638501160208, guid: 1b60b6c3620c4c1469a6d2512343a5e4, type: 3}
       propertyPath: m_Name
       value: Corpse (0)

@@ -13,7 +13,7 @@ public class Controller_Corpse : MonoBehaviour
     private Rope rope;
 
     [Header("General Settings")]
-    [SerializeField] private MeshRenderer corpseMeshRend;
+    [SerializeField] private SkinnedMeshRenderer corpseMeshRend;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private bool visualizeRays = true;
     [SerializeField] private LayerMask raycastLayerMask;
@@ -52,7 +52,7 @@ public class Controller_Corpse : MonoBehaviour
         if (corpseGO == null)
             corpseGO = transform.Find("Corpse").gameObject;
         if (sphereCollider == null)
-            sphereCollider = GetComponent<SphereCollider>();
+            sphereCollider = GetComponentInChildren<SphereCollider>();
         if (rope == null)
             rope = transform.GetComponentInChildren<Rope>();
 
@@ -126,22 +126,8 @@ public class Controller_Corpse : MonoBehaviour
     private List<RaycastHit> CastRaysInward(int rayCount = 100, float rayHitChance = 0.05f) {
         List<RaycastHit> allHits = new();
         
-        Vector3 center = transform.position;
-        float radius = 1.0f;
-        
-        if (sphereCollider != null) {
-            center = transform.TransformPoint(sphereCollider.center);
-            radius = sphereCollider.radius * Mathf.Max(
-                transform.localScale.x,
-                transform.localScale.y,
-                transform.localScale.z
-            );
-        }
-        else if (meshFilter != null) {
-            Bounds bounds = meshFilter.sharedMesh.bounds;
-            radius = Mathf.Max(bounds.extents.x, bounds.extents.y, bounds.extents.z);
-            center = transform.TransformPoint(bounds.center);
-        }
+        var center = sphereCollider.transform.position;
+        var radius = sphereCollider.radius;
         
         Vector3[] points = GeneratePointsOnSphere(rayCount, radius, center);
         
