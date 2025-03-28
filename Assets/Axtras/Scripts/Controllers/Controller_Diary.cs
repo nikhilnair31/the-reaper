@@ -65,13 +65,13 @@ public class Controller_Diary : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0)) {
                 float dragDistance = Input.mousePosition.y - startDragPosition.y;
-                // Debug.Log($"Drag Distance: {dragDistance} | currentPage: {currentPage} | totalPages: {totalPages}");
+                Debug.Log($"Drag Distance: {dragDistance} | currentPage: {currentPage} | totalPages: {totalPages}");
                 
                 if (Mathf.Abs(dragDistance) > dragThreshold) {
                     if (dragDistance > 0 && currentPage >= 0) {
                         FlipPage(1);
                     }
-                    else if (dragDistance < 0 && currentPage < totalPages - 1) {
+                    else if (dragDistance < 0 && currentPage <= totalPages - 1) {
                         FlipPage(-1);
                     }
                 }
