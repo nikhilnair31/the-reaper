@@ -93,12 +93,18 @@ public class Controller_Diary : MonoBehaviour
         nextPageObj.SetActive(true);
 
         StartCoroutine(
-            AnimatePageFlip(currentPageObj, nextPageObj, direction)
+            SimplePageFlip(currentPageObj, nextPageObj, direction)
         );
     }
     
+    private IEnumerator SimplePageFlip(GameObject currentPageObj, GameObject nextPageObj, int direction) {
+        currentPageObj.SetActive(false);
+        currentPage = pageObjectsList.IndexOf(nextPageObj);
+        isFlipping = false;
+        yield return null;
+    }
     private IEnumerator AnimatePageFlip(GameObject currentPageObj, GameObject nextPageObj, int direction) {
-        float endX = (direction > 0) ? -180f : 180f;
+        float endX = (direction > 0) ? 270f : 180f;
         
         Vector3 currentRotation = currentPageObj.transform.rotation.eulerAngles;
         

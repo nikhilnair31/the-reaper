@@ -6541,6 +6541,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvii
       objectReference: {fileID: 0}
+    - target: {fileID: 959422724203525256, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 330585545}
     - target: {fileID: 2399471696462309175, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960
@@ -6627,6 +6631,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891349549432849828, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891349549432849828, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891349549432849828, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
