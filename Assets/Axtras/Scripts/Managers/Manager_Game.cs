@@ -34,19 +34,11 @@ public class Manager_Game : MonoBehaviour
             mainCameraGO = Camera.main.gameObject;
     }
     
-    public void StartGame() {
-        Debug.Log("Game Started");
+    public void StartRun() {
+        Debug.Log("Game Run Started");
     }
-    public void EndGame() {
-        Debug.Log("Game Ended");
-
-        Manager_UI.Instance.ControlLoadingUI(false);
-        Manager_UI.Instance.ControlGameUI(false);
-        Manager_UI.Instance.ControlMenuUI(false);
-        Manager_UI.Instance.ControlOverUI(true);
-
-        var story = Manager_Content.Instance.PickStory();
-        Manager_UI.Instance.SetStoryText(story);  
+    public void EndRun() {
+        Debug.Log("Game Run Ended");
     }
     
     public void IncScore() {

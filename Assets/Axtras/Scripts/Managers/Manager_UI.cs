@@ -9,8 +9,8 @@ public class Manager_UI : MonoBehaviour
 
     [Header("Menu UI")]
     [SerializeField] private GameObject menuPanelGO;
-    [SerializeField] private Button startButton;
-    [SerializeField] private Button endButton;
+    [SerializeField] private Button startRunButton;
+    [SerializeField] private Button exitButton;
     
     [Header("Over UI")]
     [SerializeField] private GameObject overPanelGO;
@@ -32,6 +32,7 @@ public class Manager_UI : MonoBehaviour
     [SerializeField] private Button diaryButton;
     [SerializeField] private Button slicingButton;
     [SerializeField] private Button grabButton;
+    [SerializeField] private Button endRunButton;
     [SerializeField] private GameObject torchFuelPanelGO;
     [SerializeField] private GameObject diaryPanelGO;
     #endregion
@@ -52,8 +53,12 @@ public class Manager_UI : MonoBehaviour
         if (torchFuelPanelGO != null)
             torchFuelPanelGO.SetActive(false);
         
-        startButton?.onClick.AddListener(StartGame);
-        endButton?.onClick.AddListener(EndGame);
+        // Menu buttons
+        startRunButton?.onClick.AddListener(StartRun);
+        exitButton?.onClick.AddListener(ExitGame);
+        // Game buttons
+        endRunButton?.onClick.AddListener(EndRun);
+        // Tool buttons
         lanternButton?.onClick.AddListener(ToggleLantern);
         diaryButton?.onClick.AddListener(ToggleDiary);
         slicingButton?.onClick.AddListener(ToggleSlice);
@@ -63,25 +68,33 @@ public class Manager_UI : MonoBehaviour
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
     }
     
-    public void StartGame() {
-        Debug.Log("Start button pressed!");
+    public void StartRun() {
+        Debug.Log("Start run button pressed!");
         
-        startButton.gameObject.SetActive(false);
+        startRunButton.gameObject.SetActive(false);
 
         loadingPanelGO.SetActive(false);
         overPanelGO.SetActive(false);
 
-        Manager_Game.Instance.StartGame();
+        Manager_Game.Instance.StartRun();
     }
-    public void EndGame() {
-        Debug.Log("End button pressed!");
+    public void EndRun() {
+        Debug.Log("End run button pressed!");
+
+        ControlLoadingUI(false);
+        ControlGameUI(false);
+        ControlMenuUI(false);
+        ControlOverUI(true);
         
-        endButton.gameObject.SetActive(false);
+        var story = Manager_Content.Instance.PickStory();
+        SetStoryText(story);  
 
-        loadingPanelGO.SetActive(true);
-        overPanelGO.SetActive(false);
+        Manager_Game.Instance.EndRun();
+    }
+    public void ExitGame() {
+        Debug.Log("Exit button pressed!");
 
-        Manager_Game.Instance.EndGame();
+        Application.Quit();
     }
     
     public void SetStoryText(string text) {

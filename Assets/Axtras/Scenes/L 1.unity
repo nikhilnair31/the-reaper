@@ -180,17 +180,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4e30db9f8d38b469fd4da54caff070, type: 3}
---- !u!114 &71629206 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3681293722249499347, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-  m_PrefabInstance: {fileID: 2043008162}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &181495897
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,8 +475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuPanelGO: {fileID: 1462983963}
-  startButton: {fileID: 2043008164}
-  endButton: {fileID: 2043008165}
+  startRunButton: {fileID: 2043008164}
+  exitButton: {fileID: 2043008165}
   overPanelGO: {fileID: 2043008166}
   storyText: {fileID: 2043008167}
   loadingPanelGO: {fileID: 1927766285}
@@ -501,6 +490,7 @@ MonoBehaviour:
   diaryButton: {fileID: 1727799000}
   slicingButton: {fileID: 1727798999}
   grabButton: {fileID: 1846774966}
+  endRunButton: {fileID: 2043008163}
   torchFuelPanelGO: {fileID: 1267352241}
   diaryPanelGO: {fileID: 1102840179}
 --- !u!114 &354226963
@@ -617,64 +607,7 @@ MonoBehaviour:
   lightTransform: {fileID: 1893395719}
   lightObject: {fileID: 1893395718}
   boostMul: 5
-  diaryRulesStr: 'Bodies with red auras must remain hanging.
-
-    Any corpse with
-    star-shaped scars on their hands must be cut down.
-
-    Bodies with snake tattoos
-    coiling around limbs must be cut down.
-
-    Corpses surrounded by blue auras
-    must remain hanging.
-
-    Bodies with no visible scars should stay hanging.
-
-    If
-    a corpse has both a red aura and a crescent moon tattoo, it must be cut down
-    (contradicts rule 1).
-
-    Bodies with X-shaped scars across the chest should
-    be cut down.
-
-    When two adjacent corpses have matching aura colors, only one
-    may be cut down.
-
-    Any body with bird tattoos must remain hanging.
-
-    Corpses
-    with distinctive scars on both palms must be cut down.
-
-    Bodies with green
-    auras and tree tattoos must remain hanging.
-
-    Corpses bearing sequential number
-    tattoos (1,2,3...) must be cut down in numerical order.
-
-    Bodies with crown
-    tattoos must remain hanging unless they also have cross-shaped scars.
-
-    Corpses
-    with pulsating auras (any color) must be cut down immediately.
-
-    Any body
-    with facial tattoos must remain hanging.
-
-    Corpses with lightning-shaped scars
-    must remain hanging if they also have circular tattoos.
-
-    Bodies with purple
-    auras and no tattoos must remain hanging.
-
-    When three bodies have identical
-    scar patterns, all must be cut down together.
-
-    Corpses with incomplete or
-    faded tattoos must remain hanging.
-
-    Any body showing overlapping auras of
-    different colors must be cut down, but only after all bodies with single auras
-    have been addressed.'
+  diaryTransform: {fileID: 0}
   sliceDistance: 10
   sliceMinDistance: 5
   sliceInterpolatedSteps: 15
@@ -6315,17 +6248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1727799006 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7353581438964990437, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-  m_PrefabInstance: {fileID: 2043008162}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1732824364
 GameObject:
   m_ObjectHideFlags: 0
@@ -6581,34 +6503,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvii
       objectReference: {fileID: 0}
-    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 959422724203525256, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 2188584577971376207, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188584577971376207, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188584577971376207, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188584577971376207, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188584577971376207, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188584577971376207, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2399471696462309175, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 960
@@ -6649,95 +6571,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2724332277327104110, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 1727799006}
-    - target: {fileID: 2724332277327104110, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3440460016729424943, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5303156748085251339, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 71629206}
-    - target: {fileID: 5303156748085251339, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8891349549432849828, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8891349549432849828, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8891349549432849828, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9058628359665960614, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+--- !u!114 &2043008163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5985144790872970591, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+  m_PrefabInstance: {fileID: 2043008162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2043008164 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 70155058565337007, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
