@@ -49,13 +49,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MoonExposure: 0.48
+    - _MoonExposure: 6.96
     - _MoonPhase: 0.252
     - _MoonPhaseIntensity: 1.6
     - _MoonPositionX: -0.674
     - _MoonPositionY: -0.282
     - _MoonPositionZ: -0.511
-    - _MoonRadius: 0.316
+    - _MoonRadius: 0.323
     - _StarExposure: 1.69
     - _StarLatitude: 52
     - _StarPower: 1.5

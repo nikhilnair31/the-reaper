@@ -242,6 +242,9 @@ public class Controller_Player : MonoBehaviour
             // Decrease score on corpse slice
             Manager_Game.Instance.DecScore();
 
+            // Spawn blot on a diary rule
+            Controller_Diary.Instance.SpawnBlot();
+
             // Spawn whispers
             var corpseController = hit.transform.parent.GetComponent<Controller_Corpse>();
             corpseController?.SpawnWhisper();

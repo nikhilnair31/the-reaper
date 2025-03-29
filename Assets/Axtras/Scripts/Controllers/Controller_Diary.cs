@@ -18,7 +18,15 @@ public class Controller_Diary : MonoBehaviour
     [Header("Page Content")]
     [SerializeField] private GameObject pageParentGO;
     [SerializeField] private GameObject pagePrefab;
-    private List<GameObject> pageObjectsList = new List<GameObject>();
+    private List<GameObject> pageObjectsList = new ();
+    private List<TextMeshProUGUI> textList = new ();
+
+    [Header("Page Content")]
+    [SerializeField] private GameObject blotPrefab;
+    [SerializeField] private float blotChances = 0.1f;
+    [SerializeField] private Vector2 randBlotPos = new (0f, 0f);
+    [SerializeField] private Vector2 randBlotRot = new (0f, 360f);
+    [SerializeField] private Vector2 randBlotScale = new (0.7f, 1.3f);
     
     [Header("Flip Settings")]
     [SerializeField] private float flipDuration = 0.5f;
@@ -47,8 +55,12 @@ public class Controller_Diary : MonoBehaviour
         for (int i = 0; i < totalPages; i++) {
             GameObject page = Instantiate(pagePrefab, pageParentGO.transform);
             page.transform.localPosition = new Vector3(0, 145f, 0);
-            page.GetComponentInChildren<TextMeshProUGUI>().text = diaryRulesList[i];
+            
+            var text = page.GetComponentInChildren<TextMeshProUGUI>();
+            text.text = diaryRulesList[i];
+            
             pageObjectsList.Add(page);
+            textList.Add(text);
 
             // Start all pages on the right side, hide them except for the first one
             page.SetActive(i == 0);
@@ -121,5 +133,31 @@ public class Controller_Diary : MonoBehaviour
             });
         
         return null;
+    }
+
+    public void SpawnBlot() {
+        if (blotPrefab == null) return;
+
+        Debug.Log($"textList: {textList.Count}");
+        foreach (var text in textList) {
+            Debug.Log($"text: {text.text}");
+            if (Random.value < blotChances) {
+                Debug.Log("Spawn Blot");
+                GameObject blot = Instantiate(blotPrefab, text.transform.parent);
+                blot.transform.SetLocalPositionAndRotation(
+                    new (
+                        Random.Range(randBlotPos.x, randBlotPos.y), 
+                        0f, 
+                        0f
+                    ),
+                    Quaternion.Euler(
+                        0f, 
+                        0f, 
+                        Random.Range(randBlotRot.x, randBlotRot.y)
+                    )
+                );
+                blot.transform.localScale = Vector3.one * Random.Range(randBlotScale.x, randBlotScale.y);
+            }
+        }
     }
 }

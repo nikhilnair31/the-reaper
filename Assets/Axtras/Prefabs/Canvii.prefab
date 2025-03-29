@@ -33,10 +33,10 @@ RectTransform:
   - {fileID: 203331337459483012}
   m_Father: {fileID: 7113587556315584367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -240}
-  m_SizeDelta: {x: 150, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1999688594856405462
 CanvasRenderer:
@@ -974,10 +974,10 @@ RectTransform:
   - {fileID: 2416586962805366372}
   m_Father: {fileID: 7113587556315584367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -300}
-  m_SizeDelta: {x: 150, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3431249461825594960
 CanvasRenderer:
@@ -1165,7 +1165,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -3010,6 +3010,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageParentGO: {fileID: 6816796752860798788}
   pagePrefab: {fileID: 3243908274550411067, guid: b98873c049a655342838a747ccd3d1d4, type: 3}
+  blotPrefab: {fileID: 8992183055544284219, guid: 615d0b0f2db59594cbb0473c69ece5cb, type: 3}
+  blotChances: 0.1
+  randBlotPos: {x: -100, y: 100}
+  randBlotRot: {x: 0, y: 360}
+  randBlotScale: {x: 1, y: 3}
   flipDuration: 0.35
   dragThreshold: 20
 --- !u!1 &8193388060485807921
