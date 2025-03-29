@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.PlayerLoop;
 
 public class Manager_UI : MonoBehaviour
 {
@@ -15,16 +16,10 @@ public class Manager_UI : MonoBehaviour
     [Header("Over UI")]
     [SerializeField] private GameObject overPanelGO;
     [SerializeField] private TMP_Text storyText;
+    [SerializeField] private Button nextButton;
     
     [Header("Loading UI")]
     [SerializeField] private GameObject loadingPanelGO;
-
-    [Header("Tools Settings")]
-    [SerializeField] private Texture2D defaultCursor;
-    [SerializeField] private Texture2D lanternCursor;
-    [SerializeField] private Texture2D diaryCursor;
-    [SerializeField] private Texture2D sliceCursor;
-    [SerializeField] private Texture2D grabCursor;
 
     [Header("Game UI")]
     [SerializeField] private GameObject gamePanelGO;
@@ -35,6 +30,13 @@ public class Manager_UI : MonoBehaviour
     [SerializeField] private Button endRunButton;
     [SerializeField] private GameObject torchFuelPanelGO;
     [SerializeField] private GameObject diaryPanelGO;
+
+    [Header("Tools Settings")]
+    [SerializeField] private Texture2D defaultCursor;
+    [SerializeField] private Texture2D lanternCursor;
+    [SerializeField] private Texture2D diaryCursor;
+    [SerializeField] private Texture2D sliceCursor;
+    [SerializeField] private Texture2D grabCursor;
     #endregion
     
     private void Awake() {
@@ -48,14 +50,25 @@ public class Manager_UI : MonoBehaviour
     }
     
     private void Start() {
+        Init();
+        ButtonSetup();
+        CanvasSetup();
+    }
+    private void Init() {
         if (diaryPanelGO != null)
             diaryPanelGO.SetActive(false);
         if (torchFuelPanelGO != null)
             torchFuelPanelGO.SetActive(false);
         
+        Cursor.visible = true;
+        Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+    }
+    private void ButtonSetup() {
         // Menu buttons
         startRunButton?.onClick.AddListener(StartRun);
         exitButton?.onClick.AddListener(ExitGame);
+        // Over buttons
+        nextButton?.onClick.AddListener(StartRun);
         // Game buttons
         endRunButton?.onClick.AddListener(EndRun);
         // Tool buttons
@@ -63,18 +76,21 @@ public class Manager_UI : MonoBehaviour
         diaryButton?.onClick.AddListener(ToggleDiary);
         slicingButton?.onClick.AddListener(ToggleSlice);
         grabButton?.onClick.AddListener(ToggleGrab);
-        
-        Cursor.visible = true;
-        Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+    }
+    private void CanvasSetup() {
+        ControlLoadingUI(false);
+        ControlGameUI(false);
+        ControlMenuUI(true);
+        ControlOverUI(false);
     }
     
     public void StartRun() {
         Debug.Log("Start run button pressed!");
-        
-        startRunButton.gameObject.SetActive(false);
 
-        loadingPanelGO.SetActive(false);
-        overPanelGO.SetActive(false);
+        ControlLoadingUI(false);
+        ControlGameUI(true);
+        ControlMenuUI(false);
+        ControlOverUI(false);
 
         Manager_Game.Instance.StartRun();
     }
@@ -207,12 +223,12 @@ public class Manager_UI : MonoBehaviour
     public void ControlGameUI(bool active) {
         Debug.Log($"ControlGameUI {active}");
 
-        loadingPanelGO.SetActive(active);
+        gamePanelGO.SetActive(active);
     }
     public void ControlMenuUI(bool active) {
         Debug.Log($"ControlMenuUI {active}");
 
-        loadingPanelGO.SetActive(active);
+        menuPanelGO.SetActive(active);
     }
     public void ControlOverUI(bool active) {
         Debug.Log($"ControlOverUI {active}");
