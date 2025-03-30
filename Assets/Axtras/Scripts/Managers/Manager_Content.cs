@@ -30,10 +30,23 @@ public class Manager_Content : MonoBehaviour
     }
     private void Start() {
         Init();
+        DataLoad();
     }
     private void Init() {
         if (whispersList.Count == 0)
             whispersList = whispersStr.Split('\n').ToList();
+    }
+    private void DataLoad() {
+        // Load stories and rules from save files
+        var stories = Manager_SaveLoad.Instance.LoadStories();
+        var rules = Manager_SaveLoad.Instance.LoadRules();
+        
+        // Set stories and rules in the content manager
+        SetStories(stories);
+        SetRules(rules);
+        
+        // Initialize the diary rules
+        InitDiaryRules();
     }
     
     public void InitDiaryRules() {
@@ -49,10 +62,10 @@ public class Manager_Content : MonoBehaviour
         return rulesList;
     }
 
-    public void SetStories(List<Data_Stories> stories) {
+    private void SetStories(List<Data_Stories> stories) {
         storyList = stories;
     }
-    public void SetRules(List<Data_Rules> rules) {
+    private void SetRules(List<Data_Rules> rules) {
         rulesList = rules;
     }
 

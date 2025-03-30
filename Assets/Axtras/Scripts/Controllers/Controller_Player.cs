@@ -66,23 +66,13 @@ public class Controller_Player : MonoBehaviour
 
     private void Start() {
         Init();
-        InitLantern();
-        InitDiary();
     }
     private void Init() {
         mainCamera = Camera.main;
 
         currentTool = Tool.None;
-    }
-    private void InitLantern() {
+        
         lightObject?.SetActive(false);
-    }
-    private void InitDiary() {
-        Manager_Content.Instance.InitDiaryRules();
-    }
-    private void InitSlice() {
-    }
-    private void InitGrab() {
     }
     
     private void Update() {

@@ -8,8 +8,10 @@ public class Manager_Game : MonoBehaviour
     private GameObject playerGO;
     private GameObject mainCameraGO;
 
-    [Header("Game Settings")]
+    [Header("Run Settings")]
     [SerializeField] private int run = 0;
+    
+    [Header("Score Settings")]
     [SerializeField] private int score = 0;
     [SerializeField] private int scoreInc = 10;
     [SerializeField] private int scoreDec = 15;
@@ -27,6 +29,7 @@ public class Manager_Game : MonoBehaviour
 
     private void Start() {
         Init();
+        DataLoad();
     }
     private void Init() {
         if (playerGO == null)
@@ -34,12 +37,20 @@ public class Manager_Game : MonoBehaviour
         if (mainCameraGO == null)   
             mainCameraGO = Camera.main.gameObject;
     }
-    
+    private void DataLoad() {
+        // Load general data from save file
+        var general = Manager_SaveLoad.Instance.LoadGeneral();
+        
+        // Set the run and score values
+        SetRunCnt(general.runCnt);
+        SetScore(general.scoreCnt);
+    }
+
     public void StartRun() {
         Debug.Log("Game Run Started");
         
+        // Add run count
         run++;
-        score = 0;
     }
     public void EndRun() {
         Debug.Log("Game Run Ended");
@@ -55,5 +66,12 @@ public class Manager_Game : MonoBehaviour
     public void DecScore() {
         Debug.Log($"DecScore | Score: {score} | ScoreInc: {scoreInc}");
         score -= scoreInc;
+    }
+
+    private void SetRunCnt(int runcnt) {
+        run = runcnt;
+    }
+    private void SetScore(int scoreval) {
+        score = scoreval;
     }
 }

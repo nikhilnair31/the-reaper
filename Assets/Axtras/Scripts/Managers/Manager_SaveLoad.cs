@@ -10,10 +10,12 @@ public class Manager_SaveLoad : MonoBehaviour
 
     private List<Data_Stories> stories = new ();
     private List<Data_Rules> rules = new ();
+    private Data_General general;
     
     [Header("Save Settings")]
-    [SerializeField] private string storyFileName = "story";
+    [SerializeField] private string generalFileName = "general";
     [SerializeField] private string whispersFileName = "whispers";
+    [SerializeField] private string storyFileName = "story";
     [SerializeField] private string rulesFileName = "rules";
     #endregion
     
@@ -52,6 +54,19 @@ public class Manager_SaveLoad : MonoBehaviour
         else {
             Debug.Log("No rules save file found.");
             return new();
+        }
+    }
+    public Data_General LoadGeneral() {
+        string filePath = Application.persistentDataPath + "/" + generalFileName + ".json";
+        if (File.Exists(filePath)) {
+            string jsonData = File.ReadAllText(filePath);
+            general = JsonUtility.FromJson<Data_General>(jsonData);
+            Debug.Log($"General loaded from: {filePath}");
+            return general;
+        } 
+        else {
+            Debug.Log("No general save file found.");
+            return null;
         }
     }
     #endregion

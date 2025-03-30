@@ -53,7 +53,6 @@ public class Manager_UI : MonoBehaviour
         Init();
         ButtonSetup();
         CanvasSetup();
-        DataLoad();
     }
     private void Init() {
         if (diaryPanelGO != null)
@@ -84,18 +83,6 @@ public class Manager_UI : MonoBehaviour
         ControlMenuUI(true);
         ControlOverUI(false);
     }
-    private void DataLoad() {
-        // Load stories and rules from save files
-        var stories = Manager_SaveLoad.Instance.LoadStories();
-        var rules = Manager_SaveLoad.Instance.LoadRules();
-        
-        // Set stories and rules in the content manager
-        Manager_Content.Instance.SetStories(stories);
-        Manager_Content.Instance.SetRules(rules);
-        
-        // Initialize the diary rules
-        Manager_Content.Instance.InitDiaryRules();
-    }
     
     public void StartRun() {
         Debug.Log("Start run button pressed!");
@@ -115,6 +102,10 @@ public class Manager_UI : MonoBehaviour
         ControlMenuUI(false);
         ControlOverUI(true);
         
+        // Pick and unlock a random rule from the list
+        Manager_Content.Instance.PickRule();
+
+        // Pick a random story from the list
         var story = Manager_Content.Instance.PickStory();
         SetStoryText(story);  
 
@@ -126,7 +117,7 @@ public class Manager_UI : MonoBehaviour
         Application.Quit();
     }
     
-    public void SetStoryText(string text) {
+    private void SetStoryText(string text) {
         Debug.Log($"SetStoryText: {text}");
         
         storyText.text = text;
