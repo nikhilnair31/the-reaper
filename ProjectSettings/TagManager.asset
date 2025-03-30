@@ -7,6 +7,7 @@ TagManager:
   - Person
   - Rope
   - Corpse
+  - Tree
   layers:
   - Default
   - TransparentFX
