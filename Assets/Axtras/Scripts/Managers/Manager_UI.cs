@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.PlayerLoop;
-using UnityEngine.EventSystems;
 using System.Collections;
+using DG.Tweening;
+using TMPro;
 
 public class Manager_UI : MonoBehaviour
 {
@@ -32,6 +31,9 @@ public class Manager_UI : MonoBehaviour
     [SerializeField] private Button endRunButton;
     [SerializeField] private GameObject torchFuelPanelGO;
     [SerializeField] private GameObject diaryPanelGO;
+
+    [Header("Tween Settings")]
+    [SerializeField] private float fadeTime = 1f;
 
     [Header("Tools Settings")]
     [SerializeField] private Texture2D defaultCursor;
@@ -63,7 +65,7 @@ public class Manager_UI : MonoBehaviour
         Cursor.visible = true;
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
 
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
     }
     private void ButtonSetup() {
         // Menu buttons
@@ -96,6 +98,7 @@ public class Manager_UI : MonoBehaviour
         ControlLoadingUI(true);
 
         // Generate a run
+        yield return new WaitForSecondsRealtime(fadeTime);
         Manager_Game.Instance.StartRun();
         yield return new WaitForSecondsRealtime(1f);
 
@@ -115,6 +118,7 @@ public class Manager_UI : MonoBehaviour
         ControlLoadingUI(true);
 
         // End the run
+        yield return new WaitForSecondsRealtime(fadeTime);
         Manager_Game.Instance.EndRun();
         yield return new WaitForSecondsRealtime(1f);
         
@@ -146,22 +150,46 @@ public class Manager_UI : MonoBehaviour
     public void ControlLoadingUI(bool active) {
         Debug.Log($"ControlLoadingUI {active}");
 
-        loadingPanelGO.SetActive(active);
+        if (loadingPanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
+            cg.DOFade(1f, fadeTime)
+                .OnStart(() => {
+                    cg.alpha = 0f;
+                    loadingPanelGO.SetActive(active);
+                });
+        }
     }
     public void ControlGameUI(bool active) {
         Debug.Log($"ControlGameUI {active}");
 
-        gamePanelGO.SetActive(active);
+        if (gamePanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
+            cg.DOFade(1f, fadeTime)
+                .OnStart(() => {
+                    cg.alpha = 0f;
+                    gamePanelGO.SetActive(active);
+                });
+        }
     }
     public void ControlMenuUI(bool active) {
         Debug.Log($"ControlMenuUI {active}");
 
-        menuPanelGO.SetActive(active);
+        if (menuPanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
+            cg.DOFade(1f, fadeTime)
+                .OnStart(() => {
+                    cg.alpha = 0f;
+                    menuPanelGO.SetActive(active);
+                });
+        }
     }
     public void ControlOverUI(bool active) {
         Debug.Log($"ControlOverUI {active}");
 
-        overPanelGO.SetActive(active);
+        if (overPanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
+            cg.DOFade(1f, fadeTime)
+                .OnStart(() => {
+                    cg.alpha = 0f;
+                    overPanelGO.SetActive(active);
+                });
+        }
     }
     
     private void ControlAllToolPanels(bool active = false) {
