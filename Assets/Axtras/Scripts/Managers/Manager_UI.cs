@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.PlayerLoop;
+using UnityEngine.EventSystems;
+using System.Collections;
 
 public class Manager_UI : MonoBehaviour
 {
@@ -55,13 +57,13 @@ public class Manager_UI : MonoBehaviour
         CanvasSetup();
     }
     private void Init() {
-        if (diaryPanelGO != null)
-            diaryPanelGO.SetActive(false);
-        if (torchFuelPanelGO != null)
-            torchFuelPanelGO.SetActive(false);
+        ControlAllToolPanels(false);
+        ControlAllButtonsSize(1f);
         
         Cursor.visible = true;
         Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+
+        Time.timeScale = 0f;
     }
     private void ButtonSetup() {
         // Menu buttons
@@ -78,147 +80,69 @@ public class Manager_UI : MonoBehaviour
         grabButton?.onClick.AddListener(ToggleGrab);
     }
     private void CanvasSetup() {
-        ControlLoadingUI(false);
-        ControlGameUI(false);
+        ControlAllPanels(false);
         ControlMenuUI(true);
-        ControlOverUI(false);
     }
     
+    #region General
     public void StartRun() {
+        StartCoroutine(StartRunCoor());
+    }
+    public IEnumerator StartRunCoor() {
         Debug.Log("Start run button pressed!");
-
-        ControlLoadingUI(false);
-        ControlGameUI(true);
-        ControlMenuUI(false);
-        ControlOverUI(false);
-
-        Manager_Game.Instance.StartRun();
-    }
-    public void EndRun() {
-        Debug.Log("End run button pressed!");
-
-        ControlLoadingUI(false);
-        ControlGameUI(false);
-        ControlMenuUI(false);
-        ControlOverUI(true);
         
-        // Pick and unlock a random rule from the list
-        Manager_Content.Instance.PickRule();
+        // Enable loading ui 
+        ControlAllPanels(false);
+        ControlLoadingUI(true);
 
-        // Pick a random story from the list
-        var story = Manager_Content.Instance.PickStory();
-        SetStoryText(story);  
+        // Generate a run
+        Manager_Game.Instance.StartRun();
+        yield return new WaitForSecondsRealtime(1f);
 
-        Manager_Game.Instance.EndRun();
+        // Enable game ui 
+        ControlAllPanels(false);
+        ControlGameUI(true);
     }
+    
+    public void EndRun() {
+        StartCoroutine(EndRunCoor());
+    }
+    public IEnumerator EndRunCoor() {
+        Debug.Log("End run button pressed!");
+        
+        // Enable loading ui 
+        ControlAllPanels(false);
+        ControlLoadingUI(true);
+
+        // End the run
+        Manager_Game.Instance.EndRun();
+        yield return new WaitForSecondsRealtime(1f);
+        
+        // Enable game ui 
+        ControlAllPanels(false);
+        ControlOverUI(true);
+    }
+    
     public void ExitGame() {
+        StartCoroutine(ExitGameCoor());
+    }
+    public IEnumerator ExitGameCoor() {
         Debug.Log("Exit button pressed!");
 
         Application.Quit();
+
+        yield return null;
+    }
+    #endregion
+
+    #region UI Control
+    public void ControlAllPanels(bool active) {
+        loadingPanelGO.SetActive(active);
+        gamePanelGO.SetActive(active);
+        menuPanelGO.SetActive(active);
+        overPanelGO.SetActive(active);
     }
     
-    private void SetStoryText(string text) {
-        Debug.Log($"SetStoryText: {text}");
-        
-        storyText.text = text;
-    }
-    
-    public void ToggleLantern() {
-        Debug.Log("Lantern button pressed!");
-
-        if (Controller_Player.Instance.GetToolLantern()) {
-            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);         
-            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
-            SetButtonSize(lanternButton, 1f);
-        }
-        else {
-            ResetPanels();
-            ResetButtonSize();
-
-            Controller_Player.Instance.SetTool(Controller_Player.Tool.Lantern);  
-            Cursor.SetCursor(lanternCursor, Vector2.zero, CursorMode.Auto);
-            SetButtonSize(lanternButton, 1.5f);
-        }
-
-        bool isActive = torchFuelPanelGO.activeSelf;
-        torchFuelPanelGO.SetActive(!isActive);
-    }
-    public void ToggleDiary() {
-        Debug.Log("Diary button pressed!");
-        
-        if (Controller_Player.Instance.GetToolDiary()) {
-            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);          
-            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
-            SetButtonSize(diaryButton, 1f);
-        }
-        else {
-            ResetPanels();
-            ResetButtonSize();
-
-            Controller_Player.Instance.SetTool(Controller_Player.Tool.Diary); 
-            Cursor.SetCursor(diaryCursor, Vector2.zero, CursorMode.Auto);
-            SetButtonSize(diaryButton, 1.5f);
-        }
-
-        bool isActive = diaryPanelGO.activeSelf;
-        diaryPanelGO.SetActive(!isActive);
-    }
-    public void ToggleSlice() {
-        Debug.Log("Slicing button pressed!");
-        
-        if (Controller_Player.Instance.GetToolSlice()) {
-            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);            
-            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
-            SetButtonSize(slicingButton, 1f);
-        }
-        else {
-            ResetPanels();
-            ResetButtonSize();
-
-            Controller_Player.Instance.SetTool(Controller_Player.Tool.Slice); 
-            Cursor.SetCursor(sliceCursor, Vector2.zero, CursorMode.Auto);
-            SetButtonSize(slicingButton, 1.5f);
-        }
-    }
-    public void ToggleGrab() {
-        Debug.Log("Grabing button pressed!");
-        
-        if (Controller_Player.Instance.GetToolGrab()) {
-            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);            
-            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
-            SetButtonSize(grabButton, 1f);
-        }
-        else {
-            ResetPanels();
-            ResetButtonSize();
-
-            Controller_Player.Instance.SetTool(Controller_Player.Tool.Grab); 
-            Cursor.SetCursor(grabCursor, Vector2.zero, CursorMode.Auto);
-            SetButtonSize(grabButton, 1.5f);
-        }
-    }
-
-    private void ResetButtonSize() {
-        var lanternRT = lanternButton.GetComponent<RectTransform>();
-        var diaryRT = diaryButton.GetComponent<RectTransform>();
-        var slicingRT = slicingButton.GetComponent<RectTransform>();
-        var grabingRT = grabButton.GetComponent<RectTransform>();
-
-        lanternRT.localScale = Vector3.one;
-        diaryRT.localScale = Vector3.one;
-        slicingRT.localScale = Vector3.one;
-        grabingRT.localScale = Vector3.one;
-    }
-    private void ResetPanels() {
-        torchFuelPanelGO.SetActive(false);
-        diaryPanelGO.SetActive(false);
-    }
-
-    private void SetButtonSize(Button btn, float sizeVal) {
-        var rt = btn.GetComponent<RectTransform>();
-        rt.localScale = new (sizeVal, sizeVal, sizeVal);
-    }
-
     public void ControlLoadingUI(bool active) {
         Debug.Log($"ControlLoadingUI {active}");
 
@@ -239,4 +163,107 @@ public class Manager_UI : MonoBehaviour
 
         overPanelGO.SetActive(active);
     }
+    
+    private void ControlAllToolPanels(bool active = false) {
+        torchFuelPanelGO?.SetActive(active);
+        diaryPanelGO?.SetActive(active);
+    }
+    
+    private void ControlAllButtonsSize(float sizeVal = 1f) {
+        var lanternRT = lanternButton.GetComponent<RectTransform>();
+        var diaryRT = diaryButton.GetComponent<RectTransform>();
+        var slicingRT = slicingButton.GetComponent<RectTransform>();
+        var grabingRT = grabButton.GetComponent<RectTransform>();
+
+        lanternRT.localScale = Vector3.one * sizeVal;
+        diaryRT.localScale = Vector3.one * sizeVal;
+        slicingRT.localScale = Vector3.one * sizeVal;
+        grabingRT.localScale = Vector3.one * sizeVal;
+    }
+    private void SetButtonSize(Button btn, float sizeVal) {
+        var rt = btn.GetComponent<RectTransform>();
+        rt.localScale = Vector3.one * sizeVal;
+    }
+    
+    public void SetStoryText(string text) {
+        storyText.text = text;
+    }
+    #endregion
+    
+    #region Tools
+    public void ToggleLantern() {
+        Debug.Log("Lantern button pressed!");
+
+        if (Controller_Player.Instance.GetToolLantern()) {
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);         
+            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(lanternButton, 1f);
+        }
+        else {
+            ControlAllToolPanels(false);
+            ControlAllButtonsSize(1f);
+
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.Lantern);  
+            Cursor.SetCursor(lanternCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(lanternButton, 1.5f);
+        }
+
+        bool isActive = torchFuelPanelGO.activeSelf;
+        torchFuelPanelGO.SetActive(!isActive);
+    }
+    public void ToggleDiary() {
+        Debug.Log("Diary button pressed!");
+        
+        if (Controller_Player.Instance.GetToolDiary()) {
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);          
+            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(diaryButton, 1f);
+        }
+        else {
+            ControlAllToolPanels(false);
+            ControlAllButtonsSize(1f);
+
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.Diary); 
+            Cursor.SetCursor(diaryCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(diaryButton, 1.5f);
+        }
+
+        bool isActive = diaryPanelGO.activeSelf;
+        diaryPanelGO.SetActive(!isActive);
+    }
+    public void ToggleSlice() {
+        Debug.Log("Slicing button pressed!");
+        
+        if (Controller_Player.Instance.GetToolSlice()) {
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);            
+            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(slicingButton, 1f);
+        }
+        else {
+            ControlAllToolPanels(false);
+            ControlAllButtonsSize(1f);
+
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.Slice); 
+            Cursor.SetCursor(sliceCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(slicingButton, 1.5f);
+        }
+    }
+    public void ToggleGrab() {
+        Debug.Log("Grabing button pressed!");
+        
+        if (Controller_Player.Instance.GetToolGrab()) {
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.None);            
+            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(grabButton, 1f);
+        }
+        else {
+            ControlAllToolPanels(false);
+            ControlAllButtonsSize(1f);
+
+            Controller_Player.Instance.SetTool(Controller_Player.Tool.Grab); 
+            Cursor.SetCursor(grabCursor, Vector2.zero, CursorMode.Auto);
+            SetButtonSize(grabButton, 1.5f);
+        }
+    }
+    #endregion
 }

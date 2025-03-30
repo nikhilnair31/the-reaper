@@ -52,15 +52,36 @@ public class Manager_Game : MonoBehaviour
 
     public void StartRun() {
         Debug.Log("Game Run Started");
+
+        // Prewarm physics steps
+        for (int i = 0; i < 100; i++) {
+            Physics.simulationMode = SimulationMode.Script;
+            Physics.Simulate(Time.fixedDeltaTime);
+        }
+        Physics.simulationMode = SimulationMode.FixedUpdate;
+
+        // Set time to normal speed
+        Time.timeScale = 1f;
         
         // Add run count
         run++;
     }
     public void EndRun() {
         Debug.Log("Game Run Ended");
+        
+        // Pick a random story from the list
+        var story = Manager_Content.Instance.PickStory();
+        Manager_UI.Instance.SetStoryText(story);
 
+        // Pick and unlock a random rule from the list
+        Manager_Content.Instance.PickRule();
+
+        // Save the current set of stories and rules
         Manager_SaveLoad.Instance.SaveStories();
         Manager_SaveLoad.Instance.SaveRules();
+
+        // Set time to frozen
+        Time.timeScale = 0f;
     }
     
     public void IncScore() {
