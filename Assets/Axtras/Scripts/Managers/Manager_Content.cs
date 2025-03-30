@@ -37,12 +37,22 @@ public class Manager_Content : MonoBehaviour
             whispersList = whispersStr.Split('\n').ToList();
     }
     private void DataLoad() {
-        // Load stories and rules from save files
+        // Load stories from save files
         var stories = Manager_SaveLoad.Instance.LoadStories();
-        var rules = Manager_SaveLoad.Instance.LoadRules();
-        
-        // Set stories and rules in the content manager
+        if (stories == null) {
+            Manager_SaveLoad.Instance.SaveStories();
+            stories = storyList;
+        };
+        // Set stories in the content manager
         SetStories(stories);
+
+        // Load rules from save files
+        var rules = Manager_SaveLoad.Instance.LoadRules();
+        if (rules == null) {
+            Manager_SaveLoad.Instance.SaveRules();
+            rules = rulesList;
+        };
+        // Set rules in the content manager
         SetRules(rules);
         
         // Initialize the diary rules

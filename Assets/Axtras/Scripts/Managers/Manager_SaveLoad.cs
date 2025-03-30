@@ -40,7 +40,7 @@ public class Manager_SaveLoad : MonoBehaviour
         } 
         else {
             Debug.Log("No stories save file found.");
-            return new();
+            return null;
         }
     }
     public List<Data_Rules> LoadRules() {
@@ -53,7 +53,7 @@ public class Manager_SaveLoad : MonoBehaviour
         } 
         else {
             Debug.Log("No rules save file found.");
-            return new();
+            return null;
         }
     }
     public Data_General LoadGeneral() {
@@ -94,6 +94,17 @@ public class Manager_SaveLoad : MonoBehaviour
         
         Debug.Log("Rules saved to: " + filePath);
     }
+    public void SaveGeneral() {
+        var general = new General() {
+            general = Manager_Game.Instance.GetGeneral()
+        };
+        string jsonData = JsonUtility.ToJson(general, true);
+        
+        string filePath = Application.persistentDataPath + "/" + generalFileName + ".json";
+        File.WriteAllText(filePath, jsonData);
+        
+        Debug.Log("General saved to: " + filePath);
+    }
     #endregion
     
     #region Serialization and Deserialization
@@ -104,6 +115,10 @@ public class Manager_SaveLoad : MonoBehaviour
     [Serializable]
     private class RulesList {
         public List<Data_Rules> rules = new ();
+    }
+    [Serializable]
+    private class General {
+        public Data_General general = new ();
     }
     #endregion
 }
