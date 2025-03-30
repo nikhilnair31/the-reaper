@@ -10,13 +10,13 @@ public class Manager_Content : MonoBehaviour
     [Header("Story Settings")]
     [SerializeField] private List<Data_Stories> storyList = new ();
     private int storyIndex = 0;
+    
+    [Header("Rules Settings")]
+    [SerializeField] private List<Data_Rules> rulesList = new ();
 
     [Header("Whipsers Settings")]
     [SerializeField][TextArea(3, 10)] private string whispersStr;
     [SerializeField]private List<string> whispersList = new ();
-    
-    [Header("Rules Settings")]
-    [SerializeField] private List<Data_Rules> rulesList = new ();
     #endregion 
 
     private void Awake() {
@@ -28,7 +28,6 @@ public class Manager_Content : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
     private void Start() {
         Init();
     }
@@ -41,6 +40,20 @@ public class Manager_Content : MonoBehaviour
         var listOfRulesData = rulesList.Where(rule => rule.unlocked).ToList();
         var listOfRulesStr = listOfRulesData.Select(rule => rule.ruleStr).ToList();
         Controller_Diary.Instance.InitDiaryPages(listOfRulesStr);
+    }
+
+    public List<Data_Stories> GetStories() {
+        return storyList;
+    }
+    public List<Data_Rules> GetRules() {
+        return rulesList;
+    }
+
+    public void SetStories(List<Data_Stories> stories) {
+        storyList = stories;
+    }
+    public void SetRules(List<Data_Rules> rules) {
+        rulesList = rules;
     }
 
     public string PickWhisper() {
@@ -78,5 +91,22 @@ public class Manager_Content : MonoBehaviour
         storyIndex++;
 
         return story;
+    }
+    public void PickRule() {
+        if (rulesList.Count == 0) {
+            Debug.LogWarning("No rule objects available");
+            return;
+        }
+
+        var lockedRulesList = rulesList.Where(rule => !rule.unlocked).ToList();
+        if (lockedRulesList.Count == 0) {
+            Debug.Log("All rules have been unlocked.");
+            return;
+        }
+
+        var unlockRuleObj = rulesList[Random.Range(0, lockedRulesList.Count)];
+        Debug.Log($"Picked to unlock rule obj: {unlockRuleObj}");
+        
+        unlockRuleObj.unlocked = true;
     }
 }

@@ -53,6 +53,7 @@ public class Manager_UI : MonoBehaviour
         Init();
         ButtonSetup();
         CanvasSetup();
+        DataLoad();
     }
     private void Init() {
         if (diaryPanelGO != null)
@@ -82,6 +83,18 @@ public class Manager_UI : MonoBehaviour
         ControlGameUI(false);
         ControlMenuUI(true);
         ControlOverUI(false);
+    }
+    private void DataLoad() {
+        // Load stories and rules from save files
+        var stories = Manager_SaveLoad.Instance.LoadStories();
+        var rules = Manager_SaveLoad.Instance.LoadRules();
+        
+        // Set stories and rules in the content manager
+        Manager_Content.Instance.SetStories(stories);
+        Manager_Content.Instance.SetRules(rules);
+        
+        // Initialize the diary rules
+        Manager_Content.Instance.InitDiaryRules();
     }
     
     public void StartRun() {

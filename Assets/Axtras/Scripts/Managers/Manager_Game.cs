@@ -43,6 +43,9 @@ public class Manager_Game : MonoBehaviour
     }
     public void EndRun() {
         Debug.Log("Game Run Ended");
+
+        Manager_SaveLoad.Instance.SaveStories();
+        Manager_SaveLoad.Instance.SaveRules();
     }
     
     public void IncScore() {
