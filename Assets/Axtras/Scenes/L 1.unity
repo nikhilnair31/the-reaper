@@ -506,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfedc02a41bcb88428f64b67d7a8de3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  run: 0
   score: 0
   scoreInc: 10
   scoreDec: 15
@@ -521,12 +522,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792616089ce32004589ef426195c33c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyStr: 'rinku rats tinku
-
-    potatoes are saturdaying
-
-    cars in my rac'
-  storyList: []
+  storyList:
+  - storyStr: rats are fat bat
+    shown: 0
+  - storyStr: cars in my bum
+    shown: 0
+  - storyStr: potatoes eat me
+    shown: 0
   whispersStr: 'oh no
 
     thank you

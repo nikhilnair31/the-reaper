@@ -9,6 +9,7 @@ public class Manager_Game : MonoBehaviour
     private GameObject mainCameraGO;
 
     [Header("Game Settings")]
+    [SerializeField] private int run = 0;
     [SerializeField] private int score = 0;
     [SerializeField] private int scoreInc = 10;
     [SerializeField] private int scoreDec = 15;
@@ -36,6 +37,9 @@ public class Manager_Game : MonoBehaviour
     
     public void StartRun() {
         Debug.Log("Game Run Started");
+        
+        run++;
+        score = 0;
     }
     public void EndRun() {
         Debug.Log("Game Run Ended");

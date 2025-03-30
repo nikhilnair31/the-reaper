@@ -8,8 +8,8 @@ public class Manager_Content : MonoBehaviour
     public static Manager_Content Instance { get; private set; }
     
     [Header("Story Settings")]
-    [SerializeField][TextArea(3, 10)] private string storyStr;
-    [SerializeField] private List<string> storyList = new ();
+    [SerializeField] private List<Data_Stories> storyList = new ();
+    private int storyIndex = 0;
 
     [Header("Whipsers Settings")]
     [SerializeField][TextArea(3, 10)] private string whispersStr;
@@ -33,9 +33,6 @@ public class Manager_Content : MonoBehaviour
         Init();
     }
     private void Init() {
-        if (storyList.Count == 0)
-            storyList = storyStr.Split('\n').ToList();
-        
         if (whispersList.Count == 0)
             whispersList = whispersStr.Split('\n').ToList();
     }
@@ -60,13 +57,25 @@ public class Manager_Content : MonoBehaviour
     }
     public string PickStory() {
         if (storyList.Count == 0) {
-            Debug.LogWarning("No story available");
+            Debug.LogWarning("No story objects available");
+            return "...";
+        }
+
+        if (storyIndex >= storyList.Count) {
+            Debug.Log("All stories have been shown. Resetting story index.");
             return "...";
         }
         
-        int randomIndex = Random.Range(0, storyList.Count);
-        string story = storyList[randomIndex];
-        Debug.Log($"Picked Story: {story}");
+        var pickedStoryObj = storyList[storyIndex];
+        if (pickedStoryObj == null) {
+            Debug.LogError($"Story object at index {storyIndex} is null.");
+            return "...";
+        }
+        Debug.Log($"Picked Story Obj: {pickedStoryObj}");
+        
+        var story = pickedStoryObj.storyStr;
+        pickedStoryObj.shown = true;
+        storyIndex++;
 
         return story;
     }
