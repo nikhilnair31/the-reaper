@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class Controller_Player : MonoBehaviour
 {
@@ -28,14 +29,17 @@ public class Controller_Player : MonoBehaviour
     
     [Header("Lantern Settings")]
     [SerializeField] private Transform lightTransform;
-    [SerializeField] private GameObject lightObject;
-    [SerializeField] private float boostMul = 2f;
+    [SerializeField] private Light lanternLight;
+    [SerializeField] private float flickerRate = 0.1f;
+    [SerializeField] private float flickerPerc = 0.2f;
+    [SerializeField] private float baseIntensity = 1f;
+    [SerializeField] private float boostIntensity = 5f;
+    private Sequence flickerSequence;
     private bool isBoosting = false;
     private bool isLanternActive = false;
 
     [Header("Diary Settings")]
     [SerializeField] private Transform diaryTransform;
-    private List<string> diaryRulesList;
     
     [Header("Slice Settings")]
     [SerializeField] private float sliceDistance = 10f;
@@ -72,7 +76,7 @@ public class Controller_Player : MonoBehaviour
 
         currentTool = Tool.None;
         
-        lightObject?.SetActive(false);
+        lanternLight.enabled = false;
     }
     
     private void Update() {
@@ -83,15 +87,22 @@ public class Controller_Player : MonoBehaviour
     }
     private void HandleLantern() {
         if (GetToolLantern()) {
-            if (Input.GetMouseButtonDown(1)) {
-                isBoosting = !isBoosting;
-                var light = lightObject.GetComponent<Light>();
-                light.intensity = isBoosting ? light.intensity * boostMul : light.intensity / boostMul;
-            }
-
+            // Check for left mouse click to enable/disable light
             if (Input.GetMouseButtonDown(0)) {
                 isLanternActive = !isLanternActive;
-                lightObject?.SetActive(isLanternActive);
+                
+                lanternLight.enabled = isLanternActive;
+                LanternFlickerTween();
+            }
+
+            // Check for right mouse click to enable/disable boost if light already on
+            if (Input.GetMouseButtonDown(1) && isLanternActive) {
+                isBoosting = !isBoosting;
+
+                lanternLight.intensity = 
+                    isBoosting ? 
+                        boostIntensity : 
+                        baseIntensity;
             }
             
             if (isLanternActive) {
@@ -131,7 +142,7 @@ public class Controller_Player : MonoBehaviour
                 Debug.DrawRay(currentRay.origin, currentRay.direction * sliceDistance, Color.red, 0.1f);
                 
                 if (Physics.Raycast(currentRay, out hit, sliceDistance, sliceLayerMask)) {
-                    ProcessHit(hit);
+                    SliceProcessing(hit);
                 }
                 
                 if (lastMousePosition != Vector3.zero && Vector2.Distance(lastMousePosition, currentMousePosition) > sliceMinDistance) {
@@ -145,7 +156,7 @@ public class Controller_Player : MonoBehaviour
                         Debug.DrawRay(lerpRay.origin, lerpRay.direction * sliceDistance, Color.yellow, 0.1f);
                         
                         if (Physics.Raycast(lerpRay, out hit, sliceDistance, sliceLayerMask)) {
-                            ProcessHit(hit);
+                            SliceProcessing(hit);
                         }
                     }
                 }
@@ -192,7 +203,8 @@ public class Controller_Player : MonoBehaviour
         }
     }
 
-    private void ProcessHit(RaycastHit hit) {   
+    #region Tool Effects
+    private void SliceProcessing(RaycastHit hit) {   
         Debug.Log($"Slicing object: {hit.collider.name}");
 
         // Use instance ID to prevent processing the same object multiple times per frame
@@ -243,6 +255,21 @@ public class Controller_Player : MonoBehaviour
         // Clear processed objects after processing
         processedObjects.Clear();
     }
+    private void LanternFlickerTween() {
+        if (isLanternActive && flickerSequence == null) {
+            flickerSequence = DOTween.Sequence()
+                .AppendCallback(() => {
+                    lanternLight.intensity += Random.Range(1f - flickerPerc, 1f + flickerPerc);
+                })
+                .AppendInterval(flickerRate)
+                .SetLoops(-1)
+                .Play();
+        }
+        else {
+            flickerSequence.Kill();    
+        }
+    }
+    #endregion
 
     public void SetTool(Tool tool) {
         currentTool = tool;

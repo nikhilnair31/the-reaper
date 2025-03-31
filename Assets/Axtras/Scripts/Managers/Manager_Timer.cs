@@ -49,6 +49,7 @@ public class Manager_Timer : MonoBehaviour
         
         if (fuelAmountImage.fillAmount <= 0) {
             FuelEmpty();
+            enabled = false;
         }
     }
     private void SetFuelFill(float amount) {
