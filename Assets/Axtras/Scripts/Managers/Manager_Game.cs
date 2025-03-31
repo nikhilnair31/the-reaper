@@ -79,7 +79,7 @@ public class Manager_Game : MonoBehaviour
         SpawnCorpses();
 
         // Prewarm physics steps
-        Helper.Instance.SimulatePhysicsSteps();
+        Helper.Instance.SimulatePhysicsSteps(1000);
 
         // Set time to normal speed
         Time.timeScale = 1f;
