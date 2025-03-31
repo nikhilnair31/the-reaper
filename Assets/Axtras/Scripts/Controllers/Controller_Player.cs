@@ -278,6 +278,7 @@ public class Controller_Player : MonoBehaviour
     }
     #endregion
 
+    #region Get Sets
     public void SetTool(Tool tool) {
         currentTool = tool;
     }
@@ -303,4 +304,5 @@ public class Controller_Player : MonoBehaviour
     public bool GetIsLanternBoosting() {
         return isBoosting;
     }
+    #endregion
 }

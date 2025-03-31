@@ -68,27 +68,13 @@ public class Manager_Game : MonoBehaviour
         Debug.Log("Game Run Started");
 
         // Clear corpses
-        var corpses = GameObject.FindGameObjectsWithTag("Corpse");
-        foreach (var corpse in corpses) {
-            Destroy(corpse.transform.parent.gameObject);
-        }
+        ClearCorpses();
 
         // Spawn corpses
-        var pointToPickFrom = hangingPointsTransformList;
-        for (int i = 0; i < maxCorpses; i++) {
-            var corpse = Instantiate(corpsePrefab);
-            var rope = corpse.transform.GetComponentInChildren<Rope>();
-            var randIndex = Random.Range(0, pointToPickFrom.Count);
-            var randHangPoint = pointToPickFrom[randIndex];
-            rope.startPoint.position = randHangPoint.position;
-        }
+        SpawnCorpses();
 
         // Prewarm physics steps
-        for (int i = 0; i < 100; i++) {
-            Physics.simulationMode = SimulationMode.Script;
-            Physics.Simulate(Time.fixedDeltaTime);
-        }
-        Physics.simulationMode = SimulationMode.FixedUpdate;
+        Helper.Instance.SimulatePhysicsSteps();
 
         // Set time to normal speed
         Time.timeScale = 1f;
@@ -113,6 +99,25 @@ public class Manager_Game : MonoBehaviour
 
         // Set time to frozen
         Time.timeScale = 0f;
+    }
+    #endregion
+
+    #region Run Gen Related
+    private void ClearCorpses() {
+        var corpses = GameObject.FindGameObjectsWithTag("Corpse");
+        foreach (var corpse in corpses) {
+            Destroy(corpse.transform.parent.gameObject);
+        }
+    }
+    private void SpawnCorpses() {
+        var pointToPickFrom = hangingPointsTransformList;
+        for (int i = 0; i < maxCorpses; i++) {
+            var corpse = Instantiate(corpsePrefab);
+            var rope = corpse.transform.GetComponentInChildren<Rope>();
+            var randIndex = Random.Range(0, pointToPickFrom.Count);
+            var randHangPoint = pointToPickFrom[randIndex];
+            rope.startPoint.position = randHangPoint.position;
+        }
     }
     #endregion
 
