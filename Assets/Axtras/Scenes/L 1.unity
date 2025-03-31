@@ -242,6 +242,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 591393343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &69783479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4969485695759388056, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+  m_PrefabInstance: {fileID: 2043008162}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &80394156
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +340,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 591393343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &172570672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7309915303635830504, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+  m_PrefabInstance: {fileID: 2043008162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &179695748
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +475,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 591393343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &267161515 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 907322319710562525, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+  m_PrefabInstance: {fileID: 2043008162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &308067239
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,19 +751,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f217593ed4724d44bf48a6b952ad491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingPanelGO: {fileID: 1927766285}
   menuPanelGO: {fileID: 1462983963}
   startRunButton: {fileID: 2043008164}
   exitButton: {fileID: 2043008165}
-  overPanelGO: {fileID: 2043008166}
+  overPanelGO: {fileID: 1909320186}
+  newRunButton: {fileID: 267161515}
+  menuOverButton: {fileID: 1418896522}
+  endRunPanelGO: {fileID: 2043008166}
   storyText: {fileID: 2043008167}
-  nextButton: {fileID: 1823332396}
-  loadingPanelGO: {fileID: 1927766285}
+  nextRunButton: {fileID: 1823332396}
+  pausePanelGO: {fileID: 69783479}
+  unpauseButton: {fileID: 919348535}
+  menuPauseButton: {fileID: 172570672}
   gamePanelGO: {fileID: 480683420}
   lanternButton: {fileID: 1727799001}
   diaryButton: {fileID: 1727799000}
   slicingButton: {fileID: 1727798999}
   grabButton: {fileID: 1846774966}
   endRunButton: {fileID: 2043008163}
+  pauseButton: {fileID: 1833382832}
   torchFuelPanelGO: {fileID: 1267352241}
   diaryPanelGO: {fileID: 1102840179}
   fadeTime: 1
@@ -6078,6 +6112,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -75, z: 90}
+--- !u!114 &919348535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1863557047657993450, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+  m_PrefabInstance: {fileID: 2043008162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1006564746
 GameObject:
   m_ObjectHideFlags: 0
@@ -6368,6 +6413,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1418896522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4967166512268056154, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+  m_PrefabInstance: {fileID: 2043008162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1462983963 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3041187511007863332, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
@@ -6778,6 +6834,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1833382832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 51959589381871755, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+  m_PrefabInstance: {fileID: 2043008162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1846774966 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9058628359665960614, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
@@ -6910,6 +6977,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1909320186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6185358909739130523, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+  m_PrefabInstance: {fileID: 2043008162}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1927766285 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4418974434850017107, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}

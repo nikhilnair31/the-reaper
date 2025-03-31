@@ -9,6 +9,9 @@ public class Manager_UI : MonoBehaviour
     #region Vars
     public static Manager_UI Instance { get; private set; }
 
+    [Header("Loading UI")]
+    [SerializeField] private GameObject loadingPanelGO;
+
     [Header("Menu UI")]
     [SerializeField] private GameObject menuPanelGO;
     [SerializeField] private Button startRunButton;
@@ -16,19 +19,27 @@ public class Manager_UI : MonoBehaviour
     
     [Header("Over UI")]
     [SerializeField] private GameObject overPanelGO;
-    [SerializeField] private TMP_Text storyText;
-    [SerializeField] private Button nextButton;
+    [SerializeField] private Button newRunButton;
+    [SerializeField] private Button menuOverButton;
     
-    [Header("Loading UI")]
-    [SerializeField] private GameObject loadingPanelGO;
+    [Header("End Run UI")]
+    [SerializeField] private GameObject endRunPanelGO;
+    [SerializeField] private TMP_Text storyText;
+    [SerializeField] private Button nextRunButton;
 
-    [Header("Game UI")]
+    [Header("Pause UI")]
+    [SerializeField] private GameObject pausePanelGO;
+    [SerializeField] private Button unpauseButton;
+    [SerializeField] private Button menuPauseButton;
+
+    [Header("Game Run UI")]
     [SerializeField] private GameObject gamePanelGO;
     [SerializeField] private Button lanternButton;
     [SerializeField] private Button diaryButton;
     [SerializeField] private Button slicingButton;
     [SerializeField] private Button grabButton;
     [SerializeField] private Button endRunButton;
+    [SerializeField] private Button pauseButton;
     [SerializeField] private GameObject torchFuelPanelGO;
     [SerializeField] private GameObject diaryPanelGO;
 
@@ -71,10 +82,22 @@ public class Manager_UI : MonoBehaviour
         // Menu buttons
         startRunButton?.onClick.AddListener(StartRun);
         exitButton?.onClick.AddListener(ExitGame);
+
         // Over buttons
-        nextButton?.onClick.AddListener(StartRun);
+        newRunButton?.onClick.AddListener(StartRun);
+        menuOverButton?.onClick.AddListener(ToMenu);
+
+        // End Run buttons
+        nextRunButton?.onClick.AddListener(StartRun);
+        
+        // Pause buttons
+        unpauseButton?.onClick.AddListener(UnpauseGame);
+        menuPauseButton?.onClick.AddListener(ToMenu);
+        
         // Game buttons
         endRunButton?.onClick.AddListener(EndRun);
+        pauseButton?.onClick.AddListener(PauseGame);
+        
         // Tool buttons
         lanternButton?.onClick.AddListener(ToggleLantern);
         diaryButton?.onClick.AddListener(ToggleDiary);
@@ -124,7 +147,46 @@ public class Manager_UI : MonoBehaviour
         
         // Enable game ui 
         ControlAllPanels(false);
-        ControlOverUI(true);
+        ControlEndRunUI(true);
+    }
+    
+    public void ToMenu() {
+        StartCoroutine(ToMenuCoor());
+    }
+    public IEnumerator ToMenuCoor() {
+        Debug.Log("ToMenu button pressed!");
+
+        // Enable pause ui 
+        ControlAllPanels(false);
+        ControlMenuUI(true);
+
+        yield return null;
+    }
+    
+    public void UnpauseGame() {
+        StartCoroutine(UnpauseGameCoor());
+    }
+    public IEnumerator UnpauseGameCoor() {
+        Debug.Log("UnpauseGame button pressed!");
+
+        // Enable game ui 
+        ControlAllPanels(false);
+        ControlGameUI(true);
+
+        yield return null;
+    }
+    
+    public void PauseGame() {
+        StartCoroutine(PauseGameCoor());
+    }
+    public IEnumerator PauseGameCoor() {
+        Debug.Log("PauseGame button pressed!");
+
+        // Enable pause ui 
+        ControlAllPanels(false);
+        ControlPauseUI(true);
+
+        yield return null;
     }
     
     public void ExitGame() {
@@ -142,9 +204,11 @@ public class Manager_UI : MonoBehaviour
     #region UI Control
     public void ControlAllPanels(bool active) {
         loadingPanelGO.SetActive(active);
-        gamePanelGO.SetActive(active);
         menuPanelGO.SetActive(active);
         overPanelGO.SetActive(active);
+        endRunPanelGO.SetActive(active);
+        pausePanelGO.SetActive(active);
+        gamePanelGO.SetActive(active);
     }
     
     public void ControlLoadingUI(bool active) {
@@ -156,18 +220,6 @@ public class Manager_UI : MonoBehaviour
                 .OnStart(() => {
                     cg.alpha = 0f;
                     loadingPanelGO.SetActive(active);
-                });
-        }
-    }
-    public void ControlGameUI(bool active) {
-        Debug.Log($"ControlGameUI {active}");
-
-        if (gamePanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
-            cg.DOFade(1f, fadeTime)
-                .SetUpdate(true)
-                .OnStart(() => {
-                    cg.alpha = 0f;
-                    gamePanelGO.SetActive(active);
                 });
         }
     }
@@ -183,7 +235,7 @@ public class Manager_UI : MonoBehaviour
                 });
         }
     }
-    public void ControlOverUI(bool active) {
+    public void ControlEndRunUI(bool active) {
         Debug.Log($"ControlOverUI {active}");
 
         if (overPanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
@@ -192,6 +244,42 @@ public class Manager_UI : MonoBehaviour
                 .OnStart(() => {
                     cg.alpha = 0f;
                     overPanelGO.SetActive(active);
+                });
+        }
+    }
+    public void ControlOverUI(bool active) {
+        Debug.Log($"ControlOverUI {active}");
+
+        if (endRunPanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
+            cg.DOFade(1f, fadeTime)
+                .SetUpdate(true)
+                .OnStart(() => {
+                    cg.alpha = 0f;
+                    endRunPanelGO.SetActive(active);
+                });
+        }
+    }
+    public void ControlPauseUI(bool active) {
+        Debug.Log($"ControlPauseUI {active}");
+
+        if (pausePanelGO.TryGetComponent(out CanvasGroup cg)) {
+            cg.DOFade(1f, fadeTime)
+                .SetUpdate(true)
+                .OnStart(() => {
+                    cg.alpha = 0f;
+                    pausePanelGO.SetActive(active);
+                });
+        }
+    }
+    public void ControlGameUI(bool active) {
+        Debug.Log($"ControlGameUI {active}");
+
+        if (gamePanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
+            cg.DOFade(1f, fadeTime)
+                .SetUpdate(true)
+                .OnStart(() => {
+                    cg.alpha = 0f;
+                    gamePanelGO.SetActive(active);
                 });
         }
     }
