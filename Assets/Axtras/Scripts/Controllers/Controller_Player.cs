@@ -46,6 +46,8 @@ public class Controller_Player : MonoBehaviour
     [SerializeField] private float sliceMinDistance = 5f;
     [SerializeField] private int sliceInterpolatedSteps = 15;
     [SerializeField] private LayerMask sliceLayerMask;
+    [SerializeField] private int scoreInc = 10;
+    [SerializeField] private int scoreDec = -15;
     private HashSet<int> processedObjects = new ();
     private Vector3 lastMousePosition;
     private bool sliceActive = false;
@@ -231,7 +233,7 @@ public class Controller_Player : MonoBehaviour
                 }
 
                 // Add score on rope slice
-                Manager_Game.Instance.IncScore();
+                Manager_Game.Instance.SetScore(scoreInc);
 
                 // Spawn whispers
                 var corpseController = corpse.transform.GetComponentInChildren<Controller_Corpse>();
@@ -242,7 +244,7 @@ public class Controller_Player : MonoBehaviour
             Debug.Log($"Slicing corpse!");
 
             // Decrease score on corpse slice
-            Manager_Game.Instance.DecScore();
+            Manager_Game.Instance.SetScore(scoreDec);
 
             // Spawn blot on a diary rule
             Controller_Diary.Instance.SpawnBlot();

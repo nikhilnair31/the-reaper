@@ -35,7 +35,7 @@ public class Manager_SaveLoad : MonoBehaviour
         if (File.Exists(filePath)) {
             string jsonData = File.ReadAllText(filePath);
             stories = JsonUtility.FromJson<StoriesList>(jsonData).stories;
-            Debug.Log($"Stories loaded from: {filePath}");
+            Debug.Log($"Stories loaded from: {filePath}\nData:\n{JsonUtility.ToJson(stories, true)}");
             return stories;
         } 
         else {
@@ -48,7 +48,7 @@ public class Manager_SaveLoad : MonoBehaviour
         if (File.Exists(filePath)) {
             string jsonData = File.ReadAllText(filePath);
             rules = JsonUtility.FromJson<RulesList>(jsonData).rules;
-            Debug.Log($"Rules loaded from: {filePath}");
+            Debug.Log($"Rules loaded from: {filePath}\nData:\n{JsonUtility.ToJson(rules, true)}");
             return rules;
         } 
         else {
@@ -61,7 +61,7 @@ public class Manager_SaveLoad : MonoBehaviour
         if (File.Exists(filePath)) {
             string jsonData = File.ReadAllText(filePath);
             general = JsonUtility.FromJson<Data_General>(jsonData);
-            Debug.Log($"General loaded from: {filePath}");
+            Debug.Log($"General loaded from: {filePath}\nData:\n{JsonUtility.ToJson(general, true)}");
             return general;
         } 
         else {
@@ -95,9 +95,7 @@ public class Manager_SaveLoad : MonoBehaviour
         Debug.Log("Rules saved to: " + filePath);
     }
     public void SaveGeneral() {
-        var general = new General() {
-            general = Manager_Game.Instance.GetGeneral()
-        };
+        var general = Manager_Game.Instance.GetGeneral();
         string jsonData = JsonUtility.ToJson(general, true);
         
         string filePath = Application.persistentDataPath + "/" + generalFileName + ".json";

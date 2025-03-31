@@ -152,6 +152,7 @@ public class Manager_UI : MonoBehaviour
 
         if (loadingPanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
             cg.DOFade(1f, fadeTime)
+                .SetUpdate(true)
                 .OnStart(() => {
                     cg.alpha = 0f;
                     loadingPanelGO.SetActive(active);
@@ -163,6 +164,7 @@ public class Manager_UI : MonoBehaviour
 
         if (gamePanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
             cg.DOFade(1f, fadeTime)
+                .SetUpdate(true)
                 .OnStart(() => {
                     cg.alpha = 0f;
                     gamePanelGO.SetActive(active);
@@ -174,6 +176,7 @@ public class Manager_UI : MonoBehaviour
 
         if (menuPanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
             cg.DOFade(1f, fadeTime)
+                .SetUpdate(true)
                 .OnStart(() => {
                     cg.alpha = 0f;
                     menuPanelGO.SetActive(active);
@@ -185,6 +188,7 @@ public class Manager_UI : MonoBehaviour
 
         if (overPanelGO.TryGetComponent<CanvasGroup>(out var cg)) {
             cg.DOFade(1f, fadeTime)
+                .SetUpdate(true)
                 .OnStart(() => {
                     cg.alpha = 0f;
                     overPanelGO.SetActive(active);

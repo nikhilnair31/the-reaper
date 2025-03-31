@@ -10,20 +10,14 @@ public class Manager_Game : MonoBehaviour
     
     private GameObject playerGO;
     private GameObject mainCameraGO;
-    private Data_General generalData = new();
 
     [Header("Gen Settings")]
     [SerializeField] private List<Transform> hangingPointsTransformList;
     [SerializeField] private GameObject corpsePrefab;
     [SerializeField] private int maxCorpses = 3;
 
-    [Header("Run Settings")]
-    [SerializeField] private int run = 0;
-    
-    [Header("Score Settings")]
-    [SerializeField] private int score = 0;
-    [SerializeField] private int scoreInc = 10;
-    [SerializeField] private int scoreDec = 15;
+    [Header("Data Settings")]
+    private Data_General generalData;
     #endregion
 
     private void Awake() {
@@ -63,12 +57,10 @@ public class Manager_Game : MonoBehaviour
         // Load general data from save file
         var loadedGeneralData = Manager_SaveLoad.Instance.LoadGeneral();
         if (loadedGeneralData == null) {
+            // Set the run and score values
+            generalData = new();
             Manager_SaveLoad.Instance.SaveGeneral();
         }
-        
-        // Set the run and score values
-        SetRunCnt(generalData.runCnt);
-        SetScore(generalData.scoreCnt);
     }
 
     #region Run Related
@@ -102,7 +94,7 @@ public class Manager_Game : MonoBehaviour
         Time.timeScale = 1f;
         
         // Add run count
-        run++;
+        generalData.runCnt++;
     }
     public void EndRun() {
         Debug.Log("Game Run Ended");
@@ -117,20 +109,10 @@ public class Manager_Game : MonoBehaviour
         // Save the current set of stories and rules
         Manager_SaveLoad.Instance.SaveStories();
         Manager_SaveLoad.Instance.SaveRules();
+        Manager_SaveLoad.Instance.SaveGeneral();
 
         // Set time to frozen
         Time.timeScale = 0f;
-    }
-    #endregion
-
-    #region Score Related
-    public void IncScore() {
-        Debug.Log($"IncScore | Score: {score} | ScoreInc: {scoreInc}");
-        score += scoreInc;
-    }
-    public void DecScore() {
-        Debug.Log($"DecScore | Score: {score} | ScoreInc: {scoreInc}");
-        score -= scoreInc;
     }
     #endregion
 
@@ -139,11 +121,9 @@ public class Manager_Game : MonoBehaviour
         return generalData;
     }
 
-    private void SetRunCnt(int runcnt) {
-        run = runcnt;
-    }
-    private void SetScore(int scoreval) {
-        score = scoreval;
+    public void SetScore(int scorechange) {
+        Debug.Log($"SetScore | score: {generalData.scoreCnt} | scorechange: {scorechange}");
+        generalData.scoreCnt += scorechange;
     }
     #endregion
 }
