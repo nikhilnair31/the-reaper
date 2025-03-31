@@ -90,7 +90,7 @@ public class Controller_Player : MonoBehaviour
     private void HandleLantern() {
         if (GetToolLantern()) {
             // Check for left mouse click to enable/disable light
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0) && !Helper.Instance.IsPointerOverUIElement()) {
                 isLanternActive = !isLanternActive;
                 
                 lanternLight.enabled = isLanternActive;
@@ -281,6 +281,9 @@ public class Controller_Player : MonoBehaviour
     #region Get Sets
     public void SetTool(Tool tool) {
         currentTool = tool;
+    }
+    public void ResetTool() {
+        lanternLight.enabled = false;
     }
     
     public Tool GetTool() {

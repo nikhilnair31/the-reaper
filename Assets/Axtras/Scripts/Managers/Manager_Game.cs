@@ -52,6 +52,8 @@ public class Manager_Game : MonoBehaviour
                 Debug.LogError($"Couldn't find the tree!");
             }
         }
+
+        Helper.Instance.SimulatePhysicsSteps();
     }
     private void DataLoad() {
         // Load general data from save file
@@ -60,6 +62,9 @@ public class Manager_Game : MonoBehaviour
             // Set the run and score values
             generalData = new();
             Manager_SaveLoad.Instance.SaveGeneral();
+        }
+        else {
+            generalData = loadedGeneralData;
         }
     }
 

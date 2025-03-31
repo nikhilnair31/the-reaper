@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
-using DG.Tweening;
 
 public class Helper : MonoBehaviour 
 {
@@ -16,11 +15,25 @@ public class Helper : MonoBehaviour
 
     #region Physics Related
     public void SimulatePhysicsSteps(int steps = 100) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < steps; i++) {
             Physics.simulationMode = SimulationMode.Script;
             Physics.Simulate(Time.fixedDeltaTime);
         }
         Physics.simulationMode = SimulationMode.FixedUpdate;
+    }
+    #endregion
+
+    #region UI Related
+    public bool IsPointerOverUIElement() {
+        if (EventSystem.current == null)
+            return false;
+
+        PointerEventData eventData = new(EventSystem.current) {
+            position = Input.mousePosition
+        };
+        List<RaycastResult> results = new ();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count > 0;
     }
     #endregion
 }

@@ -292,6 +292,7 @@ public class Manager_UI : MonoBehaviour
             ControlAllToolPanels(false);
             ControlAllButtonsSize(1f);
 
+            Controller_Player.Instance.ResetTool();
             Controller_Player.Instance.SetTool(Controller_Player.Tool.Grab); 
             Cursor.SetCursor(grabCursor, Vector2.zero, CursorMode.Auto);
             SetButtonSize(grabButton, 1.5f);
