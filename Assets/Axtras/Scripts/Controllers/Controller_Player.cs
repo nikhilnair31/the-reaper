@@ -259,7 +259,12 @@ public class Controller_Player : MonoBehaviour
         if (isLanternActive && flickerSequence == null) {
             flickerSequence = DOTween.Sequence()
                 .AppendCallback(() => {
-                    lanternLight.intensity += Random.Range(1f - flickerPerc, 1f + flickerPerc);
+                    var boostVal = Random.Range(1f - flickerPerc, 1f + flickerPerc);
+                    lanternLight.intensity = 
+                        isBoosting ? 
+                            boostIntensity + boostVal : 
+                            baseIntensity + boostVal;
+                    ;
                 })
                 .AppendInterval(flickerRate)
                 .SetLoops(-1)
