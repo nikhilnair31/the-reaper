@@ -47,7 +47,9 @@ public class Manager_SaveLoad : MonoBehaviour
         string filePath = Application.persistentDataPath + "/" + rulesFileName + ".json";
         if (File.Exists(filePath)) {
             string jsonData = File.ReadAllText(filePath);
-            rules = JsonUtility.FromJson<RulesList>(jsonData).rules;
+            Debug.Log($"jsonData: {jsonData}");
+            rules = JsonHelper.FromJson<Data_Rules>(jsonData);
+            Debug.Log($"rules: {rules}");
             Debug.Log($"Rules loaded from: {filePath}\nData:\n{JsonUtility.ToJson(rules, true)}");
             return rules;
         } 
