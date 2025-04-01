@@ -806,45 +806,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792616089ce32004589ef426195c33c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyList:
-  - storyStr: rats are fat bat
-    shown: 0
-  - storyStr: cars in my bum
-    shown: 0
-  - storyStr: potatoes eat me
-    shown: 0
-  rulesList:
-  - ruleStr: Cut down any body with a snake tattoo
-    universal: 1
-    unlocked: 1
-  - ruleStr: Keep up bodies with scars on their faces
-    universal: 1
-    unlocked: 1
-  - ruleStr: If body has snake tattoo and face scar then cut it down
-    universal: 1
-    unlocked: 0
-  - ruleStr: Keep up bodies missing limbs on one side only
-    universal: 0
-    unlocked: 1
-  - ruleStr: Those who see the void needn't see the earth
-    universal: 0
-    unlocked: 0
-  whispersStr: 'oh no
+  storyList: []
+  rulesList: []
+  whispersStr: 'The rope burns, but freedom is colder still.
 
-    thank you
+    I hung for my sins.
+    What are yours?
 
-    finally
+    Some secrets should stay suspended.
 
-    why
+    The tree remembers
+    what we tried to forget.
 
-    curses
+    Cut me down, join me soon.
 
-    end this
+    They said the hanging
+    would cleanse my soul.
 
-    what
-    is this
+    The judge was wrong. I was innocent.
 
-    oh god'
+    This tree
+    feeds on our regrets.
+
+    In death, I see what I was blind to in life.
+
+    The
+    whispers don''t stop when the rope breaks.
+
+    They hang us for knowing too
+    much.
+
+    My family never knew what became of me.
+
+    The village elders called
+    it justice. I called it fear.
+
+    Each rope is a thread in a larger tapestry.
+
+    The
+    tree grows stronger with each new body.
+
+    I chose the rope over what lurks
+    in the forest.
+
+    Cut one down, two more shall hang.
+
+    The diary holds truths
+    we died to protect.
+
+    Some of us deserve to hang. Some of us don''t.
+
+    When
+    all ropes are cut, something ancient awakens.'
   whispersList: []
 --- !u!114 &354226965
 MonoBehaviour:
@@ -7030,6 +7043,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvii
       objectReference: {fileID: 0}
+    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 864195713980822879, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 959422724203525256, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
       propertyPath: m_Camera
       value: 
@@ -7072,6 +7101,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2399471696462309175, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6098949032937485621, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7027052092831809472, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230637463503902445, guid: 146ee48e35d252244ad4767649f1bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

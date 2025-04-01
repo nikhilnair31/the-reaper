@@ -1390,7 +1390,7 @@ MonoBehaviour:
   limbMissingChance: 0.05
   whisperPrefab: {fileID: 2614981329418612469, guid: 47ad2df9de44b08459793517d6bf682a, type: 3}
   whipserMoveUpAmount: 8
-  whipserTweenTime: 2
+  whipserTweenTime: 5
 --- !u!1 &8927174259608862904
 GameObject:
   m_ObjectHideFlags: 0
