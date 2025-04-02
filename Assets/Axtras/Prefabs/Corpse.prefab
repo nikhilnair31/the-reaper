@@ -1373,6 +1373,7 @@ MonoBehaviour:
   scarRayHitChance: 0.05
   auraPrefabs:
   - {fileID: 8172857068077763117, guid: 124088a89347c0444b757c520a273a22, type: 3}
+  maxAuras: 3
   auraSpawnChance: 0.5
   limbsMissingArray:
   - {fileID: 147368506740282097}

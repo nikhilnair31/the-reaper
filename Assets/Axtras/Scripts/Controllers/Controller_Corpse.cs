@@ -163,7 +163,7 @@ public class Controller_Corpse : MonoBehaviour
         }
     }
     private bool ValidateRule(Data_Rules rule) {
-        Debug.Log($"ValidateRule rule: {JsonUtility.ToJson(rule, true)}");
+        // For universal rules (like "ALL MUST REMAIN"), the rule automatically applies
         if (rule.is_universal)
             return true;
         
@@ -174,27 +174,59 @@ public class Controller_Corpse : MonoBehaviour
         
         // Check tattoo rules
         if (rule.rule_data.tattoo.enabled) {
-
+            // Check if the tattoo type is present on the corpse
+            bool hasTattoo = features.appliedTattoos.Any(t => t.ToLower().Contains(rule.rule_data.tattoo.type.ToLower()));
+            
+            // If this is an exception case, invert the result
+            if (rule.rule_data.tattoo.exception) {
+                tattooValid = !hasTattoo;
+            } else {
+                tattooValid = hasTattoo;
+            }
         }
 
         // Check scar rules
         if (rule.rule_data.scar.enabled) {
-
+            // Check if the scar type is present on the corpse
+            bool hasScar = features.appliedScars.Any(s => s.ToLower().Contains(rule.rule_data.scar.type.ToLower()));
+            
+            // If this is an exception case, invert the result
+            if (rule.rule_data.scar.exception) {
+                scarValid = !hasScar;
+            } else {
+                scarValid = hasScar;
+            }
         }
 
         // Check aura rules
         if (rule.rule_data.aura.enabled) {
-
+            // Check if the aura color is present on the corpse
+            bool hasAura = features.appliedAura.Any(a => a.ToLower().Contains(rule.rule_data.aura.color.ToLower()));
+            
+            // If this is an exception case, invert the result
+            if (rule.rule_data.aura.exception) {
+                auraValid = !hasAura;
+            } else {
+                auraValid = hasAura;
+            }
         }
         
         // Check limb rules
         if (rule.rule_data.limb.enabled) {
-
+            // Check if the specified limb is missing on the corpse
+            bool missingLimb = features.missingLimbs.Any(l => l.ToLower().Contains(rule.rule_data.limb.missing.ToLower()));
+            
+            // If this is an exception case, invert the result
+            if (rule.rule_data.limb.exception) {
+                limbValid = !missingLimb;
+            } else {
+                limbValid = missingLimb;
+            }
         }
 
         // All conditions must be met for the rule to be valid
-        var valid = tattooValid && scarValid && auraValid && limbValid;
-        Debug.Log($"valid: {valid}");
+        bool valid = tattooValid && scarValid && auraValid && limbValid;
+        Debug.Log($"Rule validation: {rule.rule_content} = {valid}");
         
         return valid;
     }
