@@ -26,17 +26,17 @@ public class Controller_Corpse : MonoBehaviour
     
     [Header("Tattoo Settings")]
     [SerializeField] private SO_Tattoo[] tattooObjects;
-    [SerializeField] private float tattooSize = 0.1f;
     [SerializeField] private int maxTattoos = 10;
     [SerializeField] private int tattooRayCount = 100;
-    [SerializeField] private float tattooRayHitChance = 0.05f;
+    [SerializeField] private float tattooRayHitChance = 0.05f;  
+    private int tattooCount = 0;
     
     [Header("Scar Settings")]
     [SerializeField] private SO_Scar[] scarObjects;
-    [SerializeField] private float scarSize = 0.15f;
     [SerializeField] private int maxScars = 5;
     [SerializeField] private int scarRayCount = 100;
     [SerializeField] private float scarRayHitChance = 0.05f;
+    private int scarCount = 0;
 
     [Header("Aura Settings")]
     [SerializeField] private SO_Aura[] auraObjects;
@@ -45,7 +45,7 @@ public class Controller_Corpse : MonoBehaviour
     
     [Header("Limb Settings")]
     [SerializeField] private SO_Limb[] limbsObjects;
-    [SerializeField] private Transform[] limbsMissingArray;
+    [SerializeField] private int maxLimbs = 3;
     [SerializeField] private float limbMissingChance = 0.05f;
 
     [Header("Whispers Settings")]
@@ -85,58 +85,75 @@ public class Controller_Corpse : MonoBehaviour
     private void RandomizeTattoos() {
         if (tattooObjects == null || tattooObjects.Length == 0) return;
             
-        var hits = CastRaysInward();
-        int tattooCount = 0;
+        var hits = CastRaysInward(tattooRayCount, tattooRayHitChance);
         
         foreach (var hit in hits) {
-            if (tattooCount >= maxTattoos) break;
-                
             var obj = tattooObjects[Random.Range(0, tattooObjects.Length)];
-            var prefab = obj.tattoo_decal;
-            SpawnDecal(hit, prefab, tattooSize);
-            features.appliedTattoos.Add(obj.tattoo_name);
+
+            // Chekc if max tattoo count is hit
+            if (tattooCount >= maxTattoos) 
+                break;
             
+            // Incremnent count
             tattooCount++;
+
+            // Add to features list
+            features.appliedTattoos.Add(obj.tattoo_name);
+
+            // Spawn tattoo
+            obj.SpawnTattoo(hit);
         }
     }
     private void RandomizeScars() {
         if (scarObjects == null || scarObjects.Length == 0) return;
             
         var hits = CastRaysInward(tattooRayCount, tattooRayHitChance);
-        var scarCount = 0;
         
         foreach (var hit in hits) {
-            if (scarCount >= maxScars) break;
-                
             var obj = scarObjects[Random.Range(0, scarObjects.Length)];
-            var prefab = obj.scar_decal;
-            SpawnDecal(hit, prefab, scarSize);
-            features.appliedScars.Add(obj.scar_name);
+
+            // Chekc if max tattoo count is hit
+            if (scarCount >= maxScars) 
+                break;
             
+            // Incremnent count
             scarCount++;
+            
+            // Add to features list
+            features.appliedScars.Add(obj.scar_name);
+
+            // Spawn scar
+            obj.SpawnScar(hit);
         }
     }
     private void RandomizeAuras() {
-        if (auraObjects == null || auraObjects.Length == 0 || Random.value > auraSpawnChance) return;
+        if (auraObjects == null || auraObjects.Length == 0 || Random.value > auraSpawnChance) 
+            return;
             
         for (int i = 0; i < maxAuras; i++) {
+            // Pick random aura
             var obj = auraObjects[Random.Range(0, auraObjects.Length)];
-            var prefab = obj.aura_particles;
-            var aura = Instantiate(prefab, corpseGO.transform);
-            aura.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
+            // Add to features list
             features.appliedAura.Add(obj.aura_name);
+
+            // Spawn aura
+            obj.SpawnAura(corpseGO.transform);
         }
     }
     private void RandomizeLimbsMissing() {
-        if (limbsMissingArray == null || limbsMissingArray.Length == 0) return;
+        if (limbsObjects == null || limbsObjects.Length == 0 || Random.value > limbMissingChance) 
+            return;
             
-        foreach (var limb in limbsMissingArray) {
-            if (Random.value < limbMissingChance) {
-                var limb_name = limb.name;
-                var limb_name_wo_side = limb.name.Substring(0, limb_name.Length -2);
-                features.missingLimbs.Add(limb_name_wo_side);
-                limb.localScale = Vector3.zero;
-            }
+        for (int i = 0; i < maxLimbs; i++) {
+            // Pick random limb
+            var obj = limbsObjects[Random.Range(0, limbsObjects.Length)];
+            
+            // Add to features list
+            features.missingLimbs.Add(obj.limb_name);
+
+            // Spawn limb
+            obj.SpawnLimb(corpseGO.transform, obj);
         }
     }
     private void RandomizePhysics() {
@@ -360,21 +377,6 @@ public class Controller_Corpse : MonoBehaviour
         return points;
     }
     
-    private void SpawnDecal(RaycastHit hit, GameObject prefab, float size) {
-        if (prefab == null)
-            return; 
-                   
-        GameObject decal = Instantiate(prefab, hit.point, Quaternion.identity);        
-        decal.transform.forward = hit.normal;        
-        decal.transform.position += hit.normal * 0.01f;        
-        decal.transform.Rotate(hit.normal, Random.Range(0, 360), Space.World);        
-        
-        float scale = Random.Range(size * 0.7f, size * 1.3f);
-        decal.transform.localScale = new Vector3(scale, scale, scale);    
-
-        if (hit.collider != null)
-            decal.transform.SetParent(hit.collider.transform);
-    }
     public void SpawnWhisper() {
         if (whisperPrefab == null || spawnedWhisper)
             return;

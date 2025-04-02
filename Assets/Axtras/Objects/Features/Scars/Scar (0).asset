@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scar_name: triple_slash
   scar_tex: {fileID: 2800000, guid: afc1874cf24cee241abe44bc3e9840e1, type: 3}
-  scar_decal: {fileID: 4419387971811043002, guid: 45621b6043603c84c8074c512d9258f2, type: 3}
+  scar_prefab: {fileID: 4419387971811043002, guid: 45621b6043603c84c8074c512d9258f2, type: 3}
+  scarSize: 0.15

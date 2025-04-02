@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tattoo_name: crescent_moon
   tattoo_tex: {fileID: 2800000, guid: 5babd321973c2b847b9a04569eef023a, type: 3}
-  tattoo_decal: {fileID: 4419387971811043002, guid: b7edd16500d200444a47a38a48040596, type: 3}
+  tattoo_prefab: {fileID: 4419387971811043002, guid: b7edd16500d200444a47a38a48040596, type: 3}
+  tattooSize: 0.1

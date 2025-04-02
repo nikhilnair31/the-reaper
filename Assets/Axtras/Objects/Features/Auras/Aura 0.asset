@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07e9b46d97eb6b14cba4be685cfe92d1, type: 3}
-  m_Name: Limb (0)
+  m_Script: {fileID: 11500000, guid: 69785a065add66f47af54fae37cda45e, type: 3}
+  m_Name: Aura 0
   m_EditorClassIdentifier: 
-  limb_name: upper_arm
+  aura_name: green
+  aura_color: {r: 0.26739052, g: 0.5471698, b: 0.33651248, a: 1}
+  aura_prefab: {fileID: 8172857068077763117, guid: 124088a89347c0444b757c520a273a22, type: 3}
