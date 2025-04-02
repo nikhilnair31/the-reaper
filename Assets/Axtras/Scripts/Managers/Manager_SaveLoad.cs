@@ -31,12 +31,20 @@ public class Manager_SaveLoad : MonoBehaviour
 
     #region Load
     public List<Data_Stories> LoadStories() {
+        Debug.Log($"LoadStories");
+        
         string filePath = Application.persistentDataPath + "/" + storyFileName + ".json";
+        Debug.Log($"Stories loading from: {filePath}");
+
         if (File.Exists(filePath)) {
-            string jsonData = File.ReadAllText(filePath);
-            stories = JsonUtility.FromJson<StoriesList>(jsonData).stories;
-            Debug.Log($"Stories loaded from: {filePath}\nData:\n{JsonUtility.ToJson(stories, true)}");
-            return stories;
+            var jsonData = File.ReadAllText(filePath);
+            Debug.Log($"jsonData: {jsonData}");
+
+            var storiesWrapper = JsonUtility.FromJson<StoriesWrapper>(jsonData);
+            var storiesList = storiesWrapper.stories;
+            Debug.Log($"stories count: {storiesList.Count}");
+
+            return storiesList;
         } 
         else {
             Debug.Log("No stories save file found.");
@@ -44,14 +52,20 @@ public class Manager_SaveLoad : MonoBehaviour
         }
     }
     public List<Data_Rules> LoadRules() {
+        Debug.Log($"LoadRules");
+        
         string filePath = Application.persistentDataPath + "/" + rulesFileName + ".json";
+        Debug.Log($"Rules loading from: {filePath}");
+
         if (File.Exists(filePath)) {
-            string jsonData = File.ReadAllText(filePath);
+            var jsonData = File.ReadAllText(filePath);
             Debug.Log($"jsonData: {jsonData}");
-            rules = JsonHelper.FromJson<Data_Rules>(jsonData);
-            Debug.Log($"rules: {rules}");
-            Debug.Log($"Rules loaded from: {filePath}\nData:\n{JsonUtility.ToJson(rules, true)}");
-            return rules;
+
+            var rulesWrapper = JsonUtility.FromJson<RulesWrapper>(jsonData);
+            var rulesList = rulesWrapper.rules;
+            Debug.Log($"rules count: {rulesList.Count}");
+            
+            return rulesList;
         } 
         else {
             Debug.Log("No rules save file found.");
@@ -75,7 +89,7 @@ public class Manager_SaveLoad : MonoBehaviour
     
     #region Save
     public void SaveStories() {
-        var storiesList = new StoriesList() {
+        var storiesList = new StoriesWrapper() {
             stories = Manager_Content.Instance.GetStories()
         };
         string jsonData = JsonUtility.ToJson(storiesList, true);
@@ -86,7 +100,7 @@ public class Manager_SaveLoad : MonoBehaviour
         Debug.Log("Stories saved to: " + filePath);
     }
     public void SaveRules() {
-        var rulesList = new RulesList() {
+        var rulesList = new RulesWrapper() {
             rules = Manager_Content.Instance.GetRules()
         };
         string jsonData = JsonUtility.ToJson(rulesList, true);
@@ -109,16 +123,12 @@ public class Manager_SaveLoad : MonoBehaviour
     
     #region Serialization and Deserialization
     [Serializable]
-    private class StoriesList {
+    private class StoriesWrapper {
         public List<Data_Stories> stories = new ();
     }
     [Serializable]
-    private class RulesList {
+    private class RulesWrapper {
         public List<Data_Rules> rules = new ();
-    }
-    [Serializable]
-    private class General {
-        public Data_General general = new ();
     }
     #endregion
 }

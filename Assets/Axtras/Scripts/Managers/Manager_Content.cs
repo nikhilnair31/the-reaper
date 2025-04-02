@@ -15,7 +15,7 @@ public class Manager_Content : MonoBehaviour
     [SerializeField] private List<Data_Rules> rulesList = new ();
 
     [Header("Whipsers Settings")]
-    [SerializeField][TextArea(3, 10)] private string whispersStr;
+    [SerializeField] private string whispersStr;
     [SerializeField]private List<string> whispersList = new ();
     #endregion 
 
@@ -61,8 +61,8 @@ public class Manager_Content : MonoBehaviour
     }
     
     public void InitDiaryRules() {
-        var listOfRulesData = rulesList.Where(rule => rule.unlocked).ToList();
-        var listOfRulesStr = listOfRulesData.Select(rule => rule.ruleStr).ToList();
+        var listOfRulesData = rulesList.Where(rule => rule.is_unlocked).ToList();
+        var listOfRulesStr = listOfRulesData.Select(rule => rule.rule_content).ToList();
         Controller_Diary.Instance.InitDiaryPages(listOfRulesStr);
     }
 
@@ -122,7 +122,7 @@ public class Manager_Content : MonoBehaviour
             return;
         }
 
-        var lockedRulesList = rulesList.Where(rule => !rule.unlocked).ToList();
+        var lockedRulesList = rulesList.Where(rule => !rule.is_unlocked).ToList();
         if (lockedRulesList.Count == 0) {
             Debug.Log("All rules have been unlocked.");
             return;
@@ -131,6 +131,6 @@ public class Manager_Content : MonoBehaviour
         var unlockRuleObj = rulesList[Random.Range(0, lockedRulesList.Count)];
         Debug.Log($"Picked to unlock rule obj: {unlockRuleObj}");
         
-        unlockRuleObj.unlocked = true;
+        unlockRuleObj.is_unlocked = true;
     }
 }

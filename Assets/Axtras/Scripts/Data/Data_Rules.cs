@@ -6,10 +6,10 @@ public class Data_Rules
 {
     #region Variables
     [Header("Rules Settings")]
-    [SerializeField] public string ruleStr = "";
-    [SerializeField] public bool universal = false;
-    [SerializeField] public bool unlocked = false;
-    [SerializeField] public RuleData ruleDat;
+    [SerializeField] public string rule_content = "";
+    [SerializeField] public bool is_universal = false;
+    [SerializeField] public bool is_unlocked = false;
+    [SerializeField] public RuleData rule_data;
     #endregion
     
     [Serializable]
@@ -24,29 +24,34 @@ public class Data_Rules
     [Serializable]
     public class TattooRule 
     {
-        public string name;
-        public int count;
-        public string location;
+        public bool enabled;
+        public string type;
+        public bool exception;
+        public bool reference;
     }
     
     [Serializable]
     public class ScarRule 
     {
-        public string name;
-        public int count;
-        public string location;
+        public bool enabled;
+        public string type;
+        public bool exception;
     }
     
     [Serializable]
     public class AuraRule 
     {
-        public string name;
+        public bool enabled;
+        public string color;
+        public bool exception;
+        public bool reference;
     }
     
     [Serializable]
     public class LimbRule 
     {
-        public string name;
-        public int count;
+        public bool enabled;
+        public string missing;
+        public bool exception;
     }
 }

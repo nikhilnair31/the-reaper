@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GogoGaga.OptimizedRopesAndCables;
 using DG.Tweening;
 using TMPro;
+using System.Linq;
 
 public class Controller_Corpse : MonoBehaviour 
 {
@@ -16,6 +17,7 @@ public class Controller_Corpse : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer corpseMeshRend;
     [SerializeField] private bool visualizeRays = true;
     [SerializeField] private LayerMask raycastLayerMask;
+    [SerializeField] private Data_CorpseFeature features = new();
     
     [Header("Physics Settings")]
     [SerializeField] private float corpseMass = 70f;
@@ -38,6 +40,7 @@ public class Controller_Corpse : MonoBehaviour
 
     [Header("Aura Settings")]
     [SerializeField] private GameObject[] auraPrefabs;
+    [SerializeField] private int maxAuras = 3;
     [SerializeField] private float auraSpawnChance = 0.5f;
     
     [Header("Limb Settings")]
@@ -70,57 +73,65 @@ public class Controller_Corpse : MonoBehaviour
         if (corpseMeshRend) {
             Material[] mats = corpseMeshRend.materials;
             var mat = mats[0];
-            mat.mainTexture = Resources.Load<Texture2D>("Textures/Corpse/Corpse_" + Random.Range(1, 4));
+            var textures = Resources.LoadAll<Texture2D>("Textures/Corpse")
+                .Select(t => t.name)
+                .ToArray();
+            var randomTextureName = textures[Random.Range(0, textures.Length)];
+            mat.mainTexture = Resources.Load<Texture2D>("Textures/Corpse/" + randomTextureName);
             corpseMeshRend.materials = mats;
         }
     }
     private void RandomizeTattoos() {
-        if (tattooPrefabs == null || tattooPrefabs.Length == 0)
-            return;
+        if (tattooPrefabs == null || tattooPrefabs.Length == 0) return;
             
         var hits = CastRaysInward();
         int tattooCount = 0;
         
         foreach (var hit in hits) {
-            if (tattooCount >= maxTattoos)
-                break;
+            if (tattooCount >= maxTattoos) break;
                 
-            GameObject prefab = tattooPrefabs[Random.Range(0, tattooPrefabs.Length)];
+            var prefab = tattooPrefabs[Random.Range(0, tattooPrefabs.Length)];
             SpawnDecal(hit, prefab, tattooSize);
+            
+            features.appliedTattoos.Add(prefab.name);
+            
             tattooCount++;
         }
     }
     private void RandomizeScars() {
-        if (scarPrefabs == null || scarPrefabs.Length == 0)
-            return;
+        if (scarPrefabs == null || scarPrefabs.Length == 0) return;
             
         var hits = CastRaysInward(tattooRayCount, tattooRayHitChance);
-        int scarCount = 0;
+        var scarCount = 0;
         
         foreach (var hit in hits) {
-            if (scarCount >= maxScars)
-                break;
+            if (scarCount >= maxScars) break;
                 
-            GameObject prefab = scarPrefabs[Random.Range(0, scarPrefabs.Length)];
+            var prefab = scarPrefabs[Random.Range(0, scarPrefabs.Length)];
             SpawnDecal(hit, prefab, scarSize);
+            
+            features.appliedScars.Add(prefab.name);
+            
             scarCount++;
         }
     }
     private void RandomizeAuras() {
-        if (auraPrefabs == null || auraPrefabs.Length == 0 || Random.value > auraSpawnChance)
-            return;
+        if (auraPrefabs == null || auraPrefabs.Length == 0 || Random.value > auraSpawnChance) return;
             
-        GameObject auraPrefab = auraPrefabs[Random.Range(0, auraPrefabs.Length)];
+        for (int i = 0; i < maxAuras; i++) {
+            var auraPrefab = auraPrefabs[Random.Range(0, auraPrefabs.Length)];
+            features.appliedAura.Add(auraPrefab.name);
         
-        GameObject aura = Instantiate(auraPrefab, corpseGO.transform);
-        aura.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            var aura = Instantiate(auraPrefab, corpseGO.transform);
+            aura.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        }
     }
     private void RandomizeLimbsMissing() {
-        if (limbsMissingArray == null || limbsMissingArray.Length == 0)
-            return;
+        if (limbsMissingArray == null || limbsMissingArray.Length == 0) return;
             
         foreach (var limb in limbsMissingArray) {
             if (Random.value < limbMissingChance) {
+                features.missingLimbs.Add(limb.name);
                 limb.localScale = Vector3.zero;
             }
         }
@@ -135,6 +146,57 @@ public class Controller_Corpse : MonoBehaviour
         if (corpseGO.TryGetComponent<SpringJoint>(out var spring)) {
             spring.spring = ropeSpringStrength * Random.Range(1 - randSpringStrenthPerc, 1 + randSpringStrenthPerc);
         }
+    }
+
+    public void ValidateAllRules() {
+        Debug.Log($"ValidateAllRules");
+        
+        var allRules = Manager_Content.Instance.GetRules();
+        Debug.Log($"allRules Count: {allRules.Count}");
+        
+        var unlockedRules = allRules.Where(rule => rule.is_unlocked).ToList();
+        Debug.Log($"unlockedRules: {unlockedRules.Count}");
+        
+        foreach (var rule in unlockedRules) {
+            var check = ValidateRule(rule);
+            Debug.Log($"check: {check}");
+        }
+    }
+    private bool ValidateRule(Data_Rules rule) {
+        Debug.Log($"ValidateRule rule: {JsonUtility.ToJson(rule, true)}");
+        if (rule.is_universal)
+            return true;
+        
+        bool tattooValid = true;
+        bool scarValid = true;
+        bool auraValid = true;
+        bool limbValid = true;
+        
+        // Check tattoo rules
+        if (rule.rule_data.tattoo.enabled) {
+
+        }
+
+        // Check scar rules
+        if (rule.rule_data.scar.enabled) {
+
+        }
+
+        // Check aura rules
+        if (rule.rule_data.aura.enabled) {
+
+        }
+        
+        // Check limb rules
+        if (rule.rule_data.limb.enabled) {
+
+        }
+
+        // All conditions must be met for the rule to be valid
+        var valid = tattooValid && scarValid && auraValid && limbValid;
+        Debug.Log($"valid: {valid}");
+        
+        return valid;
     }
 
     private List<RaycastHit> CastRaysInward(int rayCount = 100, float rayHitChance = 0.05f) {
