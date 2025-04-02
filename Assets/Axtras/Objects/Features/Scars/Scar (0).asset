@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3dc31a648b258449a8cb40e7f63ba5, type: 3}
+  m_Name: Scar (0)
+  m_EditorClassIdentifier: 
+  scar_name: triple_slash
+  scar_tex: {fileID: 2800000, guid: afc1874cf24cee241abe44bc3e9840e1, type: 3}
+  scar_decal: {fileID: 4419387971811043002, guid: 45621b6043603c84c8074c512d9258f2, type: 3}

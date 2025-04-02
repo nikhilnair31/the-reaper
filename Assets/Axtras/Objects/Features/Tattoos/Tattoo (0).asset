@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3eb477f09567e4593f12e7cd89b434, type: 3}
+  m_Name: Tattoo (0)
+  m_EditorClassIdentifier: 
+  tattoo_name: crescent_moon
+  tattoo_tex: {fileID: 2800000, guid: 5babd321973c2b847b9a04569eef023a, type: 3}
+  tattoo_decal: {fileID: 4419387971811043002, guid: b7edd16500d200444a47a38a48040596, type: 3}

@@ -25,25 +25,26 @@ public class Controller_Corpse : MonoBehaviour
     [SerializeField] private float randSpringStrenthPerc = 0.1f;
     
     [Header("Tattoo Settings")]
-    [SerializeField] private GameObject[] tattooPrefabs;
+    [SerializeField] private SO_Tattoo[] tattooObjects;
     [SerializeField] private float tattooSize = 0.1f;
     [SerializeField] private int maxTattoos = 10;
     [SerializeField] private int tattooRayCount = 100;
     [SerializeField] private float tattooRayHitChance = 0.05f;
     
     [Header("Scar Settings")]
-    [SerializeField] private GameObject[] scarPrefabs;
+    [SerializeField] private SO_Scar[] scarObjects;
     [SerializeField] private float scarSize = 0.15f;
     [SerializeField] private int maxScars = 5;
     [SerializeField] private int scarRayCount = 100;
     [SerializeField] private float scarRayHitChance = 0.05f;
 
     [Header("Aura Settings")]
-    [SerializeField] private GameObject[] auraPrefabs;
+    [SerializeField] private SO_Aura[] auraObjects;
     [SerializeField] private int maxAuras = 3;
     [SerializeField] private float auraSpawnChance = 0.5f;
     
     [Header("Limb Settings")]
+    [SerializeField] private SO_Limb[] limbsObjects;
     [SerializeField] private Transform[] limbsMissingArray;
     [SerializeField] private float limbMissingChance = 0.05f;
 
@@ -82,7 +83,7 @@ public class Controller_Corpse : MonoBehaviour
         }
     }
     private void RandomizeTattoos() {
-        if (tattooPrefabs == null || tattooPrefabs.Length == 0) return;
+        if (tattooObjects == null || tattooObjects.Length == 0) return;
             
         var hits = CastRaysInward();
         int tattooCount = 0;
@@ -90,16 +91,16 @@ public class Controller_Corpse : MonoBehaviour
         foreach (var hit in hits) {
             if (tattooCount >= maxTattoos) break;
                 
-            var prefab = tattooPrefabs[Random.Range(0, tattooPrefabs.Length)];
+            var obj = tattooObjects[Random.Range(0, tattooObjects.Length)];
+            var prefab = obj.tattoo_decal;
             SpawnDecal(hit, prefab, tattooSize);
-            
-            features.appliedTattoos.Add(prefab.name);
+            features.appliedTattoos.Add(obj.tattoo_name);
             
             tattooCount++;
         }
     }
     private void RandomizeScars() {
-        if (scarPrefabs == null || scarPrefabs.Length == 0) return;
+        if (scarObjects == null || scarObjects.Length == 0) return;
             
         var hits = CastRaysInward(tattooRayCount, tattooRayHitChance);
         var scarCount = 0;
@@ -107,23 +108,23 @@ public class Controller_Corpse : MonoBehaviour
         foreach (var hit in hits) {
             if (scarCount >= maxScars) break;
                 
-            var prefab = scarPrefabs[Random.Range(0, scarPrefabs.Length)];
+            var obj = scarObjects[Random.Range(0, scarObjects.Length)];
+            var prefab = obj.scar_decal;
             SpawnDecal(hit, prefab, scarSize);
-            
-            features.appliedScars.Add(prefab.name);
+            features.appliedScars.Add(obj.scar_name);
             
             scarCount++;
         }
     }
     private void RandomizeAuras() {
-        if (auraPrefabs == null || auraPrefabs.Length == 0 || Random.value > auraSpawnChance) return;
+        if (auraObjects == null || auraObjects.Length == 0 || Random.value > auraSpawnChance) return;
             
         for (int i = 0; i < maxAuras; i++) {
-            var auraPrefab = auraPrefabs[Random.Range(0, auraPrefabs.Length)];
-            features.appliedAura.Add(auraPrefab.name);
-        
-            var aura = Instantiate(auraPrefab, corpseGO.transform);
+            var obj = auraObjects[Random.Range(0, auraObjects.Length)];
+            var prefab = obj.aura_particles;
+            var aura = Instantiate(prefab, corpseGO.transform);
             aura.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            features.appliedAura.Add(obj.aura_name);
         }
     }
     private void RandomizeLimbsMissing() {
@@ -131,7 +132,9 @@ public class Controller_Corpse : MonoBehaviour
             
         foreach (var limb in limbsMissingArray) {
             if (Random.value < limbMissingChance) {
-                features.missingLimbs.Add(limb.name);
+                var limb_name = limb.name;
+                var limb_name_wo_side = limb.name.Substring(0, limb_name.Length -2);
+                features.missingLimbs.Add(limb_name_wo_side);
                 limb.localScale = Vector3.zero;
             }
         }

@@ -1356,25 +1356,32 @@ MonoBehaviour:
   raycastLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  features:
+    appliedTattoos: []
+    appliedScars: []
+    appliedAura: []
+    missingLimbs: []
   corpseMass: 70
   ropeSpringStrength: 700
   randSpringStrenthPerc: 0.1
-  tattooPrefabs:
-  - {fileID: 4419387971811043002, guid: b7edd16500d200444a47a38a48040596, type: 3}
+  tattooObjects:
+  - {fileID: 11400000, guid: 1f0004214544f7341b5c94502465994a, type: 2}
   tattooSize: 0.1
   maxTattoos: 3
   tattooRayCount: 100
   tattooRayHitChance: 0.05
-  scarPrefabs:
-  - {fileID: 4419387971811043002, guid: 45621b6043603c84c8074c512d9258f2, type: 3}
+  scarObjects:
+  - {fileID: 11400000, guid: a7f5cf66504f69c4b81dc78604d2c874, type: 2}
   scarSize: 0.15
   maxScars: 2
   scarRayCount: 100
   scarRayHitChance: 0.05
-  auraPrefabs:
-  - {fileID: 8172857068077763117, guid: 124088a89347c0444b757c520a273a22, type: 3}
+  auraObjects:
+  - {fileID: 11400000, guid: af386bfb8bf5a0f46ba934846ec78702, type: 2}
   maxAuras: 3
   auraSpawnChance: 0.5
+  limbsObjects:
+  - {fileID: 11400000, guid: e7fdd37c74c79ed44b6cd2834e79f236, type: 2}
   limbsMissingArray:
   - {fileID: 147368506740282097}
   - {fileID: 2809712280727963226}
