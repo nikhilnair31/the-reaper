@@ -1375,8 +1375,8 @@ MonoBehaviour:
   scarRayCount: 100
   scarRayHitChance: 0.05
   auraObjects: []
-  maxAuras: 3
-  auraSpawnChance: 0.5
+  maxAuras: 1
+  auraSpawnChance: 0.1
   limbsObjects:
   - {fileID: 11400000, guid: e7fdd37c74c79ed44b6cd2834e79f236, type: 2}
   maxLimbs: 3

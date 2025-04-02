@@ -144,7 +144,8 @@ public class Controller_Corpse : MonoBehaviour
             features.appliedAura.Add(obj.aura_name);
 
             // Spawn aura
-            obj.SpawnAura(corpseGO.transform);
+            Debug.Log($"{corpseMeshRend == null} | {corpseMeshRend.sharedMesh == null}");
+            obj.SpawnAura(corpseMeshRend.sharedMesh, corpseGO.transform);
         }
     }
     private void RandomizeLimbsMissing() {

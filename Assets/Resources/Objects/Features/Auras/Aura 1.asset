@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69785a065add66f47af54fae37cda45e, type: 3}
   m_Name: Aura 1
   m_EditorClassIdentifier: 
-  aura_name: green
+  aura_name: red
   aura_color: {r: 0.5396226, g: 0.26399103, b: 0.24333926, a: 1}
   aura_prefab: {fileID: 8172857068077763117, guid: 124088a89347c0444b757c520a273a22, type: 3}
