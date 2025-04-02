@@ -1366,35 +1366,20 @@ MonoBehaviour:
   randSpringStrenthPerc: 0.1
   tattooObjects:
   - {fileID: 11400000, guid: 1f0004214544f7341b5c94502465994a, type: 2}
-  tattooSize: 0.1
   maxTattoos: 3
   tattooRayCount: 100
   tattooRayHitChance: 0.05
   scarObjects:
   - {fileID: 11400000, guid: a7f5cf66504f69c4b81dc78604d2c874, type: 2}
-  scarSize: 0.15
   maxScars: 2
   scarRayCount: 100
   scarRayHitChance: 0.05
-  auraObjects:
-  - {fileID: 11400000, guid: af386bfb8bf5a0f46ba934846ec78702, type: 2}
+  auraObjects: []
   maxAuras: 3
   auraSpawnChance: 0.5
   limbsObjects:
   - {fileID: 11400000, guid: e7fdd37c74c79ed44b6cd2834e79f236, type: 2}
-  limbsMissingArray:
-  - {fileID: 147368506740282097}
-  - {fileID: 2809712280727963226}
-  - {fileID: 4051848279035341505}
-  - {fileID: 8662770752579318751}
-  - {fileID: 4148773352579274564}
-  - {fileID: 2412333158211437925}
-  - {fileID: 4314081032361899763}
-  - {fileID: 2991604379840426616}
-  - {fileID: 8589860372921699091}
-  - {fileID: 8087525794994907983}
-  - {fileID: 6875576572585659463}
-  - {fileID: 6286697930270387617}
+  maxLimbs: 3
   limbMissingChance: 0.05
   whisperPrefab: {fileID: 2614981329418612469, guid: 47ad2df9de44b08459793517d6bf682a, type: 3}
   whipserMoveUpAmount: 8

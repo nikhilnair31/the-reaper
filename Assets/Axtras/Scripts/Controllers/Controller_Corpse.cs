@@ -83,6 +83,8 @@ public class Controller_Corpse : MonoBehaviour
         }
     }
     private void RandomizeTattoos() {
+        tattooObjects = Resources.LoadAll<SO_Tattoo>("Objects/Features/Tattoos");
+        
         if (tattooObjects == null || tattooObjects.Length == 0) return;
             
         var hits = CastRaysInward(tattooRayCount, tattooRayHitChance);
@@ -105,6 +107,8 @@ public class Controller_Corpse : MonoBehaviour
         }
     }
     private void RandomizeScars() {
+        scarObjects = Resources.LoadAll<SO_Scar>("Objects/Features/Scars");
+        
         if (scarObjects == null || scarObjects.Length == 0) return;
             
         var hits = CastRaysInward(tattooRayCount, tattooRayHitChance);
@@ -127,6 +131,8 @@ public class Controller_Corpse : MonoBehaviour
         }
     }
     private void RandomizeAuras() {
+        auraObjects = Resources.LoadAll<SO_Aura>("Objects/Features/Auras");
+        
         if (auraObjects == null || auraObjects.Length == 0 || Random.value > auraSpawnChance) 
             return;
             
@@ -142,6 +148,8 @@ public class Controller_Corpse : MonoBehaviour
         }
     }
     private void RandomizeLimbsMissing() {
+        limbsObjects = Resources.LoadAll<SO_Limb>("Objects/Features/Limbs");
+        
         if (limbsObjects == null || limbsObjects.Length == 0 || Random.value > limbMissingChance) 
             return;
             
